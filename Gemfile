@@ -23,7 +23,9 @@ group :test do
   # gem 'xpath',    github: 'jnicklas/xpath'
   # gem 'capybara', github: 'jnicklas/capybara'
   gem 'selenium-webdriver', '2.0'
-  gem 'capybara', '2.1.0.beta1'
+  gem 'capybara', '2.1.0'
+  gem 'rb-inotify', '0.9.0'
+  gem 'libnotify', '0.8.0'
   gem 'rb-fsevent', '0.9.3', :require => false
   gem 'growl', '1.0.3'
   gem 'launchy', '2.2.0'
