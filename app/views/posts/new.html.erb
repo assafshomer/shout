@@ -1,10 +1,4 @@
-<h1>shoutup</h1> 
+<h1>Speak up</h1> 
 
-<%= form_for(@post) do |f| %>			
-<%= render 'shared/errors', object: f.object %>		
-	<%= f.label :content %>
-	<%= f.text_area :content, placeholder: "Think inside the box..." %>
-
-	<%= f.submit "ShoutUp", id: "shoutup_button"  %>
-<% end %>		
+<%= render 'shared/post_fields' %>
 

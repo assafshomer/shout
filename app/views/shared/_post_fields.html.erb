@@ -1,0 +1,7 @@
+<%= form_for(@post) do |f| %>			
+<%= render 'shared/errors', object: f.object %>		
+	<%= f.label :content %>
+	<%= f.text_area :content, placeholder: "Think inside the box..." %>
+
+	<%= f.submit submit_button_title, id: "shoutup_button"  %>
+<% end %>		
