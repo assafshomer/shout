@@ -13,7 +13,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def index
+    @posts=Post.all
+  end
+
 	private
+
 	  def post_params
       params.require(:post).permit(:content)
     end  

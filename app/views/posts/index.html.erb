@@ -1,0 +1,24 @@
+<title>index</title>
+
+<table>
+	<tr>
+    <th>id</th>
+    <th>Content</th>
+    <th>Time</th>
+	</tr>
+
+<% @posts.all.each do |post| %>
+	<tr>
+		<td>
+			<%= post.id %>
+		</td>
+		<td>
+			<%= post.content[0..30] %>
+		</td>
+		<td>
+			<%= post.created_at %>
+		</td>
+	</tr>
+<% end %>
+
+</table>
