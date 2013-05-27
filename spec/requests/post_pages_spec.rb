@@ -9,7 +9,7 @@ describe "PostPages" do
 		before { visit root_path }
 		it { should have_title 'Speak UP' }
 		it { should have_content('footer') }
-		it { should have_content('header') }
+		it { should have_xpath("//a[@data-toggle='dropdown']") }
 		it { should have_selector('textarea#post_content') }
 		it { should have_xpath("//textarea[@placeholder='Think inside the box...']") }
 		it { should have_selector('input#shoutup_button') }

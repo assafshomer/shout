@@ -7,7 +7,7 @@
     <th>Time</th>
 	</tr>
 
-<% @posts.all.each do |post| %>
+<% @posts.all.to_a.each do |post| %>
 	<tr>
 		<td>
 			<%= post.id %>
