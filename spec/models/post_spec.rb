@@ -19,7 +19,8 @@ describe Post do
  	
  	it { should respond_to(:content) }
  
- 	describe "Empty posts should be invalid" do
+describe "validations" do
+	describe "Empty posts should be invalid" do
  		before { @post=Post.new }
  		it { should_not be_valid }
  	end
@@ -31,4 +32,6 @@ describe Post do
  		before { @post=Post.new(content: 'OK') }
  		it { should be_valid }
  	end 	
+end
+
 end
