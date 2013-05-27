@@ -4,6 +4,8 @@ class PostsController < ApplicationController
   end
 
   def create
+  	@post=Post.new(post_params)  	
+  	render 'new' unless @post.save
   end
 
 	private

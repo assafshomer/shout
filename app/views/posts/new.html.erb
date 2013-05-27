@@ -1,7 +1,7 @@
 <h1>shoutup</h1> 
 
-<%= form_for(:post) do |f| %>			
-	
+<%= form_for(@post) do |f| %>			
+<%= render 'shared/errors', object: f.object %>		
 	<%= f.label :content %>
 	<%= f.text_area :content, placeholder: "Think inside the box..." %>
 
