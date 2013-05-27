@@ -1,11 +1,16 @@
 class PostsController < ApplicationController
-  def new
-  	@post=Post.new
+  def new    
+  	@post=Post.new    
   end
 
   def create
-  	@post=Post.new(post_params)  	
-  	render 'new' unless @post.save
+  	@post=Post.new(post_params)
+    if @post.save
+      flash[:success] = "Thanks for sharing"  	            
+      redirect_to root_path
+    else
+  	  render 'new'
+    end
   end
 
 	private

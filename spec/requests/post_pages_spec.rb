@@ -1,9 +1,13 @@
 require 'spec_helper'
 include ViewsHelper
+
 describe "PostPages" do
 	subject { page }
 	let!(:button) { submit_button_title }
 	before { visit root_path }
+	it { should have_title('Speak UP') }
+	it { should have_content('footer') }
+	it { should have_content('header') }
 	it { should have_selector('textarea#post_content') }
 	it { should have_xpath("//textarea[@placeholder='Think inside the box...']") }
 	it { should have_selector('input#shoutup_button') }
@@ -20,13 +24,14 @@ describe "PostPages" do
 			end
 			it { should have_selector('div.alert.alert-error', text: '1 error') }
 		end
-		describe "posting OK should not raise any errors" do
+		describe "posting OK should not raise any errors and should flash" do
 			before do
 			  fill_in 'post_content', with: 'OK'
 			  click_button button
 			end
 			it { should_not have_selector('div.alert.alert-error', text: 'error') }
-		end		
+			it { should have_selector('div.alert.alert-success') }
+		end
 	end
 	describe "persistance" do
 		before { fill_in 'post_content', with: 'foobar' }
