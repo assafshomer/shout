@@ -11,8 +11,14 @@
 require 'spec_helper'
 
 describe Post do
- it { should respond_to(:content) }
-
+	before(:each) do
+	  @attr={}
+	  @post=Post.new(@attr)
+	end
+ 	subject { @post }
+ 	
+ 	it { should respond_to(:content) }
+ 
  	describe "Empty posts should be invalid" do
  		before { @post=Post.new }
  		it { should_not be_valid }
