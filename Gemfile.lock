@@ -234,7 +234,7 @@ DEPENDENCIES
   guard-rspec (= 2.5.0)
   guard-spork (= 1.5.0)
   jbuilder (= 1.0.1)
-  jquery-rails
+  jquery-rails (= 2.2.1)
   launchy (= 2.2.0)
   libnotify (= 0.8.0)
   pg (= 0.15.1)
