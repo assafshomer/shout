@@ -2,7 +2,10 @@
 <html>
 <head>
   <title> <%= app_title %></title>
-	<%= render 'layouts/includes' %>
+  <%= stylesheet_link_tag "application", media: "all", 
+  							"data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>  
   <%= render 'layouts/shim' %>
 </head>
 <body> 
