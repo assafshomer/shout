@@ -43,18 +43,23 @@ describe "PostPages" do
 			end
 		end
 		describe "feed" do
-			describe "one post" do
-				let!(:signature) { "Test Post - #{rand(1..100000000)}" }
-				let!(:post) { (Post.new(content: signature))  }				
-				before do
-					post.created_at=1.year.ago
-					post.save
+			describe "layout and ordering" do
+				let!(:rand_array) { random_array(100,5) }
+				let!(:cont_array) { rand_array.each.map {|x| "Test Post - #{x}" }}
+				let!(:post_array) { cont_array.each.map {|blurb| Post.new(content: blurb, created_at: (cont_array.index(blurb)).days.ago) }}				
+				before do 
+					post_array.each { |post|	post.save }
 					visit root_path	
 				end				
 				it { should have_selector('th', text: 'Stream') }
 				it { should have_selector('th', text: 'Delivered') }
-				it { should have_selector('td', text: post.content) }				
-				it { should have_selector('td', text: time_ago_in_words(post.created_at)) }	
+				it "should display each of the posts" do
+					post_array.each do |post|
+						page.should have_selector('td', text: post.content) 		
+						page.should have_selector('td', text: time_ago_in_words(post.created_at)) 
+					end
+				end
+
 			end
 		end		
 	end
