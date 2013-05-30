@@ -1,7 +1,7 @@
 <%= form_for(@post) do |f| %>			
 	<%= render 'shared/errors', object: f.object %>	
 	<div class="field">
-		<%= f.text_area :content, placeholder: "Think inside the box..." %>
+		<%= f.text_area :content, placeholder: "..." %>
 	</div>	
 	<%= f.submit submit_button_title,  id: "shoutup_button", 
 																	class: "btn btn-large btn-primary"  %>

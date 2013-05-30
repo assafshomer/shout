@@ -1,11 +1,14 @@
-<h1>Speak up</h1> 
+
 <div class="row">
   <aside class="span4">
+  	<section>
+  		<h2 class="mantra" ><%= app_mantra %></h2> 
+  	</section>
     <section>
 			<%= render 'shared/post_fields' %>
     </section>
   </aside>
   <div class="span8">	    	
-  	something here
+    <%= render 'feed' %>
   </div>
 </div>  

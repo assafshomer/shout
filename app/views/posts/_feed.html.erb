@@ -1,11 +1,11 @@
-<title>index</title>
 
-<table>
-	<tr>
-    <th>id</th>
-    <th>Content</th>
-    <th>Time</th>
-	</tr>
+<% if @posts.any? %>
+	<table>
+		<tr>
+	    <th>id</th>
+	    <th>Content</th>
+	    <th>Time</th>
+		</tr>
 
 	<% @posts.each do |post| %>
 		<tr>
@@ -20,5 +20,8 @@
 			</td>
 		</tr>
 	<% end %>
+<% else %>
+	Not posts to display at this time
+<% end %>
 
 </table>

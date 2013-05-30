@@ -6,4 +6,12 @@ module ViewsHelper
 	def app_title
 		'Speak UP'
 	end
+
+	def app_mantra
+		'think inside the box...'
+	end
+
+	def post_place_holder
+		'...'
+	end
 end
