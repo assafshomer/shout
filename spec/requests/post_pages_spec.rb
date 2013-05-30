@@ -1,5 +1,4 @@
 require 'spec_helper'
-include ViewsHelper
 include TestHelper
 
 describe "PostPages" do
@@ -16,7 +15,7 @@ describe "PostPages" do
 		it { should have_selector('input#shoutup_button') }
 		it { should have_xpath("//input[@value=\'#{button}\']") }
 		it { should have_selector('h2.mantra', text: app_mantra) }
-		describe "validations" do
+				describe "validations" do
 			describe "clicking the post button with an empty post should raise an error" do
 				before { click_button button }
 				it { should have_selector('div.alert.alert-error', text: '2 errors') }
@@ -46,9 +45,16 @@ describe "PostPages" do
 		describe "feed" do
 			describe "one post" do
 				let!(:signature) { "Test Post - #{rand(1..100000000)}" }
-				let!(:post) { (Post.new(content: signature)).save  }				
-				before { visit root_path }							
-				it { should have_selector('td', text: signature) }				
+				let!(:post) { (Post.new(content: signature))  }				
+				before do
+					post.created_at=1.year.ago
+					post.save
+					visit root_path	
+				end				
+				it { should have_selector('th', text: 'Stream') }
+				it { should have_selector('th', text: 'Delivered') }
+				it { should have_selector('td', text: post.content) }				
+				it { should have_selector('td', text: time_ago_in_words(post.created_at)) }	
 			end
 		end		
 	end
