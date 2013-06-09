@@ -42,21 +42,21 @@ describe "PostPages" do
 				expect {click_button button}.to change(Post, :count).by(1)
 			end
 		end
-		describe "feed" do
+		describe "stream" do
 			describe "layout and ordering" do
 				let!(:rand_array) { random_array(100,5) }
 				let!(:cont_array) { rand_array.each.map {|x| "Test Post - #{x}" }}
-				let!(:post_array) { cont_array.each.map {|blurb| Post.new(content: blurb, created_at: (cont_array.index(blurb)).days.ago) }}				
+				let!(:post_array) { cont_array.each.map {|blurb| Post.new(content: blurb,
+				 created_at: (cont_array.index(blurb)).days.ago) }}				
 				before do 
 					post_array.each { |post|	post.save }
 					visit root_path	
 				end				
-				it { should have_selector('th', text: 'Stream') }
-				it { should have_selector('th', text: 'Delivered') }
+				it { should have_selector('h3', text: 'Stream') }				
 				it "should display each of the posts" do
 					post_array.each do |post|
-						page.should have_selector('td', text: post.content) 		
-						page.should have_selector('td', text: time_ago_in_words(post.created_at)) 
+						page.should have_selector("li##{post.id}", text: post.content) 		
+						page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 					end
 				end
 

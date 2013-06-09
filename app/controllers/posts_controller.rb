@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
   def create
   	@post=Post.new(post_params)
-    @posts=Post.all.to_a
+    @posts=Post.all.to_a    
     if @post.save
       flash[:success] = "Thanks for sharing"  	            
       redirect_to root_path

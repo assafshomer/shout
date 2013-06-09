@@ -1,0 +1,5 @@
+<li id="<%= stream_item.id %>">
+	<span class="content"><%= wrap(stream_item.content) %></span>
+	<span class="timestamp">Posted <%= time_ago_in_words(stream_item.created_at) %> ago
+	</span>	
+</li>
