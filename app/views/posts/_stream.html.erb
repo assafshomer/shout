@@ -1,5 +1,5 @@
 <% if @posts.any? %>
-	<h2 class="mantra">Stream</h2>	
+	<h2 class="mantra"><%= feed_title %></h2>	
 	<ol class="posts">
 		<%= render partial: 'stream_item', collection: @posts %>
 	</ol>	

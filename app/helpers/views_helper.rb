@@ -14,4 +14,8 @@ module ViewsHelper
 	def post_place_holder
 		'...'
 	end
+
+	def feed_title
+		'Listen up'
+	end
 end
