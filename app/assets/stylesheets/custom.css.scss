@@ -1,17 +1,29 @@
 @import "bootstrap";
 
 /* universal */
-
+@mixin rounded-corners {
+     -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}
 html {
   overflow-y: scroll;
 }
 
 body {
   padding-top: 60px;
+  background-color:#444C57;
+  background-image: url('app/assets/images/background.png');
 }
-
 section {
   overflow: auto;
+  background-color:$grayLighter; 
+  padding: 10px;
+  @include rounded-corners  
+}
+container{
+  @include rounded-corners  
 }
 
 textarea {
@@ -54,13 +66,17 @@ p {
 }
 
 /* header */
-
+.navbar {
+  background-color: $red; /* background color will be black for all browsers */
+  background-image: none;
+  background-repeat: no-repeat;
+  filter: none;
+}
 #logo {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #666666;
-  text-transform: uppercase;
+  color: #666666;  
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
@@ -150,6 +166,7 @@ $grayMediumLight: #eaeaea;
 }
 
 .mantra {
+  padding-top:10px;
   font-style:italic;
 }
 
@@ -176,6 +193,10 @@ aside {
       margin-top: 0px;
     }
   }
+  textarea {    
+    height: 100px;
+    margin: 5px;    
+  }  
 }
 .gravatar {
   float: left;
@@ -249,7 +270,16 @@ input {
     margin: 0 0 18px 0;
   }
 }
-
+.field{  
+  padding:5px;
+  textarea{
+    padding:5px;
+    width:97%;   
+  }
+}
+.pad-left{
+  padding-left:85px;
+}  
 .field_with_errors {
   @extend .control-group;
   @extend .error;
@@ -296,12 +326,6 @@ input {
 .gravatar {
   float: left;
   margin-right: 10px;
-}
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
-  }
 }
 .message{
   display: block;  

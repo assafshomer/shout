@@ -8,7 +8,7 @@ module ViewsHelper
 	end
 
 	def app_mantra
-		'think inside the box...'
+		'...think inside the box...'
 	end
 
 	def post_place_holder
