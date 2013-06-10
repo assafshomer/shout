@@ -16,6 +16,6 @@ module ViewsHelper
 	end
 
 	def feed_title
-		'Listen up'
+		'...listen up...'
 	end
 end
