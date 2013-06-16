@@ -1,6 +1,7 @@
 <% if @posts.any? %>
-	<h2 class="feed_title"><%= feed_title %></h2>	
+	
 	<ol class="posts">
+	<li class="feed_title"><%= feed_title %></li>	
 		<%= render partial: 'stream_item', collection: @posts %>
 	</ol>	
 <% else %>

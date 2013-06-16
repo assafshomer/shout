@@ -173,13 +173,9 @@ footer ul li {
 .mantra {
   padding-top:10px;
   font-style:italic;
+  color:$orange;
 }
-.feed_title {
-  padding-top:10px;
-  font-style:none;
-  font-size:3em;
-  color:#1c648f;
-}
+
 
 /* sidebar */
 
@@ -298,18 +294,7 @@ input {
 
  /* users index */
 
-.users {
-  list-style: none;
-  margin: 0;
-  li {
-    overflow: auto;
-    padding: 10px 0;
-    border-top: 1px solid $grayLighter;
-    &:last-child {
-      border-bottom: 1px solid $grayLighter;
-    }
-  }
-}
+
 
  /* Administrator profile */
 .administrator {
@@ -320,15 +305,28 @@ input {
  /* posts */
 
 .posts {
-  list-style: none;
-  margin: 10px 0 0 0;
+  list-style: none;   
+  margin:none;
   li {
-    padding: 10px 0;
-    border-top: 1px solid #c7c7c7;
+    background-color:$grayLighter;
+    padding: 10px;
+    border-top: 2px solid $appBgd;
+    @include rounded-corners  
+  }
+    .feed_title {
+    padding-top:10px;
+    font-style:none;  
+    color:$white;
+    background-color:$appBgd;
+    font-size: 3em;
+    letter-spacing: -2px;
+    margin-bottom: 30px;
+    text-align: center; 
   }
 }
 .content {
   display: block;
+  @include rounded-corners
 }
 .timestamp {
   color: $grayLight;
@@ -337,3 +335,4 @@ input {
 link { 
   color: $grayLight;
 }
+
