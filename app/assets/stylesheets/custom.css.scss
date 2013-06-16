@@ -66,16 +66,30 @@ p {
 
 /* header */
 .navbar {
-  background-color: $red; /* background color will be black for all browsers */
-  background-image: none;
-  background-repeat: no-repeat;
-  filter: none;
+  .navbar-inner {
+    background-color: #1c648f;
+    background-image: url('app/assets/sky.png');
+    background-position: 0 0;
+    background-repeat: repeat;
+    -moz-box-shadow: inset 0 26px 13px -26px #000;
+    -webkit-box-shadow: inset 0 26px 13px -26px black;
+    box-shadow: inset 0 26px 13px -26px black;
+  }  
+}
+#head-links{
+  a {
+    color:#AAA;  
+    &:hover {
+      color:$white;
+      text-decoration:none;
+    }
+  }  
 }
 #logo {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #666666;  
+  color: #AAA;  
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
@@ -83,7 +97,7 @@ p {
 }
 
 #logo:hover {
-  color: #777777;
+  color: $white;
   text-decoration: none;
 }
 
