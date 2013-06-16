@@ -17,7 +17,8 @@ body {
 section {
   overflow: auto;
   background-color:$grayLighter; 
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   @include rounded-corners  
 }
 container{
@@ -303,7 +304,7 @@ input {
   margin: 10px 0 0 0;
   li {
     padding: 10px 0;
-    border-top: 1px dotted $appBgd;
+    border-top: 1px solid #c7c7c7;
   }
 }
 .content {
