@@ -52,7 +52,7 @@ describe "PostPages" do
 					post_array.each { |post|	post.save }
 					visit root_path						
 				end				
-				it { should have_selector('h2.mantra', text: feed_title) }				
+				it { should have_selector('li.feed_title', text: feed_title) }				
 				it "should display each of the posts" do
 					post_array.each do |post|
 						page.should have_selector("li##{post.id}", text: post.content) 		
