@@ -4,6 +4,6 @@
 		<%= time_ago_in_words(stream_item.created_at) %> ago
 	</span>
 	<br/>		
-		<%= stream_item.content %>
+		<%= new_wrap(stream_item.content) %>
 	</span>
 </li>
