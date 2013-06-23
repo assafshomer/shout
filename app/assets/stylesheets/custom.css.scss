@@ -18,8 +18,7 @@ section {
   overflow: auto;
   Xbackground-color:$grayLighter; 
   background-color:$appBgd; 
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px;
   @include rounded-corners  
 }
 container{
@@ -201,11 +200,8 @@ aside {
       margin-top: 0px;
     }
   }
-  textarea {    
-    height: 250px;
-    margin: 5px;  
-  }  
 }
+
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -291,6 +287,7 @@ input {
     -webkit-box-shadow: inset 0px 0px 10px 3px $grayLight;
     box-shadow: inset 0px 0px 10px 3px $grayLight;      
   }
+
 }
 .pad-left{
   padding-left:18px;
@@ -322,8 +319,7 @@ input {
 
 .posts {
   list-style: none;   
-  margin:none;  
-  padding:5px;  
+  margin:none;    
   li {
     background-color:$grayLighter;
     padding: 10px;
@@ -344,6 +340,9 @@ input {
 .content {
   display: block;
   @include rounded-corners
+}
+.output {
+  color:$red;
 }
 .timestamp {
   color: $grayLight;

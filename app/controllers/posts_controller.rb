@@ -17,6 +17,7 @@ class PostsController < ApplicationController
 
   def index
     @posts=Post.all.to_a
+    @post=Post.first
   end
 
 	private

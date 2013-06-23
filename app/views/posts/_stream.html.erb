@@ -1,8 +1,7 @@
 <% if @posts.any? %>	
-	<ol class="posts">
-	<!-- <li class="feed_title"><%= feed_title %></li>	 -->
+	<div class="posts">	
 		<%= render partial: 'stream_item', collection: @posts %>
-	</ol>	
+	</div>	
 <% else %>
 	no posts at this time
 <% end %>

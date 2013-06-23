@@ -1,4 +1,4 @@
-<li id="<%= stream_item.id %>">
+<!-- <li id="<%= stream_item.id %>">
 	<span class="content">
 	<span class="timestamp">
 		<%= time_ago_in_words(stream_item.created_at) %> ago
@@ -6,4 +6,11 @@
 	<br/>		
 		<%= new_wrap(stream_item.content) %>
 	</span>
-</li>
+</li> -->
+	
+	<% display= "\t \t \t #{time_ago_in_words(stream_item.created_at)} \n #{stream_item.content}" %>
+
+	<div class="field span5" id="<%= stream_item.id %>" >
+		<%= text_area_tag 'description', display,
+												 :rows => 11, :cols => 25, :disabled => true, class: "output" %>
+	</div>			

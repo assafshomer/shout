@@ -1,24 +1,7 @@
-<title>index</title>
+	
 
-<table>
-	<tr>
-    <th>id</th>
-    <th>Content</th>
-    <th>Time</th>
-	</tr>
+	<div class="field span5">
+		<%= text_area_tag 'description', "Description goes here.", :rows => 12, :cols => 25, :disabled => true %>
+	</div>				
 
-	<% @posts.each do |post| %>
-		<tr>
-			<td>
-				<%= post.id %>
-			</td>
-			<td>
-				<%= post.content[0..30] %>
-			</td>
-			<td>
-				<%= post.created_at %>
-			</td>
-		</tr>
-	<% end %>
-
-</table>
+																
