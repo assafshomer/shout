@@ -1,6 +1,11 @@
 module ViewsHelper
 	def submit_button_title
-		app_title
+		# app_title
+		app_title.downcase
+	end
+
+	def button_space
+		' '*20
 	end
 
 	def app_title
@@ -12,7 +17,7 @@ module ViewsHelper
 	end
 
 	def post_place_holder
-		'...'
+		"			...think inside the box..."
 	end
 
 	def feed_title

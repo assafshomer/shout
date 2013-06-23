@@ -16,7 +16,8 @@ body {
 }
 section {
   overflow: auto;
-  background-color:$grayLighter; 
+  Xbackground-color:$grayLighter; 
+  background-color:$appBgd; 
   padding-left: 10px;
   padding-right: 10px;
   @include rounded-corners  
@@ -201,7 +202,7 @@ aside {
     }
   }
   textarea {    
-    height: 150px;
+    height: 250px;
     margin: 5px;  
   }  
 }
@@ -280,12 +281,27 @@ input {
 .field{  
   padding:5px;
   textarea{
-    padding:5px;
+    padding:15px;
     width:97%;   
+    background-color: $almostWhite;
+    background-image: url('app/assets/floor.jpg');
+    background-position: 5 5;
+    background-repeat: repeat;
+    -moz-box-shadow: inset 0px 0px 10px 3px $grayLight;
+    -webkit-box-shadow: inset 0px 0px 10px 3px $grayLight;
+    box-shadow: inset 0px 0px 10px 3px $grayLight;      
   }
 }
 .pad-left{
-  padding-left:85px;
+  padding-left:18px;
+}
+.btn-long {
+  padding-left:140px;
+  padding-right:140px;  
+}
+.btn-pad {
+  padding-left:10px;
+  padding-right:10px;  
 }  
 .field_with_errors {
   @extend .control-group;
@@ -306,7 +322,8 @@ input {
 
 .posts {
   list-style: none;   
-  margin:none;
+  margin:none;  
+  padding:5px;  
   li {
     background-color:$grayLighter;
     padding: 10px;

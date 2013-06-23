@@ -14,7 +14,7 @@ describe "PostPages" do
 		it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
 		it { should have_selector('input#shoutup_button') }
 		it { should have_xpath("//input[@value=\'#{button}\']") }
-		it { should have_selector('h2.mantra', text: app_mantra) }
+		# it { should have_selector('h2.mantra', text: app_mantra) }
 				describe "validations" do
 			describe "clicking the post button with an empty post should raise an error" do
 				before { click_button button }
@@ -52,7 +52,7 @@ describe "PostPages" do
 					post_array.each { |post|	post.save }
 					visit root_path						
 				end				
-				it { should have_selector('li.feed_title', text: feed_title) }				
+				# it { should have_selector('li.feed_title', text: feed_title) }				
 				it "should display each of the posts" do
 					post_array.each do |post|
 						page.should have_selector("li##{post.id}", text: post.content) 		
