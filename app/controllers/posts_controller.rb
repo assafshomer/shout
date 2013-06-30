@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
   def new    
   	@post=Post.new   
-    @posts=Post.all.to_a
+    @stream=Post.all
+    @posts=search_stream(params[:search], @stream)
   end
 
   def create
@@ -24,5 +25,13 @@ class PostsController < ApplicationController
 
 	  def post_params
       params.require(:post).permit(:content)
-    end  
+    end
+
+  def search_stream(space_separated_search_terms, stream)    
+    if !space_separated_search_terms.blank?      
+      stream.where(generate_LIKE_sql(space_separated_search_terms, 'content',Post))
+    else
+      stream
+    end
+  end      
 end
