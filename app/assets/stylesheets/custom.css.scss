@@ -19,19 +19,26 @@ section {
   Xbackground-color:$grayLighter; 
   background-color:$appBgd; 
   padding: 10px;
-  @include rounded-corners  
+  @include rounded-corners;  
 }
 container{
-  @include rounded-corners  
+  @include rounded-corners;  
 }
 
 textarea {
   resize: none;
   overflow-y: hidden;
 }
+#textbox{
+    background-color:$white;
+}
+[contenteditable]{
+  @include gray_box; 
+  @include rounded-corners;
+}
 
-.center {
-  text-align: center;
+.center {  text-align: center;
+
 }
 
 .center h1 {
@@ -287,10 +294,13 @@ input {
     -webkit-box-shadow: inset 0px 0px 10px 3px $grayLight;
     box-shadow: inset 0px 0px 10px 3px $grayLight;      
   }
-
 }
 .pad-left{
   padding-left:18px;
+  display:table;
+}
+.box-array{
+  padding:5px;
 }
 .btn-long {
   padding-left:140px;
@@ -324,7 +334,7 @@ input {
     background-color:$grayLighter;
     padding: 10px;
     border-top: 2px solid $appBgd;
-    @include rounded-corners  
+    @include rounded-corners;  
   }
     .feed_title {
     padding-top:10px;
@@ -339,7 +349,7 @@ input {
 }
 .content {
   display: block;
-  @include rounded-corners
+  @include rounded-corners;
 }
 .output {
   color:$red;
@@ -347,6 +357,7 @@ input {
 .timestamp {
   color: $grayLight;
   float: right;
+  font-size: 12px;
 }
 link { 
   color: $grayLight;

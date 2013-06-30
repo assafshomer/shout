@@ -4,8 +4,27 @@
   box-sizing: border-box;
 }
 @mixin rounded-corners {
-     -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+}
+@mixin gray_box {
+  padding:15px;
+  width:330px;   
+  height:280px;
+  color:#444;     
+  background-color: #CCC;
+  background-image: url('app/assets/floor.jpg');
+  background-position: 5 5;
+  background-repeat: repeat;
+  -moz-box-shadow: inset 0px 0px 15px 3px $gray;
+  -webkit-box-shadow: inset 0px 0px 15px 3px $gray;
+  box-shadow: inset 0px 0px 15px 3px $gray;   
+    &:empty:after{
+    content:"           ...think inside the box...";
+    color:#999;
+    padding-left:100px;
+    text-align:center;   
+  };  
 }
