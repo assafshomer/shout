@@ -59,6 +59,11 @@ describe "PostPages" do
 						page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 					end
 				end
+				it "should display the search bar" do
+					page.should have_xpath("//input[@value=\'Search\']") 
+					page.should have_xpath("//input[@value=\'Clear\']") 
+					page.should have_selector('input#search') 
+				end
 				describe "should display posts in reverse chronological order" do
 					let!(:times) { Post.all.to_a.map(&:created_at) }
 					specify {times.should == times.sort.reverse}

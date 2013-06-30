@@ -1,5 +1,6 @@
 <% if @posts.any? %>	
 	<div class="posts">	
+		<%= render 'shared/search' %>
 		<%= render partial: 'stream_item', collection: @posts %>
 	</div>	
 <% else %>
