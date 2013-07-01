@@ -19,7 +19,7 @@ describe "Search Posts" do
 	describe "on HomePage" do
 		before { visit root_path }
 		it "should display each of the posts" do
-			post_array.each do |post|
+			post_array.sort {|x,y| x.created_at<=>y.created_at}.reverse[0..4].each do |post|
 				page.should have_selector("div##{post.id}", text: post.content) 		
 				page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 			end
@@ -33,7 +33,7 @@ describe "Search Posts" do
 			it { should have_xpath("//input[@value=\'Clear\']") }
 			it { should  have_selector('input#search') }
 			it "should display none of the posts" do
-				post_array.each do |post|
+				post_array.sort {|x,y| x.created_at<=>y.created_at}.reverse[0..4].each do |post|
 					page.should_not have_selector("div##{post.id}", text: post.content) 		
 					page.should_not have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 				end
@@ -47,7 +47,7 @@ describe "Search Posts" do
 				visit root_path
 			end			
 			it "should display all posts" do
-				post_array.each do |post|
+				post_array.sort {|x,y| x.created_at<=>y.created_at}.reverse[0..4].each do |post|
 					page.should have_selector("div##{post.id}", text: post.content) 		
 					page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 				end
@@ -67,7 +67,7 @@ describe "Search Posts" do
 	describe "on Index" do
 		before { visit posts_path }
 		it "should display each of the posts" do
-			post_array.each do |post|
+			post_array.sort {|x,y| x.created_at<=>y.created_at}.reverse[0..4].each do |post|
 				page.should have_selector("div##{post.id}", text: post.content) 		
 				page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 			end
@@ -95,7 +95,7 @@ describe "Search Posts" do
 				visit posts_path
 			end			
 			it "should display all posts" do
-				post_array.each do |post|
+				post_array.sort {|x,y| x.created_at<=>y.created_at}.reverse[0..4].each do |post|
 					page.should have_selector("div##{post.id}", text: post.content) 		
 					page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 				end
