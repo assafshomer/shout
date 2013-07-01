@@ -6,10 +6,14 @@ namespace :db do
 
 	def make_posts		
 		number_of_posts=50			
-		number_of_posts.times do |blurb|
-			number_of_lines=rand(1..15)
+		number_of_posts.times do 			
 			hours_created_ago=rand(1..100)
-			blurb=Faker::Lorem.sentence(number_of_lines)
+			blurb=''
+			(1..10).to_a.sample.times do
+				blurb += Faker::Lorem.sentence.to_s
+				blurb += ' '
+			end
+			blurb=blurb[0..blurb.length-2]			
 			blurb="short post" unless blurb.length>5
 			post=Post.create!(content: blurb, created_at: hours_created_ago.hour.ago)
 		end
