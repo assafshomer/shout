@@ -1,8 +1,7 @@
 class PostsController < ApplicationController
   def new    
-  	@post=Post.new   
-    @stream=Post.all
-    @posts=search_stream(params[:search], @stream)
+  	@post=Post.new       
+    @posts=search_stream(params[:search], Post.all)
     redirect_to root_path if params[:commit]=='Clear'
   end
 
@@ -17,9 +16,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def index
-    @posts=Post.all.to_a
-    @post=Post.first
+  def index    
+    @posts=search_stream(params[:search], Post.all)
+    redirect_to posts_path if params[:commit]=='Clear'
   end
 
 	private
