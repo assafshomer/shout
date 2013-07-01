@@ -23,4 +23,14 @@ module ViewsHelper
 	def feed_title
 		'stream'
 	end
+
+	def fake_content
+		content=''
+		(1..10).to_a.sample.times do
+			content += Faker::Lorem.sentence
+			content += ' '
+		end
+		content[0..content.length-2]
+	end	
+
 end
