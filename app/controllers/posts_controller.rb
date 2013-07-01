@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   	@post=Post.new   
     @stream=Post.all
     @posts=search_stream(params[:search], @stream)
+    redirect_to root_path if params[:commit]=='Clear'
   end
 
   def create
