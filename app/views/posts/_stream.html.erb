@@ -1,6 +1,7 @@
 <%= render 'shared/search' %>
 <% if @posts.any? %>	
-	<div class="posts">			
+	<div class="posts">	
+	<%= will_paginate @posts %>		
 		<%= render partial: 'stream_item', collection: @posts %>
 	</div>	
 <% else %>

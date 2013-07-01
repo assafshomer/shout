@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def new    
   	@post=Post.new       
-    @posts=search_stream(params[:search], Post.all)
+    @posts=search_stream(params[:search], Post.all).paginate(page: params[:page], per_page: 5).order('created_at DESC')
     redirect_to root_path if params[:commit]=='Clear'
   end
 
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   end
 
   def index    
-    @posts=search_stream(params[:search], Post.all)
+    @posts=search_stream(params[:search], Post.all).paginate(page: params[:page], per_page: 5).order('created_at DESC')
     redirect_to posts_path if params[:commit]=='Clear'
   end
 

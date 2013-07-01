@@ -6,7 +6,10 @@ describe "PostPages" do
 
 	describe "Home" do
 		let!(:button) { submit_button_title }
-		before { visit root_path }
+		before do
+			Post.delete_all
+			visit root_path
+		end			
 		it { should have_title 'Speak UP' }
 		it { should have_content('footer') }
 		it { should have_xpath("//a[@data-toggle='dropdown']") }
@@ -44,17 +47,17 @@ describe "PostPages" do
 		end
 		describe "stream" do
 			describe "layout and ordering" do
-				let!(:rand_array) { random_array(100,5) }
+				let!(:rand_array) { random_array(100,8) }
 				let!(:cont_array) { rand_array.each.map {|x| "Test Post - #{x}" }}
 				let!(:post_array) { cont_array.each.map {|blurb| Post.new(content: blurb,
 				 created_at: ((random_array(100,1))[0]).days.ago) }}				
 				before do 
 					post_array.each { |post|	post.save }
-					visit root_path						
+					visit root_path											
 				end				
-				# it { should have_selector('li.feed_title', text: feed_title) }				
+				it { should have_selector('div.pagination') } 
 				it "should display each of the posts" do
-					post_array.each do |post|
+					post_array.sort {|x,y| x.created_at<=>y.created_at}.reverse[0..4].each do |post|
 						page.should have_selector("div##{post.id}", text: post.content) 		
 						page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 					end
@@ -74,12 +77,20 @@ describe "PostPages" do
 	end
 
 	describe "index" do
-		let!(:signature) { "Test Post - #{rand(1..100000000)}" }
-		let!(:post) { (Post.new(content: signature)).save  }
-			
-		before { visit posts_path }
-		# it { should have_title 'index' }
-		# it { should have_selector('td', text: signature) }
+		let!(:signature) { "Test Post - #{rand(1..100)}" }
+		let!(:post) { (Post.new(content: signature)).save  }			
+		before do
+			6.times do
+				FactoryGirl.create(:post)
+			end			
+			visit posts_path
+		end
+		it { should have_title 'Speak UP' }
+		it { should have_content('footer') }
+		it { should have_xpath("//a[@data-toggle='dropdown']") }
+		it { should_not have_selector('textarea#post_content') }		
+		it { should_not have_selector('input#shoutup_button') }		
+		it { should have_selector('div.pagination') } 
 	end
 
 end
