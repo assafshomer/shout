@@ -5,7 +5,7 @@ describe "Search Posts" do
 	subject { page }
 		let!(:post_array) { [] }
 	before(:each) do
-		20.times {post_array << FactoryGirl.create(:post, content: Faker::Lorem.sentence) }	
+		5.times {post_array << FactoryGirl.create(:post, content: Faker::Lorem.sentence) }	
 		post_array << FactoryGirl.create(:post, content: "Hey hey my my, Rock & Roll may never die")					
 		post_array << FactoryGirl.create(:post, content: "But his laughing lady's loving ain't the kind he can keep")		
 		post_array << FactoryGirl.create(:post, content: "my my hey hey rocknroll is here to stay")
@@ -26,5 +26,34 @@ describe "Search Posts" do
 		it { should have_xpath("//input[@value=\'Search\']") }
 		it { should have_xpath("//input[@value=\'Clear\']") }
 		it { should  have_selector('input#search') }
-	end		
+		it "should display none of the posts" do
+			post_array.each do |post|
+				page.should_not have_selector("div##{post.id}", text: post.content) 		
+				page.should_not have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
+			end
+		end
+	end
+	describe "clearing" do
+		before do 
+			fill_in 'search', with: 'supercalifragilisticexpialidocious'
+			click_button 'Search'
+			click_button 'Clear'
+			visit root_path
+		end			
+		it "should display all posts" do
+			post_array.each do |post|
+				page.should have_selector("div##{post.id}", text: post.content) 		
+				page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
+			end
+		end
+	end
+	describe "search should filter correctly" do
+		before do 
+			fill_in 'post_content', with: 'supercalifragilisticexpialidocious'[0..29]
+			click_button submit_button_title
+			fill_in 'search', with: 'supercalifragilisticexpialidocious'[0..29]
+			click_button 'Search'			
+		end			
+		it { should have_selector('span.content', text: 'supercalifragilisticexpialidocious'[0..29]) }		
+	end
 end
