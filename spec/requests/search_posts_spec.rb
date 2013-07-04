@@ -48,12 +48,12 @@ describe "Search Posts" do
 			end			
 			it "should display all posts" do
 				post_array.sort {|x,y| x.created_at<=>y.created_at}.reverse[0..4].each do |post|
-					page.should have_selector("div##{post.id}", text: post.content) 		
+					page.should have_selector("div##{post.id}", text: post.content) 							
 					page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 				end
 			end
 		end
-		describe "search should filter correctly" do
+		describe "search should filter correctly on a word that does not exist" do
 			before do 
 				fill_in 'post_content', with: 'supercalifragilisticexpialidocious'[0..29]
 				click_button submit_button_title
@@ -62,6 +62,21 @@ describe "Search Posts" do
 			end			
 			it { should have_selector('span.content', text: 'supercalifragilisticexpialidocious'[0..29]) }		
 		end
+		describe "search on 'my my' should" do
+			before do 
+				fill_in 'search', with: 'my my'
+				click_button 'Search'			
+			end
+			it "should description" do
+				post_array.map(&:content).grep(/my my/).size.should == 3
+			end
+			it "display just posts with my my, and display their count correctly" do
+				post_array.select {|x| x.content =~ /my my/}.each do |post|
+					page.should have_selector("div##{post.id}", text: post.content)					 							
+				end
+			end										
+		end	
+
 	end
 
 	describe "on Index" do
