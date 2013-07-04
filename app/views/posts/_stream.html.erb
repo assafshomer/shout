@@ -1,8 +1,8 @@
 <%= render 'shared/search' %>				
 
 <% if @posts.any? %>
-	<%= will_paginate @posts, inner_window:5, outer_window:5,
-	 previous_label: '-', next_label: '+' %>	
+
+<%= render 'shared/paginate', size: size %>	
 	<div class="posts">		
 		<%= render partial: 'stream_item', collection: @posts %>		
 	</div>	
