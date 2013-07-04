@@ -378,4 +378,23 @@ input {
 link { 
   color: $grayLight;
 }
-
+.pagination{
+  ul{
+    .active{
+      a{
+        background-color:$almostWhite;
+        font-size:20px;
+        font-weight:bold;
+        color:$blue;
+      }
+    }      
+    li{
+      a{
+  font-size:1em;
+  line-height:1px;
+  padding: 8px;         
+  color:$grayLight
+      }
+    } 
+  }
+}

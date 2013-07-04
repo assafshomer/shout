@@ -16,9 +16,8 @@ describe "PostPages" do
 		it { should have_selector('textarea#post_content') }
 		it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
 		it { should have_selector('input#shoutup_button') }
-		it { should have_xpath("//input[@value=\'#{button}\']") }
-		# it { should have_selector('h2.mantra', text: app_mantra) }
-				describe "validations" do
+		it { should have_xpath("//input[@value=\'#{button}\']") }		
+		describe "validations" do
 			describe "clicking the post button with an empty post should raise an error" do
 				before { click_button button }
 				it { should have_selector('div.alert.alert-error', text: '2 errors') }

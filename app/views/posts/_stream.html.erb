@@ -1,8 +1,18 @@
-<%= render 'shared/search' %>
-<% if @posts.any? %>	
-	<div class="posts">	
-	<%= will_paginate @posts %>		
-		<%= render partial: 'stream_item', collection: @posts %>
+<% if @posts.any? %>
+	<table>
+		<tr>
+			<td>
+				<%= render 'shared/search' %>				
+			</td>
+		</tr>
+		<tr>
+			<td align="left">
+				<%= will_paginate @posts, inner_window:5, outer_window:5, previous_label: '-', next_label: '+' %>			
+			</td>
+		</tr>
+	</table>	
+	<div class="posts">		
+		<%= render partial: 'stream_item', collection: @posts %>		
 	</div>	
 <% else %>
 	no posts at this time
