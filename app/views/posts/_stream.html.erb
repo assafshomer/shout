@@ -1,7 +1,6 @@
 <%= render 'shared/search' %>				
-
+<div id="counter"><%= Post.all.to_a.count %> posts (<%= @search_results.to_a.count %> matches)</div>
 <% if @posts.any? %>
-<!-- <div><%= @posts.count %> matches</div> -->
 <%= render 'shared/paginate', size: size %>	
 	<div class="posts">		
 		<%= render partial: 'stream_item', collection: @posts %>		

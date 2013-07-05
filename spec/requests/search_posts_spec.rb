@@ -27,7 +27,7 @@ describe "Search Posts" do
 		describe "search bar should still be there" do
 			before do 
 				fill_in 'search', with: 'supercalifragilisticexpialidocious'
-				click_button 'Search'
+				click_button 'Search'				
 			end			
 			it { should have_xpath("//input[@value=\'Search\']") }
 			it { should have_xpath("//input[@value=\'Clear\']") }
@@ -47,7 +47,7 @@ describe "Search Posts" do
 				fill_in 'search', with: 'supercalifragilisticexpialidocious'
 				click_button 'Search'
 				click_button 'Clear'
-				visit root_path
+				visit root_path				
 			end			
 			it "should display all posts" do
 				post_array.sort {|x,y| x.created_at<=>y.created_at}.reverse[0..4].each do |post|
@@ -57,7 +57,7 @@ describe "Search Posts" do
 			end
 			it "should show a no search message in the counter" do
 				page.should have_selector('div#counter', text: "#{Post.count} posts")
-			end
+			end			
 		end
 		describe "search should filter correctly on a word that does not exist" do
 			before do 
