@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  def new    
+  def new
+    @all_posts=Post.all.to_a    
   	@post=Post.new 
     @search_results=search_stream(params[:search], Post.all)      
     @posts=@search_results.paginate(page: params[:page], per_page: 6).order('created_at DESC')
@@ -7,8 +8,10 @@ class PostsController < ApplicationController
   end
 
   def create
+    @all_posts=Post.all.to_a
+    @search_results=search_stream(params[:search], Post.all)
   	@post=Post.new(post_params)
-    @posts=Post.all.to_a    
+    @posts=@search_results.paginate(page: params[:page], per_page: 6).order('created_at DESC')    
     if @post.save
       flash[:success] = "Thanks for sharing"  	            
       redirect_to root_path
@@ -18,6 +21,7 @@ class PostsController < ApplicationController
   end
 
   def index 
+    @all_posts=Post.all.to_a
     @search_results=search_stream(params[:search], Post.all)
     @posts=@search_results.paginate(page: params[:page], per_page: 6).order('created_at DESC')
     redirect_to posts_path if params[:commit]=='Clear'

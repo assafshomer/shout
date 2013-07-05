@@ -39,7 +39,9 @@ describe "Search Posts" do
 				end
 			end
 			it "should show a count of zero" do
+				page.should have_selector('div#counter', text: "#{Post.count} posts")
 				page.should have_selector('div#counter', text: "0 matches")
+				page.should_not have_content 'no posts at this time'
 			end
 		end
 		describe "clearing" do
@@ -57,6 +59,7 @@ describe "Search Posts" do
 			end
 			it "should show a no search message in the counter" do
 				page.should have_selector('div#counter', text: "#{Post.count} posts")
+				page.should_not have_selector('div#counter', text: 'matches')
 			end			
 		end
 		describe "search should filter correctly on a word that does not exist" do

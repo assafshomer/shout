@@ -7,7 +7,7 @@ describe "PostPages" do
 	describe "Home" do
 		let!(:button) { submit_button_title }
 		before do
-			Post.delete_all
+			# Post.delete_all
 			visit root_path
 		end			
 		it { should have_title 'Speak UP' }
@@ -53,7 +53,11 @@ describe "PostPages" do
 				before do 
 					post_array.each { |post|	post.save }
 					visit root_path											
-				end				
+				end
+				describe "clicking the post button with an empty post should raise an error" do
+					before { click_button button }
+					it { should have_selector('div.alert.alert-error', text: '2 errors') }
+				end
 				it { should have_selector('div.pagination') } 
 				it "should display each of the posts" do
 					post_array.sort {|x,y| x.created_at<=>y.created_at}.reverse[0..4].each do |post|
