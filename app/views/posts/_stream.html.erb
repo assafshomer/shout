@@ -2,7 +2,7 @@
 <% search_count = @search_results.to_a.count  %>				
 <% full_count = Post.all.to_a.count %>
 <div id="counter"><%= full_count %> posts 
-	<%= "(#{search_count} matches)" unless search_count==full_count %> </div>
+	<%= "(#{search_count} match)" unless search_count==full_count %> </div>
 <% if @all_posts.any? %>
 	<% if @search_results.any? %>
 		<%= render 'shared/paginate', size: size %>	
