@@ -38,6 +38,9 @@ describe "Search Posts" do
 					page.should_not have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 				end
 			end
+			it "should show a count of zero" do
+				page.should have_selector('div#counter', text: "0 matches")
+			end
 		end
 		describe "clearing" do
 			before do 
@@ -51,6 +54,9 @@ describe "Search Posts" do
 					page.should have_selector("div##{post.id}", text: post.content) 							
 					page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 				end
+			end
+			it "should show a no search message in the counter" do
+				page.should have_selector('div#counter', text: "#{Post.count} posts")
 			end
 		end
 		describe "search should filter correctly on a word that does not exist" do
@@ -67,14 +73,14 @@ describe "Search Posts" do
 				fill_in 'search', with: 'my my'
 				click_button 'Search'			
 			end
-			it "should description" do
-				post_array.map(&:content).grep(/my my/).size.should == 3
-			end
-			it "display just posts with my my, and display their count correctly" do
+			it "display just posts with 'my my', and display their count correctly" do
 				post_array.select {|x| x.content =~ /my my/}.each do |post|
 					page.should have_selector("div##{post.id}", text: post.content)					 							
 				end
-			end										
+			end	
+			it "display the correct post count" do				
+				page.should have_selector("div#counter", text: "3 matches")					 											
+			end														
 		end	
 
 	end
