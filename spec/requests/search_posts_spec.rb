@@ -83,9 +83,16 @@ describe "Search Posts" do
 			end	
 			it "display the correct post count" do				
 				page.should have_selector("div#counter", text: "3 match")					 											
-			end														
-		end	
-
+			end
+		end
+		describe "empty search" do
+			before do
+			  visit root_path			  
+			end
+			it "search buttons should be inactive" do
+				
+			end
+		end
 	end
 
 	describe "on Index" do
