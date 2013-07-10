@@ -98,6 +98,7 @@ p {
       letter-spacing: -1px;
       padding-top: 9px;  
       line-height: 1;
+      font-weight:bold;
     } 
     .nav {
       a {
@@ -108,6 +109,16 @@ p {
 }
 
 
+.pagination{
+  ul{
+    .active{
+      a{
+        color:blue;
+        font-weight:bold;
+      }
+    }
+  }
+}
 
 
 /* footer */
@@ -128,19 +139,7 @@ footer a {
   padding: 5px;
 }
 
-.forgot_password_link {  
-  vertical-align: bottom;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  float: right;
-  a {  
-  font-size: 0.75em;
-  color: $grayLight;  
-  }
-  a:hover{     
-      color: $red;    
-  }
-}  
+
 
 .btn-align {
   margin-bottom: 10px;  
@@ -211,10 +210,7 @@ aside {
   }
 }
 
-.gravatar {
-  float: left;
-  margin-right: 10px;
-}
+
 .stats {
   overflow: auto;
   a {
@@ -250,13 +246,7 @@ aside {
   }
 }
 
-.user_avatars {
-  overflow: auto;
-  margin-top: 10px;
-  .gravatar {
-    margin: 1px 1px;
-  }
-}
+
 
 
 .form-inline {
@@ -275,7 +265,6 @@ aside {
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
-  width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   @include box_sizing;
@@ -295,7 +284,7 @@ input {
   padding:5px;
   textarea{
     padding:15px;
-    width:97%;   
+    width:80%;   
     background-color: $almostWhite;
     background-image: url('app/assets/floor.jpg');
     background-position: 5 5;
@@ -303,6 +292,10 @@ input {
     -moz-box-shadow: inset 0px 0px 10px 3px $grayLight;
     -webkit-box-shadow: inset 0px 0px 10px 3px $grayLight;
     box-shadow: inset 0px 0px 10px 3px $grayLight;      
+  }
+  #new_post{
+    padding-left: 305px; 
+    padding-top: 35px;
   }
 }
 .pad-left{
@@ -320,6 +313,13 @@ input {
   padding-left:10px;
   padding-right:10px;  
 }  
+.submit-pad {
+  padding-left: 220px;   
+}
+.write-pad {
+  padding-left: 115px; 
+  padding-top: 35px;
+}
 .search-pad {
   padding-left:150px;
   padding-right:10px;  

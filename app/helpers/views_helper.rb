@@ -1,7 +1,7 @@
 module ViewsHelper
 	def submit_button_title
 		# app_title
-		app_title.downcase
+		app_mantra.downcase
 	end
 
 	def button_space
@@ -9,7 +9,7 @@ module ViewsHelper
 	end
 
 	def app_title
-		'Speak UP'
+		'bilbox'
 	end
 
 	def app_mantra
@@ -17,7 +17,7 @@ module ViewsHelper
 	end
 
 	def post_place_holder
-		"			...think inside the box..."
+		# "			...think inside the box..."
 	end
 
 	def feed_title
