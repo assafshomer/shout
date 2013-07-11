@@ -1,0 +1,6 @@
+<% search_count = @search_results.to_a.count  %>				
+<% full_count = Post.all.to_a.count %>
+<div id="counter">
+	<%= full_count %> posts 
+	<%= "(of which #{search_count} match \'#{params[:search]}\')" unless search_count==full_count %> 
+</div>
