@@ -1,15 +1,11 @@
-<%= render 'shared/search' %>
-<% search_count = @search_results.to_a.count  %>				
-<% full_count = Post.all.to_a.count %>
-<div id="counter"><%= full_count %> posts 
-	<%= "(#{search_count} match)" unless search_count==full_count %> </div>
-<% if @all_posts.any? %>	
-	<%= render 'shared/paginate', pad: pagination_pad %>		
+<%= render 'shared/search_fields' %>
+<% if @all_posts.any? %>			
 	<div class="posts navbar">
 		<ul class="nav" >
 			<%= render partial: 'stream_item', collection: @posts %>		
 		</ul>		
 	</div>	
+	<%= render 'shared/paginate_with_counter', pad: pagination_pad %>
 <% else %>
 	no posts at this time
 <% end %>
