@@ -1,11 +1,5 @@
-<%= render 'shared/search_fields' %>
-<% if @all_posts.any? %>			
 	<div class="posts navbar">
 		<ul class="nav" >
 			<%= render partial: 'stream_item', collection: @posts %>		
 		</ul>		
 	</div>	
-	<%= render 'shared/paginate_with_counter', pad: pagination_pad %>
-<% else %>
-	no posts at this time
-<% end %>
