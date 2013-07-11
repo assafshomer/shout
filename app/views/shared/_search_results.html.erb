@@ -1,5 +1,0 @@
-<% full_count = Post.all.to_a.count %>
-<% search_count = @search_results.to_a.count  %>	
-
-<%= full_count %> posts 
-<%= "(of which #{search_count} matched #{params[:search]})" unless search_count==full_count %> 
