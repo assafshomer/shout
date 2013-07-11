@@ -1,0 +1,17 @@
+<%= render 'shared/search_fields' %>
+<% if @all_posts.any? %>
+<table>
+	<tr>
+		<td>
+			<%= render 'stream' %>			
+		</td>
+	</tr>		
+	<tr>
+		<td>
+			<%= render 'shared/paginate_with_counter', pad: pagination_pad %>
+		</td>
+	</tr>
+</table>
+<% else %>
+	no posts at this time
+<% end %>
