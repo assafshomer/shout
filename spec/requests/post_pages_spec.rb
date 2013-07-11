@@ -10,9 +10,8 @@ describe "PostPages" do
 			# Post.delete_all
 			visit root_path
 		end			
-		# it { should have_title 'Speak UP' }
-		it { should have_content('footer') }
-		it { should have_xpath("//a[@data-toggle='dropdown']") }
+		it { should have_title app_title }
+		it { should have_content('footer') }		
 		it { should have_selector('textarea#post_content') }
 		# it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
 		it { should have_selector('input#shoutup_button') }
@@ -89,8 +88,7 @@ describe "PostPages" do
 			visit posts_path
 		end
 		it { should have_link(app_title, href: root_path) }
-		it { should have_content('footer') }
-		it { should have_xpath("//a[@data-toggle='dropdown']") }
+		it { should have_content('footer') }		
 		it { should_not have_selector('textarea#post_content') }		
 		it { should_not have_selector('input#shoutup_button') }		
 		it { should have_selector('div.pagination') } 

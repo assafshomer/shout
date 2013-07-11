@@ -31,6 +31,16 @@ module ViewsHelper
 			content += ' '
 		end
 		content[0..content.length-2]
-	end	
+	end
+	def home_title
+		'Contribute'
+	end
+	def tile_title
+		'Watch'
+	end
+
+	def tile_size
+		4
+	end
 
 end

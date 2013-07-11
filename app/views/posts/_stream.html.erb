@@ -4,7 +4,7 @@
 <div id="counter"><%= full_count %> posts 
 	<%= "(#{search_count} match)" unless search_count==full_count %> </div>
 <% if @all_posts.any? %>	
-	<%= render 'shared/paginate', size: size %>		
+	<%= render 'shared/paginate', pad: pagination_pad %>		
 	<div class="posts navbar">
 		<ul class="nav" >
 			<%= render partial: 'stream_item', collection: @posts %>		
