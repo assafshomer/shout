@@ -7,6 +7,7 @@ gem 'bcrypt-ruby', '3.0.0'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
+gem 'slim'
 # gem 'protected_attributes'
 
 group :development, :test do
@@ -17,6 +18,10 @@ group :development, :test do
   gem 'spork-rails', github: 'railstutorial/spork-rails'
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.3.6'
+  gem 'pry-rails'
+  gem 'pry-debugger'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
