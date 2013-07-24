@@ -3,7 +3,7 @@ li style="background-color:#444C57;padding:0"
     div contenteditable="false" id=(stream_item.id)
       span.content
         span.timestamp
-          = time_ago_in_words(stream_item.created_at)
-          | ago
+          = time_ago_in_words(stream_item.created_at) 
+          |  ago
         br/
         = new_wrap(stream_item.content)
