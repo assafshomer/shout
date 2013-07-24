@@ -42,7 +42,24 @@ describe "PostPages" do
 			it "should save the post to the db" do
 				expect {click_button button}.to change(Post, :count).by(1)
 			end
-		end
+		end 
+		# describe "Ajax" do
+		# 	before { visit root_path }
+		# 	it "should create a new post" do
+		# 		lambda do
+		# 			xhr :post, :create
+		# 		end.should change(Post, :count).by(1)
+		# 	end
+	 #   	it "should increment the Relationship count" do
+	 #      expect do
+	 #        xhr :post, :create, post: { content: 'test created by Ajax' }
+	 #      end.to change(Post, :count).by(1)
+	 #    end
+	 #    it "should respond with success" do
+	 #      xhr :post, :create, post: { content: 'test created by Ajax' }
+	 #      response.should be_success
+	 #    end
+	 #  end		
 		# describe "stream" do
 		# 	describe "layout and ordering" do
 		# 		let!(:rand_array) { random_array(100,8) }
