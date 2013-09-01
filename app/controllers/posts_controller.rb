@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     else
   	  render 'new'
     end
-  end
+  end 
 
   def index 
     @all_posts=Post.all.to_a

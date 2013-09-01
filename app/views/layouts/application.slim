@@ -1,0 +1,13 @@
+doctype
+html
+  head
+    title
+      = app_title
+    = render 'layouts/includes'
+    = render 'layouts/shim'
+  body
+    = render 'layouts/header'
+    .container
+      = render 'layouts/flash'
+      = yield
+      = render 'layouts/footer'
