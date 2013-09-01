@@ -19,9 +19,10 @@ section {
   Xbackground-color:$grayLighter; 
   background-color:$appBgd; 
   padding: 10px;
+  float:left;
   @include rounded-corners;  
 }
-container{
+container{  
   @include rounded-corners;  
 }
 
@@ -284,7 +285,7 @@ input {
   padding:5px;
   textarea{
     padding:15px;
-    width:80%;   
+    width:700px;   
     background-color: $almostWhite;
     background-image: url('app/assets/floor.jpg');
     background-position: 5 5;
@@ -403,4 +404,7 @@ link {
 }
 .board{  
   background-color:$red;
+}
+div.container {
+  width:1800;
 }
