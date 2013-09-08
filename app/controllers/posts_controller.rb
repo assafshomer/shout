@@ -4,6 +4,10 @@ class PostsController < ApplicationController
     redirect_to root_path if params[:commit]=='Clear'
   end
 
+  def show
+    @post=Post.find(params[:id])
+  end
+
   def create
     # binding.pry
   	@post=Post.new(post_params)
