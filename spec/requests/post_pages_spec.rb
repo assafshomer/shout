@@ -55,6 +55,7 @@ describe "PostPages" do
 		let!(:p1) {FactoryGirl.create(:post)}
 		before(:each) do		  
 		  visit post_path p1.id
+		  # save_and_open_page
 		end
 		it_should_behave_like 'all pages'			
 		it { should have_content(p1.content) }	
