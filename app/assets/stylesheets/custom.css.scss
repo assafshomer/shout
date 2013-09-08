@@ -33,9 +33,9 @@ textarea {
 #textbox{
     background-color:$white;
 }
-[contenteditable]{
-  @include gray_box; 
-  @include rounded-corners;
+.boxoutput{
+  @include smalloutputbox; 
+  @include rounded-corners; 
 }
 #search-form{
   padding: 0;
@@ -246,10 +246,6 @@ aside {
     display: block;
   }
 }
-
-
-
-
 .form-inline {
   table td{
     padding: 15; /* 'cellpadding' equivalent */  
@@ -283,20 +279,8 @@ input {
 }
 .field{  
   padding:5px;
-  textarea{
-    padding:15px;
-    width:700px;   
-    background-color: $almostWhite;
-    background-image: url('app/assets/floor.jpg');
-    background-position: 5 5;
-    background-repeat: repeat;
-    -moz-box-shadow: inset 0px 0px 10px 3px $grayLight;
-    -webkit-box-shadow: inset 0px 0px 10px 3px $grayLight;
-    box-shadow: inset 0px 0px 10px 3px $grayLight;      
-  }
-  #new_post{
-    padding-left: 305px; 
-    padding-top: 35px;
+  textarea#inputbox{
+  @include inputbox; 
   }
 }
 .pad-left{

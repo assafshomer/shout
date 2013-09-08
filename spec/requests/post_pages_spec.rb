@@ -17,7 +17,7 @@ describe "PostPages" do
 			visit root_path
 		end			
 		it_should_behave_like 'all pages'
-		it { should have_selector('textarea#post_content') }
+		it { should have_selector('textarea#inputbox') }
 		# it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
 		it { should have_selector('input#shoutup_button') }
 		it { should have_xpath("//input[@value=\'#{button}\']") }		
@@ -28,14 +28,14 @@ describe "PostPages" do
 			end
 			describe "clicking the post button with a single character post should raise an error" do
 				before do
-				  fill_in 'post_content', with: 'x'
+				  fill_in 'inputbox', with: 'x'
 				  click_button button
 				end
 				it { should have_selector('div.alert.alert-error', text: '1 error') }
 			end
 			describe "posting OK should not raise any errors and should flash" do
 				before do
-				  fill_in 'post_content', with: 'OK'
+				  fill_in 'inputbox', with: 'OK'
 				  click_button button
 				end
 				it { should_not have_selector('div.alert.alert-error', text: 'error') }
@@ -43,7 +43,7 @@ describe "PostPages" do
 			end
 		end
 		describe "persistance" do
-			before { fill_in 'post_content', with: 'foobar' }
+			before { fill_in 'inputbox', with: 'foobar' }
 			it "should save the post to the db" do
 				expect {click_button button}.to change(Post, :count).by(1)
 			end
@@ -54,8 +54,7 @@ describe "PostPages" do
 		subject { page }
 		let!(:p1) {FactoryGirl.create(:post)}
 		before(:each) do		  
-		  visit post_path p1.id
-		  # save_and_open_page
+		  visit post_path p1.id		  
 		end
 		it_should_behave_like 'all pages'			
 		it { should have_content(p1.content) }	

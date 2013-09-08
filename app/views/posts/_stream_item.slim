@@ -1,6 +1,6 @@
 li style="background-color:#444C57;padding:0"
   .box-array
-    div contenteditable="false" id=(stream_item.id)
+    div.boxoutput id=(stream_item.id)
       span.content
         span.timestamp
           = time_ago_in_words(stream_item.created_at) 

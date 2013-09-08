@@ -135,7 +135,7 @@ describe "Search Posts" do
 		describe "search should filter correctly" do
 			before do
 				visit root_path 
-				fill_in 'post_content', with: 'supercalifragilisticexpialidocious'[0..29]
+				fill_in 'inputbox', with: 'supercalifragilisticexpialidocious'[0..29]
 				click_button submit_button_title
 				visit posts_path
 				fill_in 'search', with: 'supercalifragilisticexpialidocious'[0..29]
