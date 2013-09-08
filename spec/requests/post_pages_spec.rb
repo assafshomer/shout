@@ -95,10 +95,13 @@ describe "PostPages" do
 		# end		
 	end
 
-	describe "index" do
-		let!(:signature) { "Test Post - #{rand(1..100)}" }
-		let!(:post) { (Post.new(content: signature)).save  }			
+	describe "show" do
+		
+	end
+
+	describe "index" do		
 		before do
+			Post.delete_all
 			6.times do
 				FactoryGirl.create(:post)
 			end			
