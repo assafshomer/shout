@@ -9,7 +9,7 @@
   -khtml-border-radius: 5px;
   border-radius: 5px;
 }
-@mixin inputbox {
+@mixin bigbox {
   padding:15px;
   width:700px;   
   background-color: $almostWhite;
@@ -20,7 +20,7 @@
   -webkit-box-shadow: inset 0px 0px 10px 3px $grayLight;
   box-shadow: inset 0px 0px 10px 3px $grayLight;     
 }
-@mixin smalloutputbox {
+@mixin smallbox {
   padding:15px;
   width:330px;   
   height:280px;

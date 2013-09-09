@@ -63,16 +63,16 @@ describe "PostPages" do
 	describe "index" do		
 		before do
 			Post.delete_all
+			FactoryGirl.create(:post, content: "a"+"\r\n"*20+"...")
+			FactoryGirl.create(:post, content: "line 1\r\nline 2\r\nline 3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10\r\n11\r\n1...")
 			6.times do
 				FactoryGirl.create(:post)
-			end			
+			end
 			visit posts_path
 		end
 		it_should_behave_like 'all pages'
 		it { should_not have_selector('textarea#post_content') }		
 		it { should_not have_selector('input#shoutup_button') }		
 		it { should have_selector('div.pagination') } 
-
 	end
-
 end
