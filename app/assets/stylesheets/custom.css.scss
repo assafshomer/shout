@@ -15,7 +15,7 @@ body {
   background-image: url('app/assets/images/background.png');
 }
 section {
-  overflow: auto;
+  overflow: none;
   Xbackground-color:$grayLighter; 
   background-color:$appBgd; 
   padding: 10px;
@@ -107,8 +107,6 @@ p {
     }    
   }  
 }
-
-
 .pagination{
   ul{
     .active{
@@ -270,61 +268,14 @@ input {
 .posts {
   list-style: none;   
   margin:none;    
-  li {
-    background-color:$grayLighter;
-    padding: 10px;
-    border-top: 2px solid $appBgd;
-    @include rounded-corners;  
-  }
-    .feed_title {
-    padding-top:10px;
-    font-style:none;  
-    color:$white;
-    background-color:$appBgd;
-    font-size: 3em;
-    letter-spacing: -2px;
-    margin-bottom: 30px;
-    text-align: center; 
-  }
-}
-
-.timestamp {
-  color: $grayLight;
-  float: right;
-  font-size: 12px;
-}
-
-.example{
-  ul{
-    .active{
-      a{
-        background-color:$almostWhite;
-        font-size:20px;
-        font-weight:bold;
-        color:$blue;
-      }
-    }      
-    li{
-      a{
-  font-size:1em;
-  line-height:1px;
-  padding: 8px;         
-  color:$grayLight
-      }
-    } 
-  }
-}
-#counter{
-  color:$white;
-}
-.board{  
-  background-color:$red;
 }
 
 /* index */
+
 li#tile{
   background-color:#444C57;
   padding:5px;
+  float:left;
 }
 .smallbox{
   width:330px;   
@@ -336,4 +287,12 @@ textarea#inputbox{
   height:650px;
   color:555;  
   @include box; 
+}
+.timestamp {
+  color: $grayLight;
+  float: right;
+  font-size: 12px;
+}
+#counter{
+  color:$white;
 }
