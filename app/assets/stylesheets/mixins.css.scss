@@ -16,16 +16,16 @@
   background-image: url('app/assets/floor.jpg');
   background-position: 5 5;
   background-repeat: repeat;
-  -moz-box-shadow: inset 0px 0px 10px 3px $grayLight;
-  -webkit-box-shadow: inset 0px 0px 10px 3px $grayLight;
-  box-shadow: inset 0px 0px 10px 3px $grayLight;     
+  -moz-box-shadow: inset 0px 0px 10px 3px $gray;
+  -webkit-box-shadow: inset 0px 0px 10px 3px $gray;
+  box-shadow: inset 0px 0px 10px 3px $gray;     
 }
 @mixin smallbox {
   padding:15px;
   width:330px;   
   height:280px;
   color:#444;     
-  background-color: #CCC;
+  background-color: $almostWhite;
   background-image: url('app/assets/floor.jpg');
   background-position: 5 5;
   background-repeat: repeat;
@@ -33,3 +33,17 @@
   -webkit-box-shadow: inset 0px 0px 15px 3px $gray;
   box-shadow: inset 0px 0px 15px 3px $gray;   
 }
+
+@mixin box {
+  padding:15px;
+  border: 1px solid #bbb;
+  background-color: $almostWhite;
+  background-image: url('app/assets/floor.jpg');
+  background-position: 5 5;
+  background-repeat: repeat;
+  -moz-box-shadow: inset 0px 0px 10px 3px $gray;
+  -webkit-box-shadow: inset 0px 0px 10px 3px $gray;
+  box-shadow: inset 0px 0px 10px 3px $gray;     
+  @include rounded-corners; 
+}
+

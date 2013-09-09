@@ -327,10 +327,11 @@ li#tile{
   padding:5px;
 }
 .smallbox{
-  @include smallbox; 
-  @include rounded-corners; 
+  width:330px;   
+  height:280px;
+  @include box; 
 }
-
 textarea#inputbox{
-  @include bigbox; 
+  width:700px;   
+  @include box; 
 }
