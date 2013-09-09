@@ -1,6 +1,1 @@
-.bigbox id=(@post.id)
-  span.timestamp
-    = time_ago_in_words(@post.created_at) 
-    |  ago
-  br/
-  = new_wrap(@post.content)
+= render 'shared/big_post', post: @post

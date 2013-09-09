@@ -1,1 +1,6 @@
-= render 'shared/post_fields'
+table cellpadding="15px"
+	tr
+		td 
+			= render 'shared/post_fields'			
+		td valign="top"
+			= render 'shared/big_post', post: @lastpost

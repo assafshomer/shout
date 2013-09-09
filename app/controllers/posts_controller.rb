@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def new
   	@post=Post.new 
+    @lastpost=Post.find(Post.all.ids.max)
     redirect_to root_path if params[:commit]=='Clear'
   end
 
@@ -15,6 +16,7 @@ class PostsController < ApplicationController
       flash[:success] = "Thanks for sharing"  	            
       redirect_to root_path
     else
+      @lastpost=Post.find(Post.all.ids.max)
   	  render 'new'
     end
   end 
