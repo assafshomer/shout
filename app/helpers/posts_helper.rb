@@ -1,5 +1,9 @@
 module PostsHelper
 
+  def max_length
+    67 
+    #this seems to be the number of medium size a's that fit into 40em textarea width
+  end
   def new_wrap(content)    
     array=replace_newline_with_br(content).split
     new_array=array.map do |string|
@@ -12,14 +16,14 @@ module PostsHelper
     result=string.strip.gsub("\r\n","<br/>").gsub("\n", "<br/>").gsub("\r","<br/>")
   end
 
-  def wrap_long_string(text, max_width = 30)
+  def wrap_long_string(text, width = max_length)
     zero_width_space = "&#8203;"
-    regex = /.{1,#{max_width}}/
-    (text.length < max_width) ? text : 
+    regex = /.{1,#{width}}/
+    (text.length < width) ? text : 
                                 text.scan(regex).join(zero_width_space)
   end
 
-  def smart_wrap(text, max_width = 30)
+  def smart_wrap(text)
     array=text.split("<br/>")
     new_array =  array.map do |string|
       wrap_long_string(string)

@@ -33,14 +33,18 @@ textarea {
   overflow-y: hidden;
 }
 #textbox{
-    background-color:$white;
+  background-color:$white;
 }
 
 #search-form{
   padding: 0;
 }
-.center {  text-align: center;
-
+.center {  
+  text-align: center;
+}
+.table_header{
+  color:yellow;
+  font-weight:none;  
 }
 
 .center h1 {
@@ -283,15 +287,16 @@ li#tile{
   @include box; 
 }
 textarea#inputbox{
-  width:700px; 
-  height:650px;
+  width:40em; 
+  height:40em;
   color:555;  
+  font-size:medium;  
   @include box; 
 }
 .bigbox{
-  width:700px; 
-  height:650px;
-  color:555;  
+  width:38em; 
+  height:38em;
+  color:555;    
   @include box; 
 }
 .timestamp {
@@ -301,4 +306,7 @@ textarea#inputbox{
 }
 #counter{
   color:$white;
+}
+.lower{
+  padding-top:1em;
 }

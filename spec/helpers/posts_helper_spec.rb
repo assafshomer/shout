@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+include PostsHelper
 space="a
 
 b"
@@ -8,9 +8,9 @@ describe PostsHelper do
 	describe "new_wrap" do
 		describe "should remove all new lines" do
 			specify{new_wrap('string string').should == 'string string'}
-			specify{new_wrap('a'*31).should_not == 'a'*31}						
-			specify{new_wrap('a'*27+"<br/>"+'v').should == 'a'*27+"<br />"+'v' }
-			specify{new_wrap('a'*31+"<br/>"+'v').should == 'a'*30+"&#8203;"+'a'+"<br />"+'v' }
+			specify{new_wrap('a'*(max_length+1)).should_not == 'a'*(max_length+1)}						
+			specify{new_wrap('a'*(max_length-1)+"<br/>"+'v').should == 'a'*(max_length-1)+"<br />"+'v' }
+			specify{new_wrap('a'*(max_length+1)+"<br/>"+'v').should == 'a'*max_length+"&#8203;"+'a'+"<br />"+'v' }
 			specify{new_wrap('assaf <br /> shomer').should == 'assaf <br /> shomer'}
 			specify{new_wrap("a\r\nb").should == 'a<br />b'}
 			specify{new_wrap("assaf\nshomer\n\nis").should == 'assaf<br />shomer<br /><br />is'}
@@ -27,8 +27,8 @@ describe PostsHelper do
 	end
 
 	describe "smart wrap" do
-		specify{smart_wrap('a'*31+"<br/>"+'bc').should == 'a'*30+"&#8203;"+'a'+"<br/>"+'bc'}
-		specify{smart_wrap('a'*29+"<br/>"+'bc').should == 'a'*29+"<br/>"+'bc'}		
+		specify{smart_wrap('a'*(max_length+1)+"<br/>"+'bc').should == 'a'*max_length+"&#8203;"+'a'+"<br/>"+'bc'}
+		specify{smart_wrap('a'*(max_length-1)+"<br/>"+'bc').should == 'a'*(max_length-1)+"<br/>"+'bc'}		
 	end
 
 end
