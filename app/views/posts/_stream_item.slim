@@ -1,9 +1,7 @@
 li#tile 
-  .box-array
-    div.smallbox id=(stream_item.id)
-      span.content
-        span.timestamp
-          = time_ago_in_words(stream_item.created_at) 
-          |  ago
-        br/
-        = new_wrap(stream_item.content)
+  .smallbox id=(stream_item.id)
+    span.timestamp
+      = time_ago_in_words(stream_item.created_at) 
+      |  ago
+    br/
+    = new_wrap(stream_item.content)
