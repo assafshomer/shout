@@ -282,7 +282,7 @@ li#tile{
   height:280px;  
   @include box; 
 }
-textarea#inputbox{
+textarea#inputbox, .bigbox{
   width:700px; 
   height:650px;
   color:555;  

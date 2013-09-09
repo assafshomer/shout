@@ -1,2 +1,6 @@
-h1 post content is
-=@post.content
+.bigbox id=(@post.id)
+  span.timestamp
+    = time_ago_in_words(@post.created_at) 
+    |  ago
+  br/
+  = new_wrap(@post.content)
