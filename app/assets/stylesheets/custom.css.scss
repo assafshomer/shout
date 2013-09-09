@@ -230,12 +230,7 @@ input {
     margin: 0 0 18px 0;
   }
 }
-.field{  
-  padding:5px;
-  textarea#inputbox{
-  @include bigbox; 
-  }
-}
+
 .pad-left{
   padding-left:18px;
   display:table;
@@ -334,4 +329,8 @@ li#tile{
 .smallbox{
   @include smallbox; 
   @include rounded-corners; 
+}
+
+textarea#inputbox{
+  @include bigbox; 
 }

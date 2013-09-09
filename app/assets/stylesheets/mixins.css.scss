@@ -32,10 +32,4 @@
   -moz-box-shadow: inset 0px 0px 15px 3px $gray;
   -webkit-box-shadow: inset 0px 0px 15px 3px $gray;
   box-shadow: inset 0px 0px 15px 3px $gray;   
-    &:empty:after{
-    content:"           ...think inside the box...";
-    color:#999;
-    padding-left:100px;
-    text-align:center;   
-  };  
 }
