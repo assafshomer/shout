@@ -1,6 +1,6 @@
 = form_for(@post) do |f|
 	= render 'shared/errors', object: f.object
 	.field
-		= f.text_area :content, placeholder: post_place_holder, rows: 30, id: :inputbox
+		= f.text_area :content, placeholder: post_place_holder, id: :inputbox
 	.field
 		= f.submit submit_button_title,  id: "shoutup_button", class: "btn btn-large btn-primary btn-long"	

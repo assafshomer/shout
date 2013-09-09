@@ -328,10 +328,12 @@ li#tile{
 }
 .smallbox{
   width:330px;   
-  height:280px;
+  height:280px;  
   @include box; 
 }
 textarea#inputbox{
-  width:700px;   
+  width:700px; 
+  height:650px;
+  color:555;  
   @include box; 
 }
