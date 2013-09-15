@@ -65,7 +65,7 @@ describe "PostPages" do
 			Post.delete_all
 			FactoryGirl.create(:post, content: "a"+"\r\n"*20+"...")
 			FactoryGirl.create(:post, content: "line 1\r\nline 2\r\nline 3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10\r\n11\r\n1...")
-			8.times do
+			tile_size.times do
 				FactoryGirl.create(:post)
 			end
 			visit posts_path
