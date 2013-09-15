@@ -1,5 +1,5 @@
 require 'spec_helper'
-include PostsHelper
+
 space="a
 
 b"
