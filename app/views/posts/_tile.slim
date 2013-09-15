@@ -1,12 +1,14 @@
 - if @all_posts.any?
   table
     tr
+      td width="100"
       td
         = render 'shared/paginate_with_counter', pad: pagination_pad
-      td
+      td width="100"
+      td align="right"
         = render 'shared/search_fields'
-    tr 
-      td colspan="2"
+    tr
+      td colspan="4" 
         = render 'stream'
 
 - else

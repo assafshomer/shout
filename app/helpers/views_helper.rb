@@ -42,7 +42,7 @@ module ViewsHelper
 	end
 
 	def tile_size
-		8
+		10
 	end
 
 end
