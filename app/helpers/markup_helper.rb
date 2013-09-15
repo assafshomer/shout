@@ -1,7 +1,7 @@
 module MarkupHelper
 
-  def oneisone
-    1
+  def find_backticks(string)
+    string.scan(/`\d+\s[^\s][^`]+`{1}/)
   end
 
 

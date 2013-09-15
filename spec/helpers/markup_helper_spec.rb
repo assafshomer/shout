@@ -6,9 +6,13 @@ b"
 
 describe MarkupHelper do	
 
+	match_box={}
+	match_box["`1 assaf`"]=["`1 assaf`"]
 
-	describe "blah" do
-		specify{oneisone.should == 1}
+	describe "find backticks" do
+		match_box.each do |k,v|
+			specify{find_backticks(k).should == v }	
+		end		
 	end
 
 end
