@@ -12,8 +12,8 @@
 
 @mixin box {
   border: 1px solid #bbb;
-  background-color: $almostWhite;
-  background-image: url('app/assets/floor.jpg');
+  background-color: $cream;
+  background-image: url('background.png');
   background-position: 5 5;
   background-repeat: repeat;
   -moz-box-shadow: inset 0px 0px 10px 3px $gray;

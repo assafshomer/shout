@@ -1,11 +1,13 @@
-= render 'shared/search_fields'
 - if @all_posts.any?
   table
     tr
       td
-        = render 'stream'
-    tr
-      td
         = render 'shared/paginate_with_counter', pad: pagination_pad
+      td
+        = render 'shared/search_fields'
+    tr 
+      td colspan="2"
+        = render 'stream'
+
 - else
   | no posts at this time

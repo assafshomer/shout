@@ -12,11 +12,10 @@ html {
 body {
   padding-top: 60px;
   background-color:$appBgd;
-  background-image: url('app/assets/images/background.png');
+  /*background-image: url('background.png');*/
 }
 section {
   overflow: none;
-  Xbackground-color:$grayLighter; 
   background-color:$appBgd; 
   padding: 10px;
   float:left;
@@ -82,7 +81,7 @@ p {
 .navbar {
   .navbar-inner {
     background-color: #1c648f;
-    background-image: url('app/assets/sky.png');
+    background-image: url('sky.png');
     background-position: 0 0;
     background-repeat: repeat;
     -moz-box-shadow: inset 0 26px 13px -26px #000;
@@ -278,31 +277,33 @@ input {
 
 li#tile{
   background-color:#444C57;
-  padding:5px;
+  padding:15px;
   float:left;
 }
 .smallbox{
-  width:30em;   
-  height:30em;
-  font-size:12;
-  padding:7.5px;    
+  width:34em;   
+  height:32em;
+  font-size:8;
+  padding:8px;
+  line-height:8px;    
   @include box; 
 }
 textarea#inputbox{
   width:40em; 
   height:40em;
   padding:15px;
+  font-size:16;
+  line-height:20px;    
   color:555;  
-  font-size:16;  
   @include box; 
 }
 .bigbox{
   width:38em; 
   height:38em;
   padding:15px;
-  color:555;
   font-size:16; 
   line-height:20px;    
+  color:555;
   @include box; 
 }
 .timestamp {
