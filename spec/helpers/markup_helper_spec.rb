@@ -1,4 +1,5 @@
 require 'spec_helper'
+include MarkupHelper
 	space="
 
 	"
@@ -30,6 +31,12 @@ require 'spec_helper'
 	"<div style=font-size:2em;line-height:0.8em;>a\r\n </div> x "+
 	"<div style=font-size:45em;line-height:0.8em;>ss</div>"+" y \n z `4 `w "
 
+	mnp_cases={}
+	mnp_cases[""]=""
+	mnp_cases["`2 as`"]="<div style=font-size:2em;line-height:0.8em;>"+pulverize("as")+"</div>"
+	mnp_cases["`2 a s bb`"]="<div style=font-size:2em;line-height:0.8em;>"+pulverize("a s bb")+"</div>"
+	mnp_cases["`2 as` b"]="<div style=font-size:2em;line-height:0.8em;>"+pulverize("as")+"</div>"+pulverize(" b")
+
 describe MarkupHelper do	
 	describe "extract backticks" do
 		match_box.each do |k,v|
@@ -43,10 +50,34 @@ describe MarkupHelper do
 		end
 	end
 
+	describe "mark_and_pulverize" do
+		mnp_cases.each do |k,v|
+			specify{mark_and_pulverize(k).should == v}
+		end
+	end
+
 	describe "pulverize" do
 		specify{pulverize('aaa').should == 'a&#8203;a&#8203;a&#8203;'}
+		specify{pulverize('a a  a').should == 'a&#8203; a&#8203;  a&#8203;'}
 		specify{pulverize("aa\r\na").should == "a&#8203;a&#8203;\r\na&#8203;"}
 		specify{pulverize(space).should == space}
 	end
+
+
+	describe "prepare" do
+		specify{prepare("<div>").should == ""}
+		specify{prepare("<div>blah</div>").should == pulverize("blah")}
+		# specify{prepare("<div style=font-size:15em;>blah</div>").should == "blah"}
+		# specify{prepare("<a href=b/>").should == ""}
+		# specify{prepare("<table><tr><td>cell</td></tr></table>").should == "cell"}
+	end
+
+	# describe "mark_and_pulverize" do
+	# 	specify{mark_and_pulverize("`5 aaa` bb").should ==
+	# 	 "<div style=font-size:5em;line-height:0.8em;>"+pulverize('aaa')+"</div> bb"}
+	# end
+	
+
+
 
 end

@@ -11,12 +11,20 @@ module MarkupHelper
     string.gsub(BACKTICK_GROUPED,'<div style=font-size:\2em;line-height:0.8em;>\4</div>')
   end
 
+  def mark_and_pulverize(string)
+    string.gsub(BACKTICK_GROUPED) do |match|
+      "<div style=font-size:"+$2+"em;line-height:0.8em;>"+pulverize($4)+'</div>'
+    end
+  end
+
   def pulverize(string)
     string.gsub(/(\w)/,'\0&#8203;')
   end
 
-  private
-
-
+  def prepare(string)
+    # sanitize(string.split.join(" "))
+    # sanitize(string)
+    strip_tags(string)
+  end
 
 end
