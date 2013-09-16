@@ -285,7 +285,7 @@ li#tile{
   height:32em;
   font-size:8;
   padding:8px;
-  line-height:8px;    
+  line-height:1em;    
   @include box; 
 }
 textarea#inputbox{
@@ -293,7 +293,7 @@ textarea#inputbox{
   height:40em;
   padding:15px;
   font-size:16;
-  line-height:20px;    
+  line-height:1em;    
   color:555;  
   @include box; 
 }
@@ -302,7 +302,7 @@ textarea#inputbox{
   height:38em;
   padding:15px;
   font-size:16; 
-  line-height:20px;    
+  line-height:1em;    
   color:555;
   @include box; 
 }

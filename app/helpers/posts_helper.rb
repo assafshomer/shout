@@ -12,8 +12,16 @@ module PostsHelper
     sanitize(new_array.join(' '))
   end
 
+  def wrap(content)    
+    array=replace_newline_with_br(content).split
+    new_array=array.map do |string|
+      smart_wrap(string)
+    end
+    raw(new_array.join(' '))
+  end
+
   def replace_newline_with_br(string)
-    result=string.strip.gsub("\r\n","<br/>").gsub("\n", "<br/>").gsub("\r","<br/>")
+    string.strip.gsub("\r\n","<br/>").gsub("\n", "<br/>").gsub("\r","<br/>")
   end
 
   def wrap_long_string(text, width = max_length)
