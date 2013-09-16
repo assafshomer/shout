@@ -1,7 +1,7 @@
 require 'spec_helper'
+	space="
 
-describe MarkupHelper do	
-
+	"
 	match_box={}
 	match_box["`1 assaf`"]=["`1 assaf`"]
 	match_box["`1 assaf` shomer"]=["`1 assaf`"]
@@ -30,6 +30,7 @@ describe MarkupHelper do
 	"<div style=font-size:2em;line-height:0.8em;>a\r\n </div> x "+
 	"<div style=font-size:45em;line-height:0.8em;>ss</div>"+" y \n z `4 `w "
 
+describe MarkupHelper do	
 	describe "extract backticks" do
 		match_box.each do |k,v|
 			specify{extract_backticks(k).should == v }	
@@ -40,6 +41,12 @@ describe MarkupHelper do
 		markup_cases.each do |k,v|
 			specify{markup(k).should == v}
 		end
+	end
+
+	describe "pulverize" do
+		specify{pulverize('aaa').should == 'a&#8203;a&#8203;a&#8203;'}
+		specify{pulverize("aa\r\na").should == "a&#8203;a&#8203;\r\na&#8203;"}
+		specify{pulverize(space).should == space}
 	end
 
 end

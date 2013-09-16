@@ -11,6 +11,9 @@ module MarkupHelper
     string.gsub(BACKTICK_GROUPED,'<div style=font-size:\2em;line-height:0.8em;>\4</div>')
   end
 
+  def pulverize(string)
+    string.gsub(/(\w)/,'\0&#8203;')
+  end
 
   private
 
