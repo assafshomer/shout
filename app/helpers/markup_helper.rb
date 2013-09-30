@@ -2,6 +2,7 @@ module MarkupHelper
 
   BACKTICK_REGEX = /`\d+\s+[^\s][^`]+`{1}/
   BACKTICK_GROUPED = /(`)(\d+)(\s+)([^\s]{1}[^`]*)(`{1})/
+  PRE='<div class=mark style=font-size:'  
 
   def extract_backticks(string)
     string.scan(BACKTICK_REGEX)

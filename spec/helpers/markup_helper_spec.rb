@@ -30,24 +30,26 @@ include MarkupHelper
 	extract_cases[chinese]=["`2 语/漢`","`10 中文`"]
 
 	markup_cases={}
-	markup_cases["`2 assaf`"]="<div class=mark style=font-size:2em;>assaf</div>"
+	markup_cases["`2 assaf`"]=PRE+"2em;>assaf</div>"
 	markup_cases["`2 assaf` and `45 shomer` but not `4 blue"]=
-	"<div class=mark style=font-size:2em;>assaf</div> and "+
-	"<div class=mark style=font-size:45em;>shomer</div>"+" but not `4 blue"
+	PRE+"2em;>assaf</div> and "+
+	PRE+"45em;>shomer</div>"+" but not `4 blue"
 	markup_cases["`2 a\r\n ` x `45  s` y \n z `4 `w "]=
-	"<div class=mark style=font-size:2em;>a\r\n </div> x "+
-	"<div class=mark style=font-size:45em;>s</div>"+" y \n z `4 `w "
+	PRE+"2em;>a\r\n </div> x "+
+	PRE+"45em;>s</div>"+" y \n z `4 `w "
 	markup_cases["`2 a\r\n ` x `45  ss` y \n z `4 `w "]=
-	"<div class=mark style=font-size:2em;>a\r\n </div> x "+
-	"<div class=mark style=font-size:45em;>ss</div>"+" y \n z `4 `w "
+	PRE+"2em;>a\r\n </div> x "+
+	PRE+"45em;>ss</div>"+" y \n z `4 `w "
 	markup_cases[heb_with_ticks]="פראנה <div class=mark style=font-size:5em;>יוגה</div> הוא"
-	markup_cases
+	
 
 	mnp_cases={}
 	mnp_cases[""]=""
-	mnp_cases["`2 as`"]="<div class=mark style=font-size:2em;>"+pulverize("as")+"</div>"
-	mnp_cases["`2 a s bb`"]="<div class=mark style=font-size:2em;>"+pulverize("a s bb")+"</div>"
-	mnp_cases["`2 as` b"]="<div class=mark style=font-size:2em;>"+pulverize("as")+"</div>"+pulverize(" b")
+	mnp_cases["`2 as`"]=PRE+"2em;>"+pulverize("as")+"</div>"
+	mnp_cases["`2 a s bb`"]=PRE+"2em;>"+pulverize("a s bb")+"</div>"
+	mnp_cases["`2 as` b"]=PRE+"2em;>"+pulverize("as")+"</div>"+pulverize(" b")
+	# mnp_cases["aa`1 bb`cc"]
+
 
 describe MarkupHelper do	
 	describe "extract backticks" do
@@ -73,12 +75,13 @@ describe MarkupHelper do
 		specify{pulverize('a a  a').should == 'a&#8203; a&#8203;  a&#8203;'}
 		specify{pulverize("aa\r\na").should == "a&#8203;a&#8203;\r\na&#8203;"}
 		specify{pulverize(space).should == space}
+
 	end
 
 
 	describe "prepare" do
-		specify{prepare("<div>").should == ""}
-		specify{prepare("<div>blah</div>").should == pulverize("blah")}
+		# specify{prepare("<div>").should == ""}
+		# specify{prepare("<div>blah</div>").should == pulverize("blah")}
 		# specify{prepare("<div style=font-size:15em;>blah</div>").should == "blah"}
 		# specify{prepare("<a href=b/>").should == ""}
 		# specify{prepare("<table><tr><td>cell</td></tr></table>").should == "cell"}
