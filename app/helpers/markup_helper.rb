@@ -1,11 +1,19 @@
 module MarkupHelper
 
-  BACKTICK_REGEX = /`\d+\s+[^\s][^`]+`{1}/
+  BACKTICK_REGEX = /`\d+\s+[^\s]{1}[^`]*`{1}/
   BACKTICK_GROUPED = /(`)(\d+)(\s+)([^\s]{1}[^`]*)(`{1})/
   PRE='<div class=mark style=font-size:'  
 
   def extract_backticks(string)
     string.scan(BACKTICK_REGEX)
+  end
+
+  def extract_compliment(string)
+    string.split(BACKTICK_REGEX).reject(&:empty?)
+  end
+
+  def stitch(array1,array2)
+    size=[array1.size,array2.size].max
   end
 
   def markup(string)
@@ -14,7 +22,7 @@ module MarkupHelper
 
   def mark_and_pulverize(string)
     string.gsub(BACKTICK_GROUPED) do |match|
-      "<div class=mark style=font-size:"+$2+"em;>"+pulverize($4)+'</div>'
+      PRE+$2+"em;>"+pulverize($4)+'</div>'
     end
   end
 

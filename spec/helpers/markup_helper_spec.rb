@@ -14,6 +14,7 @@ include MarkupHelper
 	extract_cases={}
 	extract_cases["`1 assaf`"]=["`1 assaf`"]
 	extract_cases["`1 assaf` shomer"]=["`1 assaf`"]
+	extract_cases["my name is `1 assaf` shomer"]=["`1 assaf`"]
 	extract_cases["`1 assaf` `2 shomer"]=["`1 assaf`"]
 	extract_cases["`1 assaf` `2 shomer`"]=["`1 assaf`", "`2 shomer`"]
 	extract_cases["`1 a\r\nb` `2 shomer`"]=["`1 a\r\nb`", "`2 shomer`"]
@@ -28,6 +29,13 @@ include MarkupHelper
 	["`567 assaf`", "`2 shomer`"]
 	extract_cases[heb_with_ticks]=["`5 יוגה`"]
 	extract_cases[chinese]=["`2 语/漢`","`10 中文`"]
+	extract_cases["assaf `1 a` shomer"]=["`1 a`"]
+
+	split_cases={}
+	split_cases["`1 assaf`"]=[]
+	split_cases["`1 assaf` shomer"]=[" shomer"]
+	split_cases["my name is `1 assaf` shomer"]=["my name is "," shomer"]
+	split_cases["assaf `1 a` shomer"]=["assaf "," shomer"]
 
 	markup_cases={}
 	markup_cases["`2 assaf`"]=PRE+"2em;>assaf</div>"
@@ -35,20 +43,19 @@ include MarkupHelper
 	PRE+"2em;>assaf</div> and "+
 	PRE+"45em;>shomer</div>"+" but not `4 blue"
 	markup_cases["`2 a\r\n ` x `45  s` y \n z `4 `w "]=
-	PRE+"2em;>a\r\n </div> x "+
-	PRE+"45em;>s</div>"+" y \n z `4 `w "
+	PRE+"2em;>a\r\n </div> x "+	PRE+"45em;>s</div>"+" y \n z `4 `w "
 	markup_cases["`2 a\r\n ` x `45  ss` y \n z `4 `w "]=
-	PRE+"2em;>a\r\n </div> x "+
-	PRE+"45em;>ss</div>"+" y \n z `4 `w "
+	PRE+"2em;>a\r\n </div> x "+	PRE+"45em;>ss</div>"+" y \n z `4 `w "
 	markup_cases[heb_with_ticks]="פראנה <div class=mark style=font-size:5em;>יוגה</div> הוא"
 	
 
 	mnp_cases={}
 	mnp_cases[""]=""
+	mnp_cases["`3 `"]="`3 `"
 	mnp_cases["`2 as`"]=PRE+"2em;>"+pulverize("as")+"</div>"
 	mnp_cases["`2 a s bb`"]=PRE+"2em;>"+pulverize("a s bb")+"</div>"
 	mnp_cases["`2 as` b"]=PRE+"2em;>"+pulverize("as")+"</div>"+pulverize(" b")
-	# mnp_cases["aa`1 bb`cc"]
+	mnp_cases["aa`3 bb`cc"]=pulverize("aa")+PRE+"3em;>"+pulverize("bb")+"</div>"+pulverize("cc")
 
 
 describe MarkupHelper do	
@@ -57,6 +64,12 @@ describe MarkupHelper do
 			specify{extract_backticks(k).should == v }	
 		end		
 	end
+
+	describe "extract compliments" do
+		split_cases.each do |k,v|
+			specify{extract_compliment(k).should == v }	
+		end		
+	end	
 
 	describe "markup" do
 		markup_cases.each do |k,v|
@@ -73,6 +86,7 @@ describe MarkupHelper do
 	describe "pulverize" do
 		specify{pulverize('aaa').should == 'a&#8203;a&#8203;a&#8203;'}
 		specify{pulverize('a a  a').should == 'a&#8203; a&#8203;  a&#8203;'}
+		specify{pulverize(' a  ').should == ' a&#8203;  '}
 		specify{pulverize("aa\r\na").should == "a&#8203;a&#8203;\r\na&#8203;"}
 		specify{pulverize(space).should == space}
 
