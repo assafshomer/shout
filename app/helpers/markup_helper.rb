@@ -8,12 +8,12 @@ module MarkupHelper
   end
 
   def markup(string)
-    string.gsub(BACKTICK_GROUPED,'<div style=font-size:\2em;line-height:0.8em;>\4</div>')
+    string.gsub(BACKTICK_GROUPED,'<div class=mark style=font-size:\2em;>\4</div>')
   end
 
   def mark_and_pulverize(string)
     string.gsub(BACKTICK_GROUPED) do |match|
-      "<div style=font-size:"+$2+"em;line-height:0.8em;>"+pulverize($4)+'</div>'
+      "<div class=mark style=font-size:"+$2+"em;>"+pulverize($4)+'</div>'
     end
   end
 
