@@ -3,21 +3,28 @@ include MarkupHelper
 	space="
 
 	"
-	match_box={}
-	match_box["`1 assaf`"]=["`1 assaf`"]
-	match_box["`1 assaf` shomer"]=["`1 assaf`"]
-	match_box["`1 assaf` `2 shomer"]=["`1 assaf`"]
-	match_box["`1 assaf` `2 shomer`"]=["`1 assaf`", "`2 shomer`"]
-	match_box["`1 a\r\nb` `2 shomer`"]=["`1 a\r\nb`", "`2 shomer`"]
-	match_box["`10 assaf` `2 shomer`"]=["`10 assaf`", "`2 shomer`"]
-	match_box["`567 assaf` `2 shomer`"]=["`567 assaf`", "`2 shomer`"]
-	match_box["`567assaf` `2 shomer`"]=["`2 shomer`"]
-	match_box["`567  assaf`"]=["`567  assaf`"]
-	match_box["`56`7  assaf`"]=["`7  assaf`"]
-	match_box["`1  ass`"]=["`1  ass`"]	
-	match_box["`567 a s s a f   `"]=["`567 a s s a f   `"]
-	match_box["`567 assaf` born in `2 shomer` is going to succee'''d in this '3 mission\`"]=
+	hebrew="אודות
+
+סטודיו פראנה בתל אביב"
+
+	heb_with_ticks="פראנה `5 יוגה` הוא"
+
+	extract_cases={}
+	extract_cases["`1 assaf`"]=["`1 assaf`"]
+	extract_cases["`1 assaf` shomer"]=["`1 assaf`"]
+	extract_cases["`1 assaf` `2 shomer"]=["`1 assaf`"]
+	extract_cases["`1 assaf` `2 shomer`"]=["`1 assaf`", "`2 shomer`"]
+	extract_cases["`1 a\r\nb` `2 shomer`"]=["`1 a\r\nb`", "`2 shomer`"]
+	extract_cases["`10 assaf` `2 shomer`"]=["`10 assaf`", "`2 shomer`"]
+	extract_cases["`567 assaf` `2 shomer`"]=["`567 assaf`", "`2 shomer`"]
+	extract_cases["`567assaf` `2 shomer`"]=["`2 shomer`"]
+	extract_cases["`567  assaf`"]=["`567  assaf`"]
+	extract_cases["`56`7  assaf`"]=["`7  assaf`"]
+	extract_cases["`1  ass`"]=["`1  ass`"]	
+	extract_cases["`567 a s s a f   `"]=["`567 a s s a f   `"]
+	extract_cases["`567 assaf` born in `2 shomer` is going to succee'''d in this '3 mission\`"]=
 	["`567 assaf`", "`2 shomer`"]
+	extract_cases[heb_with_ticks]=["`5 יוגה`"]
 
 	markup_cases={}
 	markup_cases["`2 assaf`"]="<div style=font-size:2em;line-height:0.8em;>assaf</div>"
@@ -30,6 +37,8 @@ include MarkupHelper
 	markup_cases["`2 a\r\n ` x `45  ss` y \n z `4 `w "]=
 	"<div style=font-size:2em;line-height:0.8em;>a\r\n </div> x "+
 	"<div style=font-size:45em;line-height:0.8em;>ss</div>"+" y \n z `4 `w "
+	markup_cases[heb_with_ticks]="פראנה <div style=font-size:5em;line-height:0.8em;>יוגה</div> הוא"
+
 
 	mnp_cases={}
 	mnp_cases[""]=""
@@ -39,7 +48,7 @@ include MarkupHelper
 
 describe MarkupHelper do	
 	describe "extract backticks" do
-		match_box.each do |k,v|
+		extract_cases.each do |k,v|
 			specify{extract_backticks(k).should == v }	
 		end		
 	end
