@@ -12,10 +12,6 @@ module MarkupHelper
     string.split(BACKTICK_REGEX).reject(&:empty?)
   end
 
-  def stitch(array1,array2)
-    size=[array1.size,array2.size].max
-  end
-
   def markup(string)
     string.gsub(BACKTICK_GROUPED,'<div class=mark style=font-size:\2em;>\4</div>')
   end
