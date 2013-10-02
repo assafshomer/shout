@@ -4,6 +4,7 @@ module MarkupHelper
   BACKTICK_EMPTY = /`\d+\s+`{1}/
   BACKTICK_GROUPED = /(`)(\d+)(\s+)([^\s]{1}[^`]*)(`{1})/
   PRE='<div class=mark style=font-size:'  
+  ZWSP='&#8203;'
 
   def extract_backticks(string)
     string.scan(BACKTICK_REGEX).reject {|s| s=~BACKTICK_EMPTY}
@@ -35,8 +36,8 @@ module MarkupHelper
     end
   end
 
-  def pulverize(string)
-    string.gsub(/(\S)/,'\0&#8203;')
+  def pulverize(string,char=ZWSP)
+    string.gsub(/(\S)/,'\0'+char)
   end
 
   def prepare(string)

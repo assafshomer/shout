@@ -55,16 +55,9 @@ describe "PostPages" do
 		let!(:p1) {FactoryGirl.create(:post)}
 		before(:each) do		  
 		  visit post_path p1.id	
-		  # save_and_open_page
 		end
 		it_should_behave_like 'all pages'			
-		it "should show the pulverized message" do
-			pulverize(p1.content).should be_nil
-		end
-		it "should show the pulverized message" do
-			page.body.should be_nil
-		end		
-		# it { should have_selector('div', text: pulverize(p1.content)) }	
+		it { should have_selector('div.bigbox', text: /#{pulverize(p1.content,'\W')}/) }	
 	end
 
 	describe "index" do		
