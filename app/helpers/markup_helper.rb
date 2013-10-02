@@ -1,4 +1,5 @@
 module MarkupHelper
+include PostsHelper
 
   BACKTICK_REGEX = /`\d+\s+[^\s]{1}[^`]*`{1}/
   BACKTICK_EMPTY = /`\d+\s+`{1}/
@@ -27,7 +28,7 @@ module MarkupHelper
     else
       result=ArrayStitcher.new(only_pulverize,full_process)
     end
-    result.stitch.join
+    replace_newline_with_br(result.stitch.join)
   end
 
   def mark_and_pulverize(string)

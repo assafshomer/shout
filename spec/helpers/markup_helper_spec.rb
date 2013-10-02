@@ -11,6 +11,10 @@ include MarkupHelper
 
 	chinese="Chinese (汉`2 语/漢`語 Hànyǔ or `10 中文` Zhōngwén)"
 
+	two_lines="of.
+After"
+	line_break="before \r\n after"
+
 	extract_cases={}
 	extract_cases["`1 `"]=[]
 	extract_cases["`1 assaf`"]=["`1 assaf`"]
@@ -64,6 +68,8 @@ include MarkupHelper
 	mark_cases["aa`3 bb`cc"]=pulverize("aa")+PRE+"3em;>"+pulverize("bb")+"</div>"+pulverize("cc")
 	mark_cases["``1 nested``"]=pulverize("`")+PRE+"1em;>"+pulverize("nested")+"</div>"+pulverize("`")
 	mark_cases["```1 n``"]=pulverize("``")+PRE+"1em;>"+pulverize("n")+"</div>"+pulverize("`")
+	mark_cases[two_lines]=replace_newline_with_br(pulverize(two_lines))
+	mark_cases[line_break]=replace_newline_with_br(pulverize(line_break))
 
 describe MarkupHelper do	
 	describe "extract backticks" do
@@ -90,7 +96,7 @@ describe MarkupHelper do
 		end
 	end
 
-	describe "mark_and_pulverize" do
+	describe "mark" do
 		mark_cases.each do |k,v|
 			specify{mark(k).should == v}
 		end
