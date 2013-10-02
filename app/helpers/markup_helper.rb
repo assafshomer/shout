@@ -27,8 +27,8 @@ include PostsHelper
       result=ArrayStitcher.new(full_process,only_pulverize)
     else
       result=ArrayStitcher.new(only_pulverize,full_process)
-    end
-    replace_newline_with_br(result.stitch.join)
+    end    
+    '<pre>'+result.stitch.join+'</pre>'
   end
 
   def mark_and_pulverize(string)

@@ -297,15 +297,17 @@ textarea#inputbox{
   color:555;  
   @include box; 
 }
-.bigbox{
+.bigbox pre{
   width:38em; 
   height:38em;
   padding:15px;
   font-size:16; 
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height:1em;    
   color:555;
   @include box; 
 }
+
 .timestamp {
   color: $grayLight;
   float: right;

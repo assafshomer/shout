@@ -60,16 +60,18 @@ After"
 	mnp_cases["`2 a s bb`"]=PRE+"2em;>"+pulverize("a s bb")+"</div>"
 
 	mark_cases={}
-	mark_cases[""]=""
-	mark_cases["`3 `"]=""
-	mark_cases["`2 as`"]=PRE+"2em;>"+pulverize("as")+"</div>"
-	mark_cases["`2 a s bb`"]=PRE+"2em;>"+pulverize("a s bb")+"</div>"
-	mark_cases["`2 as` b"]=PRE+"2em;>"+pulverize("as")+"</div>"+pulverize(" b")
-	mark_cases["aa`3 bb`cc"]=pulverize("aa")+PRE+"3em;>"+pulverize("bb")+"</div>"+pulverize("cc")
-	mark_cases["``1 nested``"]=pulverize("`")+PRE+"1em;>"+pulverize("nested")+"</div>"+pulverize("`")
-	mark_cases["```1 n``"]=pulverize("``")+PRE+"1em;>"+pulverize("n")+"</div>"+pulverize("`")
-	mark_cases[two_lines]=replace_newline_with_br(pulverize(two_lines))
-	mark_cases[line_break]=replace_newline_with_br(pulverize(line_break))
+	mark_cases[""]='<pre>'+""+'</pre>'
+	mark_cases["assaf"]='<pre>'+pulverize("assaf")+'</pre>'
+	mark_cases["   assaf"]='<pre>'+pulverize("   assaf")+'</pre>'
+	mark_cases["`3 `"]='<pre>'+""+'</pre>'
+	mark_cases["`2 as`"]='<pre>'+PRE+"2em;>"+pulverize("as")+"</div>"+'</pre>'
+	mark_cases["`2 a s bb`"]='<pre>'+PRE+"2em;>"+pulverize("a s bb")+"</div>"+'</pre>'
+	mark_cases["`2 as` b"]='<pre>'+PRE+"2em;>"+pulverize("as")+"</div>"+pulverize(" b")+'</pre>'
+	mark_cases["aa`3 bb`cc"]='<pre>'+pulverize("aa")+PRE+"3em;>"+pulverize("bb")+"</div>"+pulverize("cc")+'</pre>'
+	mark_cases["``1 nested``"]='<pre>'+pulverize("`")+PRE+"1em;>"+pulverize("nested")+"</div>"+pulverize("`")+'</pre>'
+	mark_cases["```1 n``"]='<pre>'+pulverize("``")+PRE+"1em;>"+pulverize("n")+"</div>"+pulverize("`")+'</pre>'
+	mark_cases[two_lines]='<pre>'+pulverize(two_lines)+'</pre>'
+	mark_cases[line_break]='<pre>'+pulverize(line_break)+'</pre>'
 
 describe MarkupHelper do	
 	describe "extract backticks" do
