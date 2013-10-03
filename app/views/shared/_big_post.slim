@@ -1,3 +1,4 @@
-.bigbox id=(post.id)
-  / = wrap(post.content)
-  = raw(mark(post.content))
+.outerbigbox
+	.bigbox id=(post.id)
+	  / = wrap(post.content)
+	  = raw(mark(post.content))
