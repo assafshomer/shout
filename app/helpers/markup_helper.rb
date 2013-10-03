@@ -3,7 +3,7 @@ include PostsHelper
 
   BACKTICK_REGEX = /`\d+\s+[^\s]{1}[^`]*`{1}/
   BACKTICK_EMPTY = /`\d+\s+`{1}/
-  BACKTICK_GROUPED = /(`)(\d+)(\s+)([^\s]{1}[^`]*)(`{1})/
+  BACKTICK_GROUPED = /(`)(\d+)(\s{1})(\s*[^\s]{1}[^`]*)(`{1})/
   PRE='<div class=mark style=font-size:'  
   ZWSP='&#8203;'
 
@@ -41,8 +41,5 @@ include PostsHelper
     string.gsub(/(\S)/,'\0'+char)
   end
 
-  def prepare(string)
-    strip_tags(string)
-  end
 
 end

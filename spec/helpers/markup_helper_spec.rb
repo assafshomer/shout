@@ -49,14 +49,16 @@ After"
 	PRE+"2em;>assaf</div> and "+
 	PRE+"45em;>shomer</div>"+" but not `4 blue"
 	markup_cases["`2 a\r\n ` x `45  s` y \n z `4 `w "]=
-	PRE+"2em;>a\r\n </div> x "+	PRE+"45em;>s</div>"+" y \n z `4 `w "
+	PRE+"2em;>a\r\n </div> x "+	PRE+"45em;> s</div>"+" y \n z `4 `w "
 	markup_cases["`2 a\r\n ` x `45  ss` y \n z `4 `w "]=
-	PRE+"2em;>a\r\n </div> x "+	PRE+"45em;>ss</div>"+" y \n z `4 `w "
+	PRE+"2em;>a\r\n </div> x "+	PRE+"45em;> ss</div>"+" y \n z `4 `w "
 	markup_cases[heb_with_ticks]="פראנה <div class=mark style=font-size:5em;>יוגה</div> הוא"
 	
 	mnp_cases={}
 	mnp_cases[""]=""
 	mnp_cases["`2 as`"]=PRE+"2em;>"+pulverize("as")+"</div>"
+	mnp_cases["`2 a b  `"]=PRE+"2em;>"+pulverize("a b  ")+"</div>"
+	mnp_cases["`2  as`"]=PRE+"2em;>"+pulverize(" as")+"</div>"
 	mnp_cases["`2 a s bb`"]=PRE+"2em;>"+pulverize("a s bb")+"</div>"
 
 	mark_cases={}
