@@ -34,4 +34,11 @@ describe Post do
 	 	end 	
 	end
 
+	describe "truncation to atmost 2546 characters" do
+		let!(:toolong) { FactoryGirl.create(:post, content: "1"*3000) }
+		let!(:normal) { FactoryGirl.create(:post) }
+		specify {toolong.content.length.should == 2546}
+		specify {normal.content.length.should < 2546}
+	end
+
 end
