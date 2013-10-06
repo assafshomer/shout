@@ -10,6 +10,16 @@
   border-radius: 5px;
 }
 
+@mixin bigbox{
+  width:38em; 
+  height:38em;
+  font-size:16; 
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height:1em;    
+  color:555;
+  overflow:hidden;
+}
+
 @mixin box {
   border: 1px solid #bbb;
   background-color: $cream;

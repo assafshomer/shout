@@ -309,29 +309,18 @@ textarea#inputbox{
   @include box; 
 }
 .outerbigbox{
-  width:38em; 
-  height:38em;
   padding:15px;
-  font-size:16; 
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height:1em;    
-  color:555;
-  overflow:hidden;
+  @include bigbox;
   @include box; 
+  pre{
+    @include bigbox;
+    padding:0;
+    background-color:$cream;
+    background-image: url('background.png');
+    border:none;
+  }  
 }
-.bigbox pre{
-  width:38em; 
-  height:38em;
-  padding:0px;
-  font-size:16; 
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height:1em;    
-  color:555;
-  overflow:hidden;
-  background-color:$cream;
-  background-image: url('background.png');
-  border:none;
-}
+
 
 .timestamp {
   color: $grayLight;
