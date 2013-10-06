@@ -1,6 +1,6 @@
-.smallbox id=(item.id)
+.smalloutput id=(item.id)
   span.timestamp
     = time_ago_in_words(item.created_at) 
     |  ago
   br/
-  = wrap(item.content)
+  = raw(mark(item.content))

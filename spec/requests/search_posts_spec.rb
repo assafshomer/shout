@@ -62,7 +62,7 @@ describe "Search Posts" do
 				fill_in 'search', with: 'supercalifragilisticexpialidocious'[0..29]
 				click_button 'Search'			
 			end			
-			it { should have_selector('div.smallbox', text: 'supercalifragilisticexpialidocious'[0..29]) }		
+			it { should have_selector('div.smalloutput', text: 'supercalifragilisticexpialidocious'[0..29]) }		
 		end
 	end
 

@@ -286,7 +286,7 @@ li.tile{
   }
  }
 }
-.smallbox{
+.xxsmalloutput{
   width:34em;   
   height:32em;
   font-size:8;
@@ -298,6 +298,13 @@ li.tile{
     background-image: none;
     background-color: $grayLighter;
   }
+  pre{
+    @include bigbox;
+    padding:0;
+    background-color:$cream;
+    background-image: url('background.png');
+    border:none;
+  }    
 }
 textarea#inputbox{
   width:40em; 
@@ -320,7 +327,21 @@ textarea#inputbox{
     border:none;
   }  
 }
-
+.smalloutput{
+  padding:5px;
+  @include smallbox;
+  @include box; 
+  pre{
+    @include smallbox;
+    padding:0;
+    background-color:$cream;
+    background-image: url('background.png');
+    border:none;
+    &:hover {
+      color:red;      
+    }      
+  }  
+}
 
 .timestamp {
   color: $grayLight;
