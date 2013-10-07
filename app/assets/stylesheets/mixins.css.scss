@@ -44,3 +44,15 @@
   @include rounded-corners; 
 }
 
+@mixin boxhover {
+  border: 1px solid #bbb;
+  background-color: $cream;
+  background-image: url('background.png');
+  background-position: 5 5;
+  background-repeat: repeat;
+  -moz-box-shadow: inset 0px 0px 10px 3px $cream;
+  -webkit-box-shadow: inset 0px 0px 10px 3px $cream;
+  box-shadow: inset 0px 0px 10px 3px $cream;     
+  @include rounded-corners; 
+}
+

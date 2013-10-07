@@ -313,15 +313,15 @@ textarea#inputbox{
   padding:5px;
   @include smallbox;
   @include box; 
+    &:hover {
+     @include boxhover;
+    }   
   pre{
     @include smallbox;
     padding:0;
     background-color:$cream;
     background-image: url('background.png');
     border:none;
-    &:hover {
-      color:red;      
-    }      
   }  
 }
 
