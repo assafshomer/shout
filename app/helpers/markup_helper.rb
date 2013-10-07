@@ -53,4 +53,16 @@ include PostsHelper
     end
   end
 
+  def marked_urls(string)
+    temp=[]
+    result=[]
+    string.scan(MARKED_URL).each do |matched_array|
+      temp << matched_array.map(&:strip)
+    end
+    temp.each do |url_building_blocks|
+      result << '<a href='+url_building_blocks[1]+'>'+url_building_blocks[0]+'</a>'
+    end
+    result
+  end  
+
 end
