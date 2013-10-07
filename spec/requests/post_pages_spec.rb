@@ -66,14 +66,18 @@ describe "PostPages" do
 		describe "post with newline" do
 			let!(:p1) { FactoryGirl.create(:post, content: two_lines) }
 			before { visit post_path p1.id }
-			it { should have_selector('div.bigoutput', text: /#{pulverize('of.','\W')}.*#{pulverize('After','\W')}/)}
-			it { should_not have_selector('div.bigoutput', text: /#{pulverize('of.','\W')}#{pulverize('After','\W')}/)}
+			it { should have_selector('div.bigoutput',
+			 text: /#{pulverize('of.','\W')}.*#{pulverize('After','\W')}/)}
+			it { should_not have_selector('div.bigoutput',
+			 text: /#{pulverize('of.','\W')}#{pulverize('After','\W')}/)}
 		end
 		describe "post with line breaks" do
 			let!(:p1) { FactoryGirl.create(:post, content: line_break) }
 			before { visit post_path p1.id }
-			it { should have_selector('div.bigoutput', text: /#{pulverize('before','\W')}.*#{pulverize('after','\W')}/)}
-			it { should_not have_selector('div.bigoutput', text: /#{pulverize('before','\W')}#{pulverize('after','\W')}/)}			
+			it { should have_selector('div.bigoutput',
+			 text: /#{pulverize('before','\W')}.*#{pulverize('after','\W')}/)}
+			it { should_not have_selector('div.bigoutput',
+			 text: /#{pulverize('before','\W')}#{pulverize('after','\W')}/)}			
 		end		
 
 	end

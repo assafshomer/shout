@@ -20,8 +20,8 @@ describe "Search Posts" do
 		before { visit posts_path }
 		it "should display each of the posts" do
 			post_array.sort {|x,y| x.created_at<=>y.created_at}.reverse[0..(tile_size-1)].each do |post|
-				page.should have_selector("div##{post.id}", text: post.content) 		
-				page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
+				page.should have_selector("div##{post.id}", text: /#{pulverize(post.content,'\W')}/) 		
+				# page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 			end
 		end
 		describe "with search term that cannot be found" do
@@ -48,21 +48,22 @@ describe "Search Posts" do
 			end			
 			it "should display all posts" do
 				post_array.sort {|x,y| x.created_at<=>y.created_at}.reverse[0..(tile_size-1)].each do |post|
-					page.should have_selector("div##{post.id}", text: post.content) 		
-					page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
+					page.should have_selector("div##{post.id}", /#{pulverize(post.content,'\W')}/) 
+					# page.should have_selector('span.timestamp', text: time_ago_in_words(post.created_at)) 
 				end
 			end
 		end
 		describe "search should filter correctly" do
+			let!(:s) { 'supercalifragilisticexpialidocious'[0..29] }
 			before do
 				visit root_path 
-				fill_in 'inputbox', with: 'supercalifragilisticexpialidocious'[0..29]
+				fill_in 'inputbox', with: s
 				click_button submit_button_title
 				visit posts_path
-				fill_in 'search', with: 'supercalifragilisticexpialidocious'[0..29]
+				fill_in 'search', with: s
 				click_button 'Search'			
 			end			
-			it { should have_selector('div.smalloutput', text: 'supercalifragilisticexpialidocious'[0..29]) }		
+			it { should have_selector('div.smalloutput', text: /#{pulverize(s,'\W')}/) }
 		end
 	end
 
