@@ -61,6 +61,20 @@ After"
 	mnp_cases["`2  as`"]=PRE+"2em;>"+pulverize(" as")+"</div>"
 	mnp_cases["`2 a s bb`"]=PRE+"2em;>"+pulverize("a s bb")+"</div>"
 
+	url_cases={}
+	url_cases["http://www.google.com"]=["http://www.google.com"]
+	url_cases["https://g"]=["https://g"]
+	url_cases["http://1.com"]=["http://1.com"]
+	url_cases["http://1.com."]=["http://1.com."]
+	url_cases["http://$.com"]=[]
+	url_cases["http://_.google.com"]=[]
+	url_cases["htt://www.google.com"]=[]
+	url_cases["http://a blue https:\\\\b"]=['http://a',"https:\\\\b"]
+	url_cases["1http://a blue https:\\\\b"]=['http://a',"https:\\\\b"]
+	url_cases["http://https://a"]=['http://https']
+	
+
+
 	mark_cases={}
 	mark_cases[""]='<pre>'+""+'</pre>'
 	mark_cases["assaf"]='<pre>'+pulverize("assaf")+'</pre>'
@@ -75,6 +89,11 @@ After"
 	mark_cases[two_lines]='<pre>'+pulverize(two_lines)+'</pre>'
 	mark_cases[line_break]='<pre>'+pulverize(line_break)+'</pre>'
 
+
+
+	mark_link={}
+	# mark_link["goog|http://www.google.com"]='<pre><a href="http://www.google.com">'+pulverize("goog")+'</a></pre>'
+
 describe MarkupHelper do	
 	describe "extract backticks" do
 		extract_cases.each do |k,v|
@@ -86,7 +105,14 @@ describe MarkupHelper do
 		split_cases.each do |k,v|
 			specify{extract_compliment(k).should == v }	
 		end		
+	end
+
+	describe "extract url" do
+		url_cases.each do |k,v|
+			specify{match_url(k).should == v }	
+		end		
 	end	
+
 
 	describe "markup" do
 		markup_cases.each do |k,v|
@@ -105,6 +131,12 @@ describe MarkupHelper do
 			specify{mark(k).should == v}
 		end
 	end	
+
+	describe "mark" do
+		mark_link.each do |k,v|
+			specify{mark(k).should == v}
+		end
+	end		
 
 	describe "pulverize" do
 		specify{pulverize('aaa').should == 'a&#8203;a&#8203;a&#8203;'}

@@ -6,9 +6,14 @@ include PostsHelper
   BACKTICK_GROUPED = /(`)(\d+)(\s{1})(\s*[^\s]{1}[^`]*)(`{1})/
   PRE='<div class=mark style=font-size:'  
   ZWSP='&#8203;'
+  URL_REGEX = /https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/]+/
 
   def extract_backticks(string)
     string.scan(BACKTICK_REGEX).reject {|s| s=~BACKTICK_EMPTY}
+  end
+
+  def match_url(string)
+    string.scan(URL_REGEX)
   end
 
   def extract_compliment(string)
