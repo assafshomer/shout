@@ -13,6 +13,7 @@
 @mixin bigbox{
   width:38em; 
   height:38em;
+  letter-spacing:1;
   font-size:16; 
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height:1em;    
@@ -22,6 +23,7 @@
 
 @mixin smallbox{
   width:38em; 
+  letter-spacing:1;
   height:38em;
   font-size:8; 
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

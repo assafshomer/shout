@@ -286,31 +286,13 @@ li.tile{
   }
  }
 }
-.xxsmalloutput{
-  width:34em;   
-  height:32em;
-  font-size:8;
-  color:555;
-  padding:8px;
-  line-height:1em;    
-  @include box; 
-  &:hover {
-    background-image: none;
-    background-color: $grayLighter;
-  }
-  pre{
-    @include bigbox;
-    padding:0;
-    background-color:$cream;
-    background-image: url('background.png');
-    border:none;
-  }    
-}
+
 textarea#inputbox{
   width:40em; 
   height:40em;
   padding:15px;
   font-size:16;
+  letter-spacing:1;
   line-height:1em;    
   color:555;  
   @include box; 
