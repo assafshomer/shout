@@ -7,13 +7,10 @@ include PostsHelper
   PRE='<div class=mark style=font-size:'  
   ZWSP='&#8203;'
   URL_REGEX = /https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/]+/
+  MARKED_URL = /(\s*\S+\s*)\|{1}(\s*https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/]+)/
 
   def extract_backticks(string)
     string.scan(BACKTICK_REGEX).reject {|s| s=~BACKTICK_EMPTY}
-  end
-
-  def match_url(string)
-    string.scan(URL_REGEX)
   end
 
   def extract_compliment(string)
@@ -46,5 +43,14 @@ include PostsHelper
     string.gsub(/(\S)/,'\0'+char)
   end
 
+  def match_url(string)
+    string.scan(URL_REGEX)
+  end
+
+  def match_marked_url(string)
+    string.scan(MARKED_URL).each do |matched_array|
+      matched_array.map!(&:strip)
+    end
+  end
 
 end

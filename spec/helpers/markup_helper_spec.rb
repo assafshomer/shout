@@ -72,7 +72,19 @@ After"
 	url_cases["http://a blue https:\\\\b"]=['http://a',"https:\\\\b"]
 	url_cases["1http://a blue https:\\\\b"]=['http://a',"https:\\\\b"]
 	url_cases["http://https://a"]=['http://https']
+
+	marked_urls={}
+	marked_urls["xxx"]=[]
+	marked_urls["google|http://www.google.com"]=[["google","http://www.google.com"]]
+	marked_urls["google| http://www.google.com"]=[["google","http://www.google.com"]]	
+	marked_urls["google | http://www.google.com"]=[["google","http://www.google.com"]]
+	marked_urls["google |http://www.google.com"]=[["google","http://www.google.com"]]	
+	marked_urls["      google |  http://www.google.com"]=[["google","http://www.google.com"]]
+	marked_urls["c|https:\\\\d"]=[["c","https:\\\\d"]]
+	marked_urls["c|http://d e f|http://g"]=[["c","http://d"],["f","http://g"]]
 	
+	bad_marked_urls={}
+	bad_marked_urls["c|http://d e f|http://g"]=[["c","http://d"],["f","http://k"]]
 
 
 	mark_cases={}
@@ -110,6 +122,17 @@ describe MarkupHelper do
 	describe "extract url" do
 		url_cases.each do |k,v|
 			specify{match_url(k).should == v }	
+		end		
+	end	
+
+	describe "extract marked url" do
+		marked_urls.each do |k,v|
+			specify{match_marked_url(k).should == v }	
+		end		
+	end	
+	describe "extract bad marked url" do
+		bad_marked_urls.each do |k,v|
+			specify{match_marked_url(k).should_not == v }	
 		end		
 	end	
 
