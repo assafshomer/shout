@@ -57,9 +57,9 @@ After"
 	mnp_cases={}
 	mnp_cases[""]=""
 	mnp_cases["`2 as`"]=PRE+"2em;>"+pulverize("as")+"</div>"
-	mnp_cases["`2 a b  `"]=PRE+"2em;>"+pulverize("a b  ")+"</div>"
-	mnp_cases["`2  as`"]=PRE+"2em;>"+pulverize(" as")+"</div>"
-	mnp_cases["`2 a s bb`"]=PRE+"2em;>"+pulverize("a s bb")+"</div>"
+	mnp_cases["`3 a b  `"]=PRE+"3em;>"+pulverize("a b  ")+"</div>"
+	mnp_cases["`4  as`"]=PRE+"4em;>"+pulverize(" as")+"</div>"
+	mnp_cases["`5 a s bb`"]=PRE+"5em;>"+pulverize("a s bb")+"</div>"
 
 	url_cases={}
 	url_cases["http://www.google.com"]=["http://www.google.com"]
@@ -74,38 +74,58 @@ After"
 	url_cases["http://https://a"]=['http://https']
 
 	marked_urls={}
-	marked_urls["xxx"]=[]
-	marked_urls["google|http://www.google.com"]=[["google","http://www.google.com"]]
+	marked_urls["`xxx|`"]=[]
+	marked_urls["`google|http://www.google.com`"]=[["`google","http://www.google.com"]]
+	marked_urls["`1 google|http://www.google.com`"]=[["`1 google","http://www.google.com"]]
+	marked_urls["yaa hoo|http://yahoo.com"]=[["yaa hoo","http://yahoo.com"]]
+	marked_urls[" yaa hoo |http://yahoo.com"]=[["yaa hoo","http://yahoo.com"]]
+	marked_urls[" ` yaa hoo |http://yahoo.com"]=[["` yaa hoo","http://yahoo.com"]]
 	marked_urls["google| http://www.google.com"]=[["google","http://www.google.com"]]	
 	marked_urls["google | http://www.google.com"]=[["google","http://www.google.com"]]
 	marked_urls["google |http://www.google.com"]=[["google","http://www.google.com"]]	
 	marked_urls["      google |  http://www.google.com"]=[["google","http://www.google.com"]]
 	marked_urls["c|https:\\\\d"]=[["c","https:\\\\d"]]
-	marked_urls["c|http://d e f|http://g"]=[["c","http://d"],["f","http://g"]]
+	marked_urls["c|http://d e f|https://g h"]=[["c","http://d"],["e f","https://g"]]
+	marked_urls["blah|foo c|http://d e f|https://g h"]=[["foo c","http://d"],["e f","https://g"]]
+	marked_urls["blah://foo c|http://d e f|https://g h"]=[["blah://foo c","http://d"],["e f","https://g"]]
+	marked_urls["http://foo.com|http://bar.baz"]=[["http://foo.com","http://bar.baz"]]
 	
 	bad_marked_urls={}
+	bad_marked_urls["[ yaa hoo|http://yahoo.com]"]=[[" yaa hoo","http://yahoo.com"]] # this is due to regex groups trimming
 	bad_marked_urls["c|http://d e f|http://g"]=[["c","http://d"],["f","http://k"]]
 
 
 	mark_cases={}
-	mark_cases[""]='<pre>'+""+'</pre>'
-	mark_cases["assaf"]='<pre>'+pulverize("assaf")+'</pre>'
-	mark_cases["   assaf"]='<pre>'+pulverize("   assaf")+'</pre>'
-	mark_cases["`3 `"]='<pre>'+""+'</pre>'
-	mark_cases["`2 as`"]='<pre>'+PRE+"2em;>"+pulverize("as")+"</div>"+'</pre>'
-	mark_cases["`2 a s bb`"]='<pre>'+PRE+"2em;>"+pulverize("a s bb")+"</div>"+'</pre>'
-	mark_cases["`2 as` b"]='<pre>'+PRE+"2em;>"+pulverize("as")+"</div>"+pulverize(" b")+'</pre>'
-	mark_cases["aa`3 bb`cc"]='<pre>'+pulverize("aa")+PRE+"3em;>"+pulverize("bb")+"</div>"+pulverize("cc")+'</pre>'
-	mark_cases["``1 nested``"]='<pre>'+pulverize("`")+PRE+"1em;>"+pulverize("nested")+"</div>"+pulverize("`")+'</pre>'
-	mark_cases["```1 n``"]='<pre>'+pulverize("``")+PRE+"1em;>"+pulverize("n")+"</div>"+pulverize("`")+'</pre>'
-	mark_cases[two_lines]='<pre>'+pulverize(two_lines)+'</pre>'
-	mark_cases[line_break]='<pre>'+pulverize(line_break)+'</pre>'
-
-
+	mark_cases[""]=""
+	mark_cases["assaf"]=pulverize("assaf")
+	mark_cases["   assaf"]=pulverize("   assaf")
+	mark_cases["` assaf`"]=pulverize("` assaf`")
+	mark_cases["` assaf `"]=pulverize("` assaf `")
+	mark_cases["`assaf`"]=pulverize("`assaf`")
+	mark_cases["`3 `"]=""
+	mark_cases["`2 as`"]=PRE+"2em;>"+pulverize("as")+"</div>"
+	mark_cases["`2 a s bb`"]=PRE+"2em;>"+pulverize("a s bb")+"</div>"
+	mark_cases["`2 as` b"]=PRE+"2em;>"+pulverize("as")+"</div>"+pulverize(" b")
+	mark_cases["aa`3 bb`cc"]=pulverize("aa")+PRE+"3em;>"+pulverize("bb")+"</div>"+pulverize("cc")
+	mark_cases["``1 nested``"]=pulverize("`")+PRE+"1em;>"+pulverize("nested")+"</div>"+pulverize("`")
+	mark_cases["```1 n``"]=pulverize("``")+PRE+"1em;>"+pulverize("n")+"</div>"+pulverize("`")
+	mark_cases[two_lines]=pulverize(two_lines)
+	mark_cases[line_break]=pulverize(line_break)
 
 	mark_link={}
-	# mark_link["goog|http://www.google.com"]='<pre><a href="http://www.google.com">'+pulverize("goog")+'</a></pre>'
+	# mark_link["`3   google|http://g.com`"]=
+	# '<a href="http://g.com" class=mark style=font-size:3em;>'+pulverize("  google")+"</a>"	
+	# mark_link["`I love |https://com`"]=
+	# '<a href="http://com" class=mark >'+pulverize("I love ")+"</a>"	
+	# mark_link["`I love |https://com` you `2 very|https://wiki` much"]=
+	# '<a href="http://com" class=mark >'+pulverize("I love ")+"</a>"+pulverize(" you ")+
+	# '<a href="https://wiki" class=mark style=font-size:2em;>'+pulverize("very")+"</a>"+pulverize(" much")	
+	# mark_link["`2 I love google|http://www.google.com`"]=
+	# '<a href="http://www.google.com" class=mark style=font-size:2em;>'+pulverize("I love google")+"</a>"
+	# mark_link["assaf `2 shomer` likes `goog|http://b.c`"]=pulverize("assaf ")+PRE+"2em;>"+pulverize("shomer")+
+	# "</div>"+pulverize(" likes ")+'<a href="http://b.c" class=mark>'+pulverize("goog")+"</a>"	
 
+	
 describe MarkupHelper do	
 	describe "extract backticks" do
 		extract_cases.each do |k,v|
@@ -151,7 +171,7 @@ describe MarkupHelper do
 
 	describe "mark" do
 		mark_cases.each do |k,v|
-			specify{mark(k).should == v}
+			specify{mark(k).should == '<pre>'+v+'</pre>'}
 		end
 	end	
 

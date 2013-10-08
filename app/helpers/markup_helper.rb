@@ -7,7 +7,7 @@ include PostsHelper
   PRE='<div class=mark style=font-size:'  
   ZWSP='&#8203;'
   URL_REGEX = /https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/]+/
-  MARKED_URL = /(\s*\S+\s*)\|{1}(\s*https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/]+)/
+  MARKED_URL = /([^|]+)\|{1}(\s*https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/]+)/
 
   def extract_backticks(string)
     string.scan(BACKTICK_REGEX).reject {|s| s=~BACKTICK_EMPTY}
@@ -53,7 +53,7 @@ include PostsHelper
     end
   end
 
-  def marked_urls(string)
+  def mark_urls(string)
     temp=[]
     result=[]
     string.scan(MARKED_URL).each do |matched_array|
