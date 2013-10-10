@@ -101,6 +101,7 @@ After"
 	build_url_cases["a|http://b"]="<a href=http://b>"+pulverize("a")+"</a>"
 	build_url_cases["c a|http://b"]="<a href=http://b>"+pulverize("c a")+"</a>"
 	build_url_cases["c a|http://b d"]="<a href=http://b>"+pulverize("c a")+"</a>"+pulverize(" d")
+	build_url_cases["c|d b a|http://b d"]=pulverize("c|")+"<a href=http://b>"+pulverize("d b a")+"</a>"+pulverize(" d")
 
 	badly_build_url_cases={}
 	badly_build_url_cases["a|b"]="<a href=b>"+pulverize("a")+"</a>"
@@ -124,23 +125,22 @@ After"
 	mark_cases["```1 n``"]=pulverize("``")+PRE+"1em;>"+pulverize("n")+"</div>"+pulverize("`")
 	mark_cases[two_lines]=pulverize(two_lines)
 	mark_cases[line_break]=pulverize(line_break)
-	# mark_cases["`3 google|http://g.com`"]=
-	# 	PRE+"3em;>"+'<a href="http://g.com">'+pulverize("google")+"</a>"+"</div>"
-	# mark_cases["google|http://g.com`"]=pulverize("google|http://g.com")
-	# 	PRE+"3em;>"+'<a href="http://g.com">'+pulverize("google")+"</a>"+"</div>"		
-	# mark_cases["`2 a b |https://c`"]=
-	# 	PRE+"2em;>"+'<a href="https://c">'+pulverize("a b ")+"</a>"+"</div>"
-	# mark_cases["`2 a | b |https://c`"]=
-	# 	PRE+"2em;>"+'<a href="https://c">'+pulverize(" b ")+"</a>"+"</div>"	
-	# mark_cases["`2 a|http://b x c|http://d`"]=
-	# 	PRE+"2em;>"+'<a href="http://b">'+pulverize("a")+"</a>"+pulverize(" x ")+
-	# 	'<a href="http://d">'+pulverize("c")+"</a>"+"</div>"
-	# mark_cases["a `2 x c|http://d`"]=
-	# 	pulverize("a ")+PRE+"2em;>"+'<a href="http://d">'+pulverize("x c")+"</a>"+"</div>"		
-	# mark_cases["a `2 x c|http://d` b `3 e` `4 http://w|http://w` f"]=pulverize("a ")+
-	# 	PRE+"2em;>"+'<a href="http://d">'+pulverize("x c")+"</a>"+pulverize("b")+
-	# 	PRE+"3em;>"+pulverize("e")+
-	# 	PRE+"4em;>"+'<a href="http://w">'+pulverize("http://w")+"</a>"+pulverize(" f")+"</div>"							
+	mark_cases["`3 google|http://g.com`"]=
+		PRE+"3em;>"+'<a href=http://g.com>'+pulverize("google")+"</a>"+"</div>"
+	mark_cases["google|http://g.com`"]=pulverize("google|http://g.com`")
+		PRE+"3em;>"+'<a href=http://g.com>'+pulverize("google")+"</a>"+"</div>"		
+	mark_cases["`2 a b |https://c`"]=
+		PRE+"2em;>"+'<a href=https://c>'+pulverize("a b ")+"</a>"+"</div>"
+	mark_cases["`2 a | b |https://c`"]=
+		PRE+"2em;>"+pulverize("a |")+'<a href=https://c>'+pulverize(" b ")+"</a>"+"</div>"	
+	mark_cases["`2 a|http://b x c|http://d`"]=
+		PRE+"2em;>"+'<a href=http://b>'+pulverize("a")+"</a>"+pulverize(" x c|http://d")+"</div>"
+	mark_cases["a `2 x c|http://d`"]=
+		pulverize("a ")+PRE+"2em;>"+'<a href=http://d>'+pulverize("x c")+"</a>"+"</div>"		
+	mark_cases["a `2 x c|http://d` b `3 e` `4 http://w|http://w` f"]=pulverize("a ")+
+		PRE+"2em;>"+'<a href=http://d>'+pulverize("x c")+"</a></div>"+pulverize(" b ")+
+		PRE+"3em;>"+pulverize("e")+"</div> "+
+		PRE+"4em;>"+'<a href=http://w>'+pulverize("http://w")+"</a></div>"+pulverize(" f")							
 
 
 	
@@ -175,12 +175,12 @@ describe MarkupHelper do
 	end	
 	describe "build urls" do
 		build_url_cases.each do |k,v|
-			specify{build_url(k).should == v }	
+			specify{link_and_pulverize(k).should == v }	
 		end		
 	end		
 	describe "don't build urls" do
 		badly_build_url_cases.each do |k,v|
-			specify{build_url(k).should_not == v }	
+			specify{link_and_pulverize(k).should_not == v }	
 		end		
 	end		
 

@@ -35,7 +35,7 @@ include PostsHelper
 
   def process(string)
     string.sub(BACKTICK_GROUPED) do |match|
-      PRE+$2+"em;>"+pulverize($4)+'</div>'
+      PRE+$2+"em;>"+link_and_pulverize($4)+'</div>'
     end
   end
 
@@ -53,7 +53,7 @@ include PostsHelper
     end
   end
 
-  def build_url(string)
+  def link_and_pulverize(string)
     match=MARKED_URL.match(string)
     if !match
       pulverize(string)
@@ -63,16 +63,6 @@ include PostsHelper
       pulverize(match.post_match)
     end
   end
-  # def build_url(string)
-  #   temp=[]
-  #   result=[]
-  #   string.scan(MARKED_URL).each do |matched_array|
-  #     temp << matched_array.map(&:strip)
-  #   end
-  #   temp.each do |url_building_blocks|
-  #     result << '<a href='+url_building_blocks[1]+'>'+url_building_blocks[0]+'</a>'
-  #   end
-  #   result
-  # end  
+
 
 end
