@@ -22,7 +22,7 @@ include PostsHelper
   end
 
   def mark(string)
-    full_process=extract_backticks(string).map {|s| mark_and_pulverize(s)}
+    full_process=extract_backticks(string).map {|s| process(s)}
     only_pulverize=extract_compliment(string).map {|s| pulverize(s)}
     result=nil
     if string[0]=='`' && string[1]!='`'
@@ -33,7 +33,7 @@ include PostsHelper
     '<pre>'+result.stitch.join+'</pre>'
   end
 
-  def mark_and_pulverize(string)
+  def process(string)
     string.sub(BACKTICK_GROUPED) do |match|
       PRE+$2+"em;>"+pulverize($4)+'</div>'
     end
@@ -53,16 +53,26 @@ include PostsHelper
     end
   end
 
-  def mark_urls(string)
-    temp=[]
-    result=[]
-    string.scan(MARKED_URL).each do |matched_array|
-      temp << matched_array.map(&:strip)
+  def build_url(string)
+    match=MARKED_URL.match(string)
+    if !match
+      pulverize(string)
+    else
+      pulverize(match.pre_match)+
+      match[0].gsub(MARKED_URL) {|match| "<a href="+$2+">"+pulverize($1)+"</a>"}+
+      pulverize(match.post_match)
     end
-    temp.each do |url_building_blocks|
-      result << '<a href='+url_building_blocks[1]+'>'+url_building_blocks[0]+'</a>'
-    end
-    result
-  end  
+  end
+  # def build_url(string)
+  #   temp=[]
+  #   result=[]
+  #   string.scan(MARKED_URL).each do |matched_array|
+  #     temp << matched_array.map(&:strip)
+  #   end
+  #   temp.each do |url_building_blocks|
+  #     result << '<a href='+url_building_blocks[1]+'>'+url_building_blocks[0]+'</a>'
+  #   end
+  #   result
+  # end  
 
 end
