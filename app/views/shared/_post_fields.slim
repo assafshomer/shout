@@ -1,6 +1,0 @@
-= form_for(@post) do |f|
-	= render 'shared/errors', object: f.object
-	div
-		= f.text_area :content, placeholder: post_place_holder, id: :inputbox
-	div
-		= f.submit submit_button_title,  id: "shoutup_button", class: "btn btn-large btn-primary btn-long"	

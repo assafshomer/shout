@@ -58,7 +58,7 @@ describe "Search Posts" do
 			before do
 				visit root_path 
 				fill_in 'inputbox', with: s
-				click_button submit_button_title
+				click_button preview_button_title
 				visit posts_path
 				fill_in 'search', with: s
 				click_button 'Search'			

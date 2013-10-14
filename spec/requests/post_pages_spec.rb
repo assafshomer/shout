@@ -15,7 +15,7 @@ describe "PostPages" do
   end
 
 	describe "Home" do
-		let!(:button) { submit_button_title }
+		
 		before do
 			# Post.delete_all # I should fix the suite to work also when the test db is empty
 			visit root_path
@@ -24,23 +24,23 @@ describe "PostPages" do
 		it { should have_selector('textarea#inputbox') }
 		# it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
 		it { should have_selector('input#shoutup_button') }
-		it { should have_xpath("//input[@value=\'#{button}\']") }		
+		it { should have_xpath("//input[@value=\'#{preview_button_title}\']") }		
 		describe "validations" do
 			describe "clicking the post button with an empty post should raise an error" do
-				before { click_button button }
+				before { click_button preview_button_title }
 				it { should have_selector('div.alert.alert-error', text: '2 errors') }
 			end
 			describe "clicking the post button with a single character post should raise an error" do
 				before do
 				  fill_in 'inputbox', with: 'x'
-				  click_button button
+				  click_button preview_button_title
 				end
 				it { should have_selector('div.alert.alert-error', text: '1 error') }
 			end
 			describe "posting OK should not raise any errors and should flash" do
 				before do
 				  fill_in 'inputbox', with: 'OK'
-				  click_button button
+				  click_button preview_button_title
 				end
 				it { should_not have_selector('div.alert.alert-error', text: 'error') }
 				it { should have_selector('div.alert.alert-success') }
@@ -49,7 +49,7 @@ describe "PostPages" do
 		describe "persistance" do
 			before { fill_in 'inputbox', with: 'foobar' }
 			it "should save the post to the db" do
-				expect {click_button button}.to change(Post, :count).by(1)
+				expect {click_button preview_button_title}.to change(Post, :count).by(1)
 			end
 		end 
 	end
@@ -84,7 +84,7 @@ describe "PostPages" do
 			before do
 			  visit root_path
 			  fill_in 'inputbox', with: link
-			  click_button submit_button_title
+			  click_button preview_button_title
 			  visit post_path(Post.all.ids.max)
 			end
 			it { should have_link('g​o​o​g​l​e​') } #note that this includes ZWSPs
@@ -113,7 +113,7 @@ describe "PostPages" do
 				before do
 				  visit root_path
 				  fill_in 'inputbox', with: text
-				  click_button submit_button_title
+				  click_button preview_button_title
 				  visit posts_path			  
 				end
 				it { should have_selector("div.smalloutput##{Post.all.ids.max}",
@@ -129,7 +129,7 @@ describe "PostPages" do
 				before do
 				  visit root_path
 				  fill_in 'inputbox', with: link
-				  click_button submit_button_title
+				  click_button preview_button_title
 				  visit posts_path
 				  # save_and_open_page			  
 				end

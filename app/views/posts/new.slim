@@ -1,6 +1,13 @@
-table cellpadding="15px" align="center"
-	tr
-		td 
-			= render 'shared/post_fields'			
-		td valign="top"
-			= render 'shared/preview', post: @lastpost
+= form_for(@post) do |f|
+	= render 'shared/errors', object: f.object
+	table cellpadding="15px" align="center"
+		tr
+			td valign="top"
+				= f.text_area :content, placeholder: post_place_holder, id: :inputbox
+			td valign="top"
+				= render 'shared/preview', post: @lastpost
+		tr
+			td align="center" 
+				= f.submit preview_button_title,  id: "shoutup_button", class: "btn btn-large btn-primary btn-long"	
+			td align="center"
+				= f.submit publish_button_title, id: "publish_button", class: "btn btn-large btn-primary btn-long"	

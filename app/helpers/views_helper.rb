@@ -1,7 +1,12 @@
 module ViewsHelper
-	def submit_button_title
+	def preview_button_title
 		# app_title
-		app_mantra.downcase
+		"Preview"
+	end
+
+	def publish_button_title
+		# app_title
+		"Publish"
 	end
 
 	def button_space
