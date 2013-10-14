@@ -108,6 +108,18 @@ After"
 	badly_build_url_cases["a||http://b"]="<a href=http://b>"+pulverize("a")+"</a>"
 	badly_build_url_cases["c a|http://b"]="<a href=http://b>"+pulverize(" c a")+"</a>"
 
+	build_nourl_cases={}
+	build_nourl_cases["assaf"]=pulverize("assaf")
+	build_nourl_cases["a|b"]=pulverize("a|b")
+	build_nourl_cases["a|http://b"]=pulverize("a")
+	build_nourl_cases["c a|http://b"]=pulverize("c a")
+	build_nourl_cases["c a|http://b d"]=pulverize("c a d")
+	build_nourl_cases["c|d b a|http://b d"]=pulverize("c|d b a d")
+
+	badly_build_nourl_cases={}
+	badly_build_nourl_cases["a|b"]=pulverize("a")
+	badly_build_nourl_cases["a||http://b"]=pulverize("a")
+	badly_build_nourl_cases["c a|http://b"]=pulverize(" c a")
 
 	mark_cases={}
 	mark_cases[""]=""
@@ -182,7 +194,17 @@ describe MarkupHelper do
 		badly_build_url_cases.each do |k,v|
 			specify{link_and_pulverize(k).should_not == v }	
 		end		
+	end	
+	describe "build urls" do
+		build_nourl_cases.each do |k,v|
+			specify{unlink_and_pulverize(k).should == v }	
+		end		
 	end		
+	describe "don't build urls" do
+		badly_build_nourl_cases.each do |k,v|
+			specify{unlink_and_pulverize(k).should_not == v }	
+		end		
+	end			
 
 	describe "markup" do
 		markup_cases.each do |k,v|

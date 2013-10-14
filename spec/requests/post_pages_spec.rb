@@ -124,8 +124,10 @@ describe "PostPages" do
 				it { should have_selector("div.smalloutput##{Post.all.ids.max}",
 				 text: /#{pulverize("google",'\W')}/) }
 				it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
+				#testing that we don't get the link inside link bug
+				it { should have_link('g​o​o​g​l​e​') } #note that this includes ZWSPs
 				describe "clicking the link to the show template should get you there" do
-					before { click_link "tile_#{Post.all.ids.max}" }
+					before {  click_link 'g​o​o​g​l​e​' }
 					specify {current_path.should == post_path(Post.all.ids.max) }			
 				end											
 			end
