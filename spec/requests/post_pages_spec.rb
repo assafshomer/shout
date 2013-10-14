@@ -17,9 +17,8 @@ describe "PostPages" do
 	describe "Home" do
 		let!(:button) { submit_button_title }
 		before do
-			# Post.delete_all
+			# Post.delete_all # I should fix the suite to work also when the test db is empty
 			visit root_path
-			# save_and_open_page
 		end			
 		it_should_behave_like 'all pages'
 		it { should have_selector('textarea#inputbox') }
@@ -85,14 +84,12 @@ describe "PostPages" do
 
 	describe "index" do		
 		before do
-			Post.delete_all
 			FactoryGirl.create(:post, content: "a"+"\r\n"*20+"...")
 			FactoryGirl.create(:post, content: "line 1\r\nline 2\r\nline 3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10\r\n11\r\n1...")
 			tile_size.times do
 				FactoryGirl.create(:post)
 			end
 			visit posts_path
-			# save_and_open_page
 		end
 		it_should_behave_like 'all pages'
 		it { should_not have_selector('textarea#post_content') }		
@@ -109,7 +106,11 @@ describe "PostPages" do
 				end
 				it { should have_selector("div.smalloutput##{Post.all.ids.max}",
 				 text: /#{pulverize(text,'\W')}/) }
-				it { should have_link('', href: post_path("#{Post.all.ids.max}")) }				
+				it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
+				describe "clicking the link to the show template should get you there" do
+					before { click_link "tile_#{Post.all.ids.max}" }
+					specify {current_path.should == post_path(Post.all.ids.max) }			
+				end
 			end
 			describe "link with url" do
 				let!(:text) { "`1 google|http://www.google.com`" }
@@ -121,8 +122,12 @@ describe "PostPages" do
 				  # save_and_open_page			  
 				end
 				it { should have_selector("div.smalloutput##{Post.all.ids.max}",
-				 text: /#{pulverize(text,'\W')}/) }
-				# it { should have_link('', href: post_path("#{Post.all.ids.max}")) }								
+				 text: /#{pulverize("google",'\W')}/) }
+				it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
+				describe "clicking the link to the show template should get you there" do
+					before { click_link "tile_#{Post.all.ids.max}" }
+					specify {current_path.should == post_path(Post.all.ids.max) }			
+				end											
 			end
 		end
 	end
