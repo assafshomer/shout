@@ -19,6 +19,7 @@ describe "PostPages" do
 		before do
 			# Post.delete_all
 			visit root_path
+			# save_and_open_page
 		end			
 		it_should_behave_like 'all pages'
 		it { should have_selector('textarea#inputbox') }
@@ -97,5 +98,32 @@ describe "PostPages" do
 		it { should_not have_selector('textarea#post_content') }		
 		it { should_not have_selector('input#shoutup_button') }		
 		it { should have_selector('div.pagination') } 
+		describe "linking to show" do
+			describe "simple linking" do
+				let!(:text) { "test simple link" }
+				before do
+				  visit root_path
+				  fill_in 'inputbox', with: text
+				  click_button submit_button_title
+				  visit posts_path			  
+				end
+				it { should have_selector("div.smalloutput##{Post.all.ids.max}",
+				 text: /#{pulverize(text,'\W')}/) }
+				it { should have_link('', href: post_path("#{Post.all.ids.max}")) }				
+			end
+			describe "link with url" do
+				let!(:text) { "`1 google|http://www.google.com`" }
+				before do
+				  visit root_path
+				  fill_in 'inputbox', with: text
+				  click_button submit_button_title
+				  visit posts_path
+				  # save_and_open_page			  
+				end
+				it { should have_selector("div.smalloutput##{Post.all.ids.max}",
+				 text: /#{pulverize(text,'\W')}/) }
+				# it { should have_link('', href: post_path("#{Post.all.ids.max}")) }								
+			end
+		end
 	end
 end
