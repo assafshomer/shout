@@ -79,7 +79,19 @@ describe "PostPages" do
 			it { should_not have_selector('div.bigoutput',
 			 text: /#{pulverize('before','\W')}#{pulverize('after','\W')}/)}			
 		end		
-
+		describe "posts with active links" do
+			let!(:link) { "`1 google|http://www.google.com`" }
+			before do
+			  visit root_path
+			  fill_in 'inputbox', with: link
+			  click_button submit_button_title
+			  visit post_path(Post.all.ids.max)
+			end
+			it { should have_link('g​o​o​g​l​e​') } #note that this includes ZWSPs
+			it { should have_xpath("//a[@href='http://www.google.com']") }			
+			it { should_not have_xpath("//a[@href='http://www.yahoo.com']") }						
+			it { should_not have_link('', href: post_path("#{Post.all.ids.max}")) }	
+		end
 	end
 
 	describe "index" do		
@@ -113,10 +125,10 @@ describe "PostPages" do
 				end
 			end
 			describe "link with url" do
-				let!(:text) { "`1 google|http://www.google.com`" }
+				let!(:link) { "`1 google|http://www.google.com`" }
 				before do
 				  visit root_path
-				  fill_in 'inputbox', with: text
+				  fill_in 'inputbox', with: link
 				  click_button submit_button_title
 				  visit posts_path
 				  # save_and_open_page			  
@@ -126,6 +138,7 @@ describe "PostPages" do
 				it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
 				#testing that we don't get the link inside link bug
 				it { should have_link('g​o​o​g​l​e​') } #note that this includes ZWSPs
+				it { should_not have_xpath("//a[@href='http://www.google.com']") }
 				describe "clicking the link to the show template should get you there" do
 					before {  click_link 'g​o​o​g​l​e​' }
 					specify {current_path.should == post_path(Post.all.ids.max) }			
