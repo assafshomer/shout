@@ -23,7 +23,7 @@ describe "PostPages" do
 		it_should_behave_like 'all pages'
 		it { should have_selector('textarea#inputbox') }
 		# it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
-		it { should have_selector('input#shoutup_button') }
+		it { should have_selector('input#preview_button') }
 		it { should have_xpath("//input[@value=\'#{preview_button_title}\']") }		
 		describe "validations" do
 			describe "clicking the post button with an empty post should raise an error" do
@@ -105,7 +105,7 @@ describe "PostPages" do
 		end
 		it_should_behave_like 'all pages'
 		it { should_not have_selector('textarea#post_content') }		
-		it { should_not have_selector('input#shoutup_button') }		
+		it { should_not have_selector('input#preview_button') }		
 		it { should have_selector('div.pagination') } 
 		describe "linking to show" do
 			describe "simple linking" do

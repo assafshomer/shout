@@ -22,7 +22,7 @@ module ViewsHelper
 	end
 
 	def post_place_holder
-		# "			...think inside the box..."
+		"think inside the box"
 	end
 
 	def feed_title
