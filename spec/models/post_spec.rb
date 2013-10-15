@@ -18,12 +18,17 @@ describe Post do
  	subject { @post }
  	
  	it { should respond_to(:content) }
+ 	it { should respond_to(:published) }
  
 	describe "validations" do
 		describe "Empty posts should be invalid" do
 	 		before { @post=Post.new }
 	 		it { should_not be_valid }
 	 	end
+		describe "Empty posts should not be published" do
+	 		before { @post=Post.new }
+	 		it { should_not be_published }
+	 	end	 	
 	 	describe "Posts should include at least 2 characters" do
 	 		before { @post=Post.new(content: 'x') }
 	 		it { should_not be_valid }

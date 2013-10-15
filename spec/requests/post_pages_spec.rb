@@ -21,10 +21,14 @@ describe "PostPages" do
 			visit root_path
 		end			
 		it_should_behave_like 'all pages'
-		it { should have_selector('textarea#inputbox') }
-		# it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
+		it { should have_selector('textarea#inputbox', text: "") }
+		it { should have_selector('div.bigoutput', text: "") }		
+		it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
 		it { should have_selector('input#preview_button') }
-		it { should have_xpath("//input[@value=\'#{preview_button_title}\']") }		
+		it { should have_xpath("//input[@value=\'#{preview_button_title}\']") }	
+		it { should have_selector('input#publish_button') }
+		it { should have_xpath("//input[@value=\'#{publish_button_title}\']") }			
+
 		describe "validations" do
 			describe "clicking the post button with an empty post should raise an error" do
 				before { click_button preview_button_title }
@@ -53,6 +57,23 @@ describe "PostPages" do
 			end
 		end 
 	end
+
+	describe "edit" do
+		before do
+			visit root_path
+			fill_in 'inputbox', with: "blah blah"
+			click_button preview_button_title			
+		end
+		it_should_behave_like 'all pages'
+		specify {current_path.should == edit_post_path(Post.ids.max)}					
+		it { should have_selector('textarea#inputbox', text: "blah blah") }
+		it { should have_selector('div.bigoutput', text: "blah blah") }
+		it { should_not have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
+		it { should have_selector('input#preview_button') }
+		it { should have_selector('input#publish_button') }
+
+	end
+
 
 	describe "show" do
 		describe "random post" do
