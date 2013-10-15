@@ -16,7 +16,8 @@ namespace :db do
 			end
 			blurb=blurb[0..blurb.length-2]			
 			blurb="short post" unless blurb.length>5
-			post=Post.create!(content: blurb, created_at: hours_created_ago.hour.ago)
+			post=Post.create!(content: blurb, 
+				created_at: hours_created_ago.hour.ago, published: true)
 		end
 	end
 	
