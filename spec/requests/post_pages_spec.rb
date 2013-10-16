@@ -233,56 +233,95 @@ describe "PostPages" do
 		end
 	end
 
-	describe "index" do		
+	describe "index" do	
+  shared_examples_for "index page" do 
+		it { should_not have_selector('textarea#inputbox') }		
+		it { should_not have_selector('input#preview_button') }		
+		it { should_not have_selector('input#publish_button') }			
+  end		
+	# let!(:preview1) { FactoryGirl.create(:post, content: "a"+"\r\n"*20+"...") }	
+	# let!(:preview2) { FactoryGirl.create(:post, content: "line 1\r\nline 2\r\nline 3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10\r\n11\r\n1...") }
+	# let!(:preview1) { FactoryGirl.create(:post, content: "foobaz") }	
+	# let!(:preview2) { FactoryGirl.create(:post) }
+	describe "no pagination" do
+		before { Post.delete_all }
+		describe "preview" do
+			let!(:preview1) { FactoryGirl.create(:post, content: "foobaz") }
+			before {visit posts_path}
+			it_should_behave_like 'all pages'
+			it_should_behave_like 'index page'				
+			it { should_not have_selector('div.pagination') }
+			it { should_not have_selector('div.smalloutput', text: /#{pulverize(preview1.content,'\W')}/) }	
+			it { should have_content("no posts at this time") }				
+		end
+		describe "publish" do
+			let!(:published1) { FactoryGirl.create(:post, content: "buzz quuaax", published: true)  }
+			before {visit posts_path}
+			it_should_behave_like 'all pages'
+			it_should_behave_like 'index page'					
+			it { should_not have_selector('div.pagination') }
+			it { should have_selector('div.smalloutput', text: /#{pulverize(published1.content,'\W')}/) }					
+			it { should_not have_content("no posts at this time") }				
+		end		
+	end
+	describe "with pagination" do
+		let!(:preview2) { FactoryGirl.create(:post, content: "moonbuzz") }
+		let!(:published2) { FactoryGirl.create(:post,content: "akuna mathata", published: true)  }
 		before do
-			FactoryGirl.create(:post, content: "a"+"\r\n"*20+"...")
-			FactoryGirl.create(:post, content: "line 1\r\nline 2\r\nline 3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10\r\n11\r\n1...")
-			tile_size.times do
-				FactoryGirl.create(:post)
-			end
+			# tile_size.times do
+			# 	FactoryGirl.create(:post, published: true)
+			# end
 			visit posts_path
 		end
 		it_should_behave_like 'all pages'
-		it { should_not have_selector('textarea#post_content') }		
-		it { should_not have_selector('input#preview_button') }		
-		it { should have_selector('div.pagination') } 
-		describe "linking to show" do
-			describe "simple linking" do
-				let!(:text) { "test simple link" }
-				before do
-				  visit root_path
-				  fill_in 'inputbox', with: text
-				  click_button preview_button_title
-				  visit posts_path			  
-				end
-				it { should have_selector("div.smalloutput##{Post.all.ids.max}",
-				 text: /#{pulverize(text,'\W')}/) }
-				it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
-				describe "clicking the link to the show template should get you there" do
-					before { click_link "tile_#{Post.all.ids.max}" }
-					specify {current_path.should == post_path(Post.all.ids.max) }			
-				end
-			end
-			describe "link with url" do
-				let!(:link) { "`1 google|http://www.google.com`" }
-				before do
-				  visit root_path
-				  fill_in 'inputbox', with: link
-				  click_button preview_button_title
-				  visit posts_path
-				  # save_and_open_page			  
-				end
-				it { should have_selector("div.smalloutput##{Post.all.ids.max}",
-				 text: /#{pulverize("google",'\W')}/) }
-				it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
-				#testing that we don't get the link inside link bug
-				it { should have_link('g​o​o​g​l​e​') } #note that this includes ZWSPs
-				it { should_not have_xpath("//a[@href='http://www.google.com']") }
-				describe "clicking the link to the show template should get you there" do
-					before {  click_link 'g​o​o​g​l​e​' }
-					specify {current_path.should == post_path(Post.all.ids.max) }			
-				end											
-			end
+		it_should_behave_like 'index page'		
+		it { should_not have_content("no posts at this time") }			
+		it { should have_selector('div.pagination') }
+		describe "preview" do
+			it { should_not have_selector('div.smalloutput', text: /#{pulverize(preview2.content,'\W')}/) }	
 		end
+		describe "publish" do
+			it { should have_selector('div.smalloutput', text: /#{pulverize(published2.content,'\W')}/) }					
+		end		
+	end
+
+		# describe "linking to show" do
+		# 	describe "simple linking" do
+		# 		let!(:text) { "test simple link" }
+		# 		before do
+		# 		  visit root_path
+		# 		  fill_in 'inputbox', with: text
+		# 		  click_button preview_button_title
+		# 		  visit posts_path			  
+		# 		end
+		# 		it { should have_selector("div.smalloutput##{Post.all.ids.max}",
+		# 		 text: /#{pulverize(text,'\W')}/) }
+		# 		it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
+
+		# 	end
+		# 	describe "clicking the link to the show template should get you there" do
+		# 		before { click_link "tile_#{Post.all.ids.max}" }
+		# 		specify {current_path.should == post_path(Post.all.ids.max) }			
+		# 	end			
+		# 	describe "link with url" do
+		# 		let!(:link) { "`1 google|http://www.google.com`" }
+		# 		before do
+		# 		  visit root_path
+		# 		  fill_in 'inputbox', with: link
+		# 		  click_button preview_button_title
+		# 		  visit posts_path
+		# 		end
+		# 		it { should have_selector("div.smalloutput##{Post.all.ids.max}",
+		# 		 text: /#{pulverize("google",'\W')}/) }
+		# 		it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
+		# 		#testing that we don't get the link inside link bug
+		# 		it { should have_link('g​o​o​g​l​e​') } #note that this includes ZWSPs
+		# 		it { should_not have_xpath("//a[@href='http://www.google.com']") }
+		# 		describe "clicking the link to the show template should get you there" do
+		# 			before {  click_link 'g​o​o​g​l​e​' }
+		# 			specify {current_path.should == post_path(Post.all.ids.max) }			
+		# 		end											
+		# 	end
+		# end
 	end
 end

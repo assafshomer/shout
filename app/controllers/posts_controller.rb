@@ -31,8 +31,8 @@ class PostsController < ApplicationController
   end
 
   def index 
-    @all_posts=Post.all.to_a
-    @search_results=search_stream(params[:search], Post.all)
+    @all_posts=Post.published.to_a
+    @search_results=search_stream(params[:search], Post.published)
     @posts=@search_results.paginate(page: params[:page],
      per_page: tile_size).order('created_at DESC')
     redirect_to posts_path if params[:commit]=='Clear'
