@@ -84,11 +84,18 @@ describe "PostPages" do
 		describe "persistance" do
 			before { fill_in 'inputbox', with: 'foobar' }
 			it "should save the post to the db" do
-				expect {click_button preview_button_title}.to change(Post, :count).by(1)
+				expect {click_button preview_button_title}.to change(Post.previewed, :count).by(1)				
 			end
-			it "should save the post to the db" do
-				expect {click_button publish_button_title}.to change(Post, :count).by(1)
-			end			
+			it "previewing should not publish the post" do
+				expect {click_button preview_button_title}.not_to change(Post.published, :count)
+			end						
+			it "publishing should save the post to the db and mark it as published" do
+				expect {click_button publish_button_title}.to change(Post.published, :count).by(1)				
+				
+			end	
+			it "publishing should not change the previews count" do
+				expect {click_button publish_button_title}.not_to change(Post.previewed, :count)
+			end						
 		end 
 	end
 
@@ -164,12 +171,24 @@ describe "PostPages" do
 
 		describe "persistance" do
 			before { fill_in 'inputbox', with: 'foobar' }
-			it "should update the post in the db" do
+			it "previewing an update should update the post in the db" do
 				expect {click_button preview_button_title}.to change{Post.first.content}.from("blah blah").to("foobar")
 			end
-			it "should update the post in the db" do
+			it "previewing an update should not change the publication count" do
+				expect {click_button preview_button_title}.not_to change(Post.published, :count)
+			end	
+			it "previewing an update should not change the preview count" do
+				expect {click_button preview_button_title}.not_to change(Post.previewed, :count)
+			end	
+			it "publishing an update should update the post in the db" do
 				expect {click_button publish_button_title}.to change{Post.first.content}.from("blah blah").to("foobar")
-			end			
+			end
+			it "publishing an update should increase the publication count" do
+				expect {click_button publish_button_title}.to change(Post.published, :count).by(1)
+			end	
+			it "publishing an update should decrease the preview count" do
+				expect {click_button publish_button_title}.to change(Post.previewed, :count).by(-1)				
+			end										
 		end 
 	end
 

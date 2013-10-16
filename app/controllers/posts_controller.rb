@@ -56,7 +56,7 @@ class PostsController < ApplicationController
       if params[:commit]=="Preview"
         redirect_to edit_post_path(post)
       else
-        # post.toggle!(:published)
+        post.toggle!(:published)
         flash[:success] = "Thanks for sharing"                
         redirect_to root_path      
       end
