@@ -17,6 +17,15 @@ class PostsController < ApplicationController
     @post=Post.find(params[:id])
   end
 
+  def update
+    @post=Post.find(params[:id])
+    if @post.update_attributes(post_params)
+      fork(@post)
+    else
+      render 'edit'      
+    end
+  end 
+
   def show
     @post=Post.find(params[:id]) 
   end
