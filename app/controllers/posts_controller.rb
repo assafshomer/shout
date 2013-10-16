@@ -4,10 +4,6 @@ class PostsController < ApplicationController
     redirect_to root_path if params[:commit]=='Clear'
   end
 
-  def show
-    @post=Post.find(params[:id]) 
-  end
-
   def create
     # binding.pry
   	@post=Post.new(post_params)
@@ -18,6 +14,14 @@ class PostsController < ApplicationController
   	  render 'new'
     end
   end 
+
+  def edit
+    @post=Post.new(post_params)
+  end
+
+  def show
+    @post=Post.find(params[:id]) 
+  end
 
   def index 
     @all_posts=Post.all.to_a
@@ -39,5 +43,9 @@ class PostsController < ApplicationController
     else
       stream
     end
-  end      
+  end
+
+  def process(post)
+    
+  end
 end

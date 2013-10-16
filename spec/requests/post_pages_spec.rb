@@ -67,10 +67,10 @@ describe "PostPages" do
 		it_should_behave_like 'all pages'
 		specify {current_path.should == edit_post_path(Post.ids.max)}					
 		it { should have_selector('textarea#inputbox', text: "blah blah") }
-		it { should have_selector('div.bigoutput', text: "blah blah") }
+		it { should have_selector('div.bigoutput', text: pulverize("blah blah")) }
 		it { should_not have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
 		it { should have_selector('input#preview_button') }
-		it { should have_selector('input#publish_button') }
+		it { should have_selector('input#publish_button') }  
 
 	end
 
