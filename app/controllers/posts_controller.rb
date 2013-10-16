@@ -1,22 +1,20 @@
 class PostsController < ApplicationController
   def new
   	@post=Post.new 
-    redirect_to root_path if params[:commit]=='Clear'
   end
 
   def create
     # binding.pry
   	@post=Post.new(post_params)
     if @post.save
-      flash[:success] = "Thanks for sharing"  	            
-      redirect_to root_path
+      fork(@post)
     else
-  	  render 'new'
+      render 'new'      
     end
   end 
 
   def edit
-    @post=Post.new(post_params)
+    @post=Post.find(params[:id])
   end
 
   def show
@@ -37,12 +35,22 @@ class PostsController < ApplicationController
       params.require(:post).permit(:content)
     end
 
-  def search_stream(space_separated_search_terms, stream)    
-    if !space_separated_search_terms.blank?      
-      stream.where(generate_LIKE_sql(space_separated_search_terms, 'content',Post))
-    else
-      stream
+    def search_stream(space_separated_search_terms, stream)    
+      if !space_separated_search_terms.blank?      
+        stream.where(generate_LIKE_sql(space_separated_search_terms, 'content',Post))
+      else
+        stream
+      end
     end
-  end
+
+    def fork(post)
+      if params[:commit]=="Preview"
+        redirect_to edit_post_path(post)
+      else
+        # post.toggle!(:published)
+        flash[:success] = "Thanks for sharing"                
+        redirect_to root_path      
+      end
+    end
 
 end

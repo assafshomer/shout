@@ -30,26 +30,58 @@ describe "PostPages" do
 		it { should have_xpath("//input[@value=\'#{publish_button_title}\']") }			
 
 		describe "validations" do
-			describe "clicking the post button with an empty post should raise an error" do
-				before { click_button preview_button_title }
-				it { should have_selector('div.alert.alert-error', text: '2 errors') }
-			end
-			describe "clicking the post button with a single character post should raise an error" do
-				before do
-				  fill_in 'inputbox', with: 'x'
-				  click_button preview_button_title
+			describe "preview_button" do
+				describe "clicking the preview button with an empty post should raise an error" do
+					before { click_button preview_button_title }
+					it { should have_selector('div.alert.alert-error', text: '2 errors') }
 				end
-				it { should have_selector('div.alert.alert-error', text: '1 error') }
-			end
-			describe "posting OK should not raise any errors and should flash" do
-				before do
-				  fill_in 'inputbox', with: 'OK'
-				  click_button preview_button_title
+				describe "clicking the preview button with a single character post should raise an error" do
+					before do
+					  fill_in 'inputbox', with: 'x'
+					  click_button preview_button_title
+					end
+					it { should have_selector('div.alert.alert-error', text: '1 error') }
 				end
-				it { should_not have_selector('div.alert.alert-error', text: 'error') }
-				it { should have_selector('div.alert.alert-success') }
+				describe "preveiwing OK should not raise errors, flash, preview the content and redirect to the edit page" do
+					before do
+					  fill_in 'inputbox', with: 'OK'
+					  click_button preview_button_title
+					end
+					it { should_not have_selector('div.alert.alert-error', text: 'error') }
+					it { should_not have_selector('div.alert.alert-success') }
+					it { should have_selector('textarea#inputbox', text: "OK") }
+					it { should have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }
+					specify {current_path.should == edit_post_path(Post.ids.max)}
+				end				
 			end
+			describe "publish button" do
+				describe "clicking the publish button with an empty post should raise an error" do
+					before { click_button publish_button_title }
+					it { should have_selector('div.alert.alert-error', text: '2 errors') }
+				end
+				describe "clicking the publish button with a single character post should raise an error" do
+					before do
+					  fill_in 'inputbox', with: 'x'
+					  click_button publish_button_title
+					end
+					it { should have_selector('div.alert.alert-error', text: '1 error') }
+				end
+				describe "publishing OK should not raise any errors, flash and return to the new template" do
+					before do
+					  fill_in 'inputbox', with: 'OK'
+					  click_button publish_button_title
+					end
+					it { should_not have_selector('div.alert.alert-error', text: 'error') }
+					it { should have_selector('div.alert.alert-success') }
+					it { should_not have_selector('textarea#inputbox', text: "OK") }
+					it { should_not have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }	
+					it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }				
+					specify {current_path.should == root_path}
+				end				
+			end			
 		end
+
+
 		describe "persistance" do
 			before { fill_in 'inputbox', with: 'foobar' }
 			it "should save the post to the db" do
@@ -67,8 +99,7 @@ describe "PostPages" do
 		it_should_behave_like 'all pages'
 		specify {current_path.should == edit_post_path(Post.ids.max)}					
 		it { should have_selector('textarea#inputbox', text: "blah blah") }
-		it { should have_selector('div.bigoutput', text: pulverize("blah blah")) }
-		it { should_not have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
+		it { should have_selector('div.bigoutput', text: /#{pulverize('blah blah','\W')}/) }
 		it { should have_selector('input#preview_button') }
 		it { should have_selector('input#publish_button') }  
 

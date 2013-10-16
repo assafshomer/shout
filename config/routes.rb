@@ -1,5 +1,5 @@
 Shout::Application.routes.draw do
- resources :posts, only: [:new, :create,:show, :index]
+ resources :posts
  
  root to: "posts#new"
  
