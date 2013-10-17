@@ -29,6 +29,9 @@ describe "Search Posts" do
 		it "should not display the preview" do
 			page.should_not have_selector('div.smalloutput', text: /#{pulverize(bbpre.content,'\W')}/)
 		end
+		it "should not show the 'of which ... matching' message" do
+			page.should_not have_selector('div#counter', text: "of which")
+		end
 		describe "with search term that cannot be found" do
 			before do 
 				fill_in 'search', with: 'supercalifragilisticexpialidocious'
