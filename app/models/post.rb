@@ -14,6 +14,6 @@ class Post < ActiveRecord::Base
   default_scope -> { order('created_at DESC') }
   scope :published, -> {where(published: true)}
   scope :previewed, -> {where(published: false)}
-  before_save { |post| post.content = post.content[0..2545] } # 67*38
+  before_save { |post| post.content = post.content[0..2545].split("​").join } # 67*38
 
 end

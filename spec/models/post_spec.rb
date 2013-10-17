@@ -46,4 +46,11 @@ describe Post do
 		specify {normal.content.length.should < 2546}
 	end
 
+	describe "trim ZWSP" do
+		let!(:string_with_ZWSP) { "`2 assafa​s​s​a​f`" }
+		before { Post.create(content: string_with_ZWSP) }
+		specify {Post.first.content.should == string_with_ZWSP.split("​").join }
+		specify {Post.first.content.should_not == string_with_ZWSP }
+	end
+
 end
