@@ -22,7 +22,7 @@ describe "PostPages" do
 		end			
 		it_should_behave_like 'all pages'
 		it { should have_selector('textarea#inputbox', text: "") }
-		it { should have_selector('div.bigoutput', text: "") }		
+		it { should_not have_selector('div.bigoutput') }		
 		it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
 		it { should have_button "Preview"}
 		it { should have_selector('input#preview_button') }
@@ -39,6 +39,7 @@ describe "PostPages" do
 				before { click_button preview_button_title }
 				it { should have_selector('div.alert.alert-error', text: '2 errors') }
 				it { should have_button "Preview"}
+				it { should_not have_selector('div.bigoutput') }		
 				it { should_not have_button "Publish" }
 			end
 			describe "clicking the preview button with a single character post should raise an error" do
@@ -48,6 +49,7 @@ describe "PostPages" do
 				end
 				it { should have_selector('div.alert.alert-error', text: '1 error') }
 				it { should have_button "Preview"}
+				it { should_not have_selector('div.bigoutput') }		
 				it { should_not have_button "Publish" }				
 			end
 			describe "preveiwing OK should not raise errors, flash, preview the content and redirect to the edit page" do
@@ -61,7 +63,7 @@ describe "PostPages" do
 				it { should have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }
 				specify {current_path.should == edit_post_path(Post.ids.max)}
 				it { should have_button "Preview"}
-				it { should have_button "Publish" }				
+				it { should have_button "Publish" }	
 			end				
 		end
 
