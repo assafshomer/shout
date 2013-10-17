@@ -24,16 +24,22 @@ describe "PostPages" do
 		it { should have_selector('textarea#inputbox', text: "") }
 		it { should have_selector('div.bigoutput', text: "") }		
 		it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
+		it { should have_button "Preview"}
 		it { should have_selector('input#preview_button') }
 		it { should have_xpath("//input[@value=\'#{preview_button_title}\']") }	
-		it { should have_selector('input#publish_button') }
-		it { should have_xpath("//input[@value=\'#{publish_button_title}\']") }			
+		it { should_not have_xpath("//input[@value=\'#{preview_button_title}\'][@disabled='disabled']") }		
+		it { should_not have_button "Publish"}
+		it { should_not have_selector('input#publish_button') }
+		it { should_not have_xpath("//input[@value=\'#{publish_button_title}\']") }
+		# it { should have_xpath("//input[@value=\'#{publish_button_title}\'][@disabled='disabled']") }		
 
 
 		describe "preview_button" do
 			describe "clicking the preview button with an empty post should raise an error" do
 				before { click_button preview_button_title }
 				it { should have_selector('div.alert.alert-error', text: '2 errors') }
+				it { should have_button "Preview"}
+				it { should_not have_button "Publish" }
 			end
 			describe "clicking the preview button with a single character post should raise an error" do
 				before do
@@ -41,6 +47,8 @@ describe "PostPages" do
 				  click_button preview_button_title
 				end
 				it { should have_selector('div.alert.alert-error', text: '1 error') }
+				it { should have_button "Preview"}
+				it { should_not have_button "Publish" }				
 			end
 			describe "preveiwing OK should not raise errors, flash, preview the content and redirect to the edit page" do
 				before do
@@ -52,31 +60,25 @@ describe "PostPages" do
 				it { should have_selector('textarea#inputbox', text: "OK") }
 				it { should have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }
 				specify {current_path.should == edit_post_path(Post.ids.max)}
+				it { should have_button "Preview"}
+				it { should have_button "Publish" }				
 			end				
 		end
 
 		describe "publish button" do
-			describe "clicking the publish button with an empty post should raise an error" do
-				before { click_button publish_button_title }
-				it { should have_selector('div.alert.alert-error', text: '2 errors') }
-			end
-			describe "clicking the publish button with a single character post should raise an error" do
-				before do
-				  fill_in 'inputbox', with: 'x'
-				  click_button publish_button_title
-				end
-				it { should have_selector('div.alert.alert-error', text: '1 error') }
-			end
 			describe "publishing OK should not raise any errors, flash and return to the new template" do
 				before do
 				  fill_in 'inputbox', with: 'OK'
+				  click_button preview_button_title
 				  click_button publish_button_title
 				end
 				it { should_not have_selector('div.alert.alert-error', text: 'error') }
 				it { should have_selector('div.alert.alert-success') }
 				it { should_not have_selector('textarea#inputbox', text: "OK") }
 				it { should_not have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }	
-				it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }				
+				it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }	
+				it { should have_button "Preview"}
+				it { should_not have_button "Publish" }							
 				specify {current_path.should == root_path}
 			end				
 		end
@@ -90,11 +92,11 @@ describe "PostPages" do
 				expect {click_button preview_button_title}.not_to change(Post.published, :count)
 			end						
 			it "publishing should save the post to the db and mark it as published" do
-				expect {click_button publish_button_title}.to change(Post.published, :count).by(1)				
+				expect {click_button preview_button_title; click_button publish_button_title}.to change(Post.published, :count).by(1)				
 				
 			end	
 			it "publishing should not change the previews count" do
-				expect {click_button publish_button_title}.not_to change(Post.previewed, :count)
+				expect {click_button preview_button_title; click_button publish_button_title}.not_to change(Post.previewed, :count)
 			end						
 		end 
 	end
@@ -170,25 +172,30 @@ describe "PostPages" do
 		end
 
 		describe "persistance" do
-			before { fill_in 'inputbox', with: 'foobar' }
-			it "previewing an update should update the post in the db" do
-				expect {click_button preview_button_title}.to change{Post.first.content}.from("blah blah").to("foobar")
+			describe "preview" do
+				before { fill_in 'inputbox', with: 'foobar' }
+				it "previewing an update should update the post in the db" do
+					expect {click_button preview_button_title}.to change{Post.first.content}.from("blah blah").to("foobar")
+				end
+				it "previewing an update should not change the publication count" do
+					expect {click_button preview_button_title}.not_to change(Post.published, :count)
+				end	
+				it "previewing an update should not change the preview count" do
+					expect {click_button preview_button_title}.not_to change(Post.previewed, :count)
+				end					
 			end
-			it "previewing an update should not change the publication count" do
-				expect {click_button preview_button_title}.not_to change(Post.published, :count)
-			end	
-			it "previewing an update should not change the preview count" do
-				expect {click_button preview_button_title}.not_to change(Post.previewed, :count)
-			end	
-			it "publishing an update should update the post in the db" do
-				expect {click_button publish_button_title}.to change{Post.first.content}.from("blah blah").to("foobar")
+			describe "publish" do
+				before { fill_in 'inputbox', with: "bazquuax" }
+				it "publishing an update should update the post in the db" do
+					expect {click_button publish_button_title}.to change{Post.first.content}.from("blah blah").to("bazquuax")
+				end
+				it "publishing an update should increase the publication count" do
+					expect {click_button publish_button_title}.to change(Post.published, :count).by(1)
+				end	
+				it "publishing an update should decrease the preview count" do
+					expect {click_button publish_button_title}.to change(Post.previewed, :count).by(-1)				
+				end					
 			end
-			it "publishing an update should increase the publication count" do
-				expect {click_button publish_button_title}.to change(Post.published, :count).by(1)
-			end	
-			it "publishing an update should decrease the preview count" do
-				expect {click_button publish_button_title}.to change(Post.previewed, :count).by(-1)				
-			end										
 		end 
 	end
 
