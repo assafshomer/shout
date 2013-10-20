@@ -160,7 +160,7 @@ After"
 		PRE+"2em;>"+'<a href=http://d>'+pulverize("x c")+"</a></div>"+pulverize(" b ")+
 		PRE+"3em;>"+pulverize("e")+"</div> "+
 		PRE+"4em;>"+'<a href=http://w>'+pulverize("http://w")+"</a></div>"+pulverize(" f")							
-
+	mark_cases["`1 ascii|http://www.alt-codes.net`"]=PRE+"1em;>"+'<a href=http://www.alt-codes.net>'+pulverize("ascii")+"</a></div>"
 
 	
 describe MarkupHelper do	

@@ -6,8 +6,8 @@ include PostsHelper
   BACKTICK_GROUPED = /(`)(\d+)(\s{1})([^`]*)(`{1})/
   PRE='<div class=mark style=font-size:'  
   ZWSP='&#8203;'
-  URL_REGEX = /https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/|-]+/
-  MARKED_URL = /([^|]+)\|{1}(\s*https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/]+)/
+  URL_REGEX = /https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/|-]+/ # only used during development
+  MARKED_URL = /([^|]+)\|{1}(\s*https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/|-]+)/
 
   def extract_backticks(string)
     string.scan(BACKTICK_REGEX).reject {|s| s=~BACKTICK_EMPTY}
@@ -17,9 +17,9 @@ include PostsHelper
     string.split(BACKTICK_REGEX).reject(&:empty?).reject {|s| s=~BACKTICK_EMPTY}
   end
 
-  def markup(string)
-    string.gsub(BACKTICK_GROUPED,PRE+'\2em;>\4</div>')
-  end
+  # def markup(string)
+  #   string.gsub(BACKTICK_GROUPED,PRE+'\2em;>\4</div>')
+  # end
 
   def mark(string, type="show")
     full_process=extract_backticks(string).map {|s| process(s, type)}
