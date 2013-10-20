@@ -37,7 +37,7 @@ describe "PostPages" do
 		describe "preview_button" do
 			describe "clicking the preview button with an empty post should raise an error" do
 				before { click_button preview_button_title }
-				it { should have_selector('div.alert.alert-error', text: '2 errors') }
+				it { should have_selector('div.alert.alert-error', text: 'too short') }
 				it { should have_button "Preview"}
 				it { should_not have_selector('div.bigoutput') }		
 				it { should_not have_button "Publish" }
@@ -47,7 +47,7 @@ describe "PostPages" do
 				  fill_in 'inputbox', with: 'x'
 				  click_button preview_button_title
 				end
-				it { should have_selector('div.alert.alert-error', text: '1 error') }
+				it { should have_selector('div.alert.alert-error', text: 'too short') }
 				it { should have_button "Preview"}
 				it { should_not have_selector('div.bigoutput') }		
 				it { should_not have_button "Publish" }				
@@ -85,7 +85,7 @@ describe "PostPages" do
 			end				
 		end
 
-		describe "persistance" do
+		describe "persistance on home page" do
 			before { fill_in 'inputbox', with: 'foobar' }
 			it "should save the post to the db" do
 				expect {click_button preview_button_title}.to change(Post.previewed, :count).by(1)				
@@ -122,14 +122,14 @@ describe "PostPages" do
 					fill_in 'inputbox', with: ""
 					click_button preview_button_title						
 				end
-				it { should have_selector('div.alert.alert-error', text: '2 errors') }
+				it { should have_selector('div.alert.alert-error', text: 'too short') }
 			end
 			describe "clicking the preview button with a single character post should raise an error" do
 				before do
 				  fill_in 'inputbox', with: 'x'
 				  click_button preview_button_title
 				end
-				it { should have_selector('div.alert.alert-error', text: '1 error') }
+				it { should have_selector('div.alert.alert-error', text: 'too short') }
 			end
 			describe "preveiwing OK should not raise errors, flash, preview the content and redirect to the edit page" do
 				before do
@@ -150,14 +150,14 @@ describe "PostPages" do
 					fill_in 'inputbox', with: ""
 					click_button preview_button_title						
 				end
-				it { should have_selector('div.alert.alert-error', text: '2 errors') }
+				it { should have_selector('div.alert.alert-error', text: 'too short') }
 			end
 			describe "clicking the publish button with a single character post should raise an error" do
 				before do
 				  fill_in 'inputbox', with: 'x'
 				  click_button publish_button_title
 				end
-				it { should have_selector('div.alert.alert-error', text: '1 error') }
+				it { should have_selector('div.alert.alert-error', text: 'too short') }
 			end
 			describe "publishing OK should not raise any errors, flash and return to the new template" do
 				before do
@@ -173,7 +173,7 @@ describe "PostPages" do
 			end				
 		end
 
-		describe "persistance" do
+		describe "persistance on edit page" do
 			describe "preview" do
 				before { fill_in 'inputbox', with: 'foobar' }
 				it "previewing an update should update the post in the db" do
@@ -198,6 +198,31 @@ describe "PostPages" do
 					expect {click_button publish_button_title}.to change(Post.previewed, :count).by(-1)				
 				end					
 			end
+			describe "publishing an edit" do
+				before do
+				  click_button publish_button_title
+				  visit edit_post_path(Post.first)
+				  fill_in 'inputbox', with: "moohahah"
+				  # save_and_open_page
+				end
+				it "should not change the pubilcation count" do
+					expect {click_button publish_button_title}.not_to change(Post.published, :count)
+				end
+				it "should not change the preview count" do
+					expect {click_button publish_button_title}.not_to change(Post.published, :count)
+				end				
+			end
+			describe "no publish back to preview, another method" do
+				let!(:pub) { FactoryGirl.create(:post, published: true) }
+				before do
+				  visit edit_post_path(pub)
+				  fill_in 'inputbox', with: "moohaha"
+				  click_button publish_button_title
+				end
+				it "should not toggle the published post back to preview" do
+					expect {pub.should be_published}
+				end
+			end			
 		end 
 	end
 

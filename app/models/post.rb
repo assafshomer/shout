@@ -10,7 +10,7 @@
 
 class Post < ActiveRecord::Base
 	
-	validates :content, presence: :true,  length:  { minimum: 2 }
+	validates :content, length:  { minimum: 2 }
   default_scope -> { order('created_at DESC') }
   scope :published, -> {where(published: true)}
   scope :previewed, -> {where(published: false)}

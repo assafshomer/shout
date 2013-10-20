@@ -2,9 +2,7 @@
 - if error_array.any?
   #error_explanation
     .alert.alert-error
-      u
-        | This form has #{pluralize(error_array.count, "error")}.
-      ul
+       ul
         - error_array.each do |msg|
           li
             | *#{msg}
