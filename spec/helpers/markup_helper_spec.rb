@@ -14,6 +14,7 @@ include MarkupHelper
 	two_lines="of.
 After"
 	line_break="before \r\n after"
+	spaces= "`5   `(3 spaces of `5 size 5`)"
 
 	extract_cases={}
 	extract_cases["`1 `"]=[]
@@ -68,6 +69,7 @@ After"
 	url_cases["http://1.com."]=["http://1.com."]
 	url_cases["http://$.com"]=[]
 	url_cases["http://_.google.com"]=[]
+	url_cases["http://www.alt-codes.net"]=["http://www.alt-codes.net"]
 	url_cases["htt://www.google.com"]=[]
 	url_cases["http://a blue https:\\\\b"]=['http://a',"https:\\\\b"]
 	url_cases["1http://a blue https:\\\\b"]=['http://a',"https:\\\\b"]

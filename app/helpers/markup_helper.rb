@@ -6,7 +6,7 @@ include PostsHelper
   BACKTICK_GROUPED = /(`)(\d+)(\s{1})(\s*[^\s]{1}[^`]*)(`{1})/
   PRE='<div class=mark style=font-size:'  
   ZWSP='&#8203;'
-  URL_REGEX = /https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/]+/
+  URL_REGEX = /https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/|-]+/
   MARKED_URL = /([^|]+)\|{1}(\s*https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/]+)/
 
   def extract_backticks(string)
