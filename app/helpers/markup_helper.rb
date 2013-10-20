@@ -1,9 +1,9 @@
 module MarkupHelper
 include PostsHelper
 
-  BACKTICK_REGEX = /`\d+\s+[^\s]{1}[^`]*`{1}/
-  BACKTICK_EMPTY = /`\d+\s+`{1}/
-  BACKTICK_GROUPED = /(`)(\d+)(\s{1})(\s*[^\s]{1}[^`]*)(`{1})/
+  BACKTICK_REGEX = /`\d+\s+[^`]*`{1}/
+  BACKTICK_EMPTY = /`\d+\s`{1}/
+  BACKTICK_GROUPED = /(`)(\d+)(\s{1})([^`]*)(`{1})/
   PRE='<div class=mark style=font-size:'  
   ZWSP='&#8203;'
   URL_REGEX = /https?:[\/|\\]{2}[[A-Za-z]|\d|\.|\\|\/|-]+/

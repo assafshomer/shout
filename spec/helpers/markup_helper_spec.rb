@@ -14,10 +14,10 @@ include MarkupHelper
 	two_lines="of.
 After"
 	line_break="before \r\n after"
-	spaces= "`5   `(3 spaces of `5 size 5`)"
 
 	extract_cases={}
 	extract_cases["`1 `"]=[]
+	extract_cases["`1  `"]=["`1  `"]
 	extract_cases["`1 assaf`"]=["`1 assaf`"]
 	extract_cases["`1 assaf` shomer"]=["`1 assaf`"]
 	extract_cases["my name is `1 assaf` shomer"]=["`1 assaf`"]
@@ -36,24 +36,27 @@ After"
 	extract_cases[heb_with_ticks]=["`5 יוגה`"]
 	extract_cases[chinese]=["`2 语/漢`","`10 中文`"]
 	extract_cases["assaf `1 a` shomer"]=["`1 a`"]
+	extract_cases["`5   `(3 x y `5 z 5`)"]=["`5   `","`5 z 5`"]
 
 	split_cases={}
 	split_cases["`1 `"]=[]
+	split_cases["`1  `"]=[]
 	split_cases["`1 assaf`"]=[]
 	split_cases["`1 assaf` shomer"]=[" shomer"]
 	split_cases["my name is `1 assaf` shomer"]=["my name is "," shomer"]
 	split_cases["assaf `1 a` shomer"]=["assaf "," shomer"]
+	split_cases["`5   `(3 x y `5 z 5`)"]=["(3 x y ",")"]
 
-	markup_cases={}
-	markup_cases["`2 assaf`"]=PRE+"2em;>assaf</div>"
-	markup_cases["`2 assaf` and `45 shomer` but not `4 blue"]=
-	PRE+"2em;>assaf</div> and "+
-	PRE+"45em;>shomer</div>"+" but not `4 blue"
-	markup_cases["`2 a\r\n ` x `45  s` y \n z `4 `w "]=
-	PRE+"2em;>a\r\n </div> x "+	PRE+"45em;> s</div>"+" y \n z `4 `w "
-	markup_cases["`2 a\r\n ` x `45  ss` y \n z `4 `w "]=
-	PRE+"2em;>a\r\n </div> x "+	PRE+"45em;> ss</div>"+" y \n z `4 `w "
-	markup_cases[heb_with_ticks]="פראנה <div class=mark style=font-size:5em;>יוגה</div> הוא"
+	# markup_cases={}
+	# markup_cases["`2 assaf`"]=PRE+"2em;>assaf</div>"
+	# markup_cases["`2 assaf` and `45 shomer` but not `4 blue"]=
+	# PRE+"2em;>assaf</div> and "+
+	# PRE+"45em;>shomer</div>"+" but not `4 blue"
+	# markup_cases["`2 a\r\n ` x `45  s` y \n z `4 `w "]=
+	# PRE+"2em;>a\r\n </div> x "+	PRE+"45em;> s</div>"+" y \n z `4 `w "
+	# markup_cases["`2 a\r\n ` x `45  ss` y \n z `4 `w "]=
+	# PRE+"2em;>a\r\n </div> x "+	PRE+"45em;> ss</div>"+" y \n z `4 `w "
+	# markup_cases[heb_with_ticks]="פראנה <div class=mark style=font-size:5em;>יוגה</div> הוא"
 	
 	process_cases={}
 	process_cases[""]=""
@@ -130,6 +133,8 @@ After"
 	mark_cases["` assaf`"]=pulverize("` assaf`")
 	mark_cases["` assaf `"]=pulverize("` assaf `")
 	mark_cases["`assaf`"]=pulverize("`assaf`")
+	mark_cases["`5   `(3 x y `5 z 5`)"]=PRE+"5em;>"+pulverize("  ")+"</div>"+pulverize("(3 x y ")+
+		PRE+"5em;>"+pulverize("z 5")+"</div>"+pulverize(")")
 	mark_cases["`3 `"]=""
 	mark_cases["`2 as`"]=PRE+"2em;>"+pulverize("as")+"</div>"
 	mark_cases["`2 a s bb`"]=PRE+"2em;>"+pulverize("a s bb")+"</div>"
@@ -208,11 +213,11 @@ describe MarkupHelper do
 		end		
 	end			
 
-	describe "markup" do
-		markup_cases.each do |k,v|
-			specify{markup(k).should == v}
-		end
-	end
+	# describe "markup" do
+	# 	markup_cases.each do |k,v|
+	# 		specify{markup(k).should == v}
+	# 	end
+	# end
 
 	describe "process" do
 		process_cases.each do |k,v|
