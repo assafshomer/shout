@@ -84,7 +84,7 @@ describe "Search Posts" do
 				fill_in 'search', with: s
 				click_button 'Search'			
 			end			
-			it { should have_selector('div.smalloutput', text: /#{pulverize(s,'\W')}/) }
+			it { should have_selector("div##{Post.first.id}", text: /#{pulverize(s,'\W')}/) }
 		end
 	end
 

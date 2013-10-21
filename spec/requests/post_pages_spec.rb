@@ -294,7 +294,7 @@ describe "PostPages" do
 			it_should_behave_like 'all pages'
 			it_should_behave_like 'index page'					
 			it { should_not have_selector('div.pagination') }
-			it { should have_selector('div.smalloutput', text: /#{pulverize(published1.content,'\W')}/) }					
+			it { should have_selector("div##{published1.id}", text: /#{pulverize(published1.content,'\W')}/) }					
 			it { should_not have_content("no posts at this time") }				
 		end		
 	end
@@ -315,7 +315,7 @@ describe "PostPages" do
 			it { should_not have_selector('div.smalloutput', text: /#{pulverize(preview2.content,'\W')}/) }	
 		end
 		describe "publish" do
-			it { should have_selector('div.smalloutput', text: /#{pulverize(published2.content,'\W')}/) }					
+			it { should have_selector("div##{published2.id}", text: /#{pulverize(published2.content,'\W')}/) }					
 		end		
 	end
 
