@@ -51,4 +51,14 @@
   border:none;  
 }
 
-
+@mixin output {
+  @include boxoutput;
+  @include box; 
+    &:hover {
+     @include boxhover;
+    }   
+  pre {
+    @include boxoutput;
+    @include boxpre;
+  }  
+}

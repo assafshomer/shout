@@ -296,44 +296,31 @@ textarea#inputbox{
   color:555;  
   @include box; 
 }
+
 .bigoutput{
+  @include output;
   font-size:16; 
   padding:15px;
-  @include boxoutput;
-  @include box; 
   pre{
     font-size:16;
-    @include boxoutput;
-    @include boxpre;
   }  
 }
+
 .smalloutput{
+  @include output;
   padding:5px;
   font-size:8;
-  @include boxoutput;
-  @include box; 
-    &:hover {
-     @include boxhover;
-    }   
   pre{
     font-size:8;
-    @include boxoutput;
-    @include boxpre;
   }  
 }
 
 .minioutput{
+  @include output;
   padding:2px;
   font-size:4;
-  @include boxoutput;
-  @include box; 
-    &:hover {
-     @include boxhover;
-    }   
   pre{
     font-size:4;
-    @include boxoutput;
-    @include boxpre;
   }  
 }
 
