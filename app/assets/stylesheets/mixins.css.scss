@@ -10,22 +10,10 @@
   border-radius: 5px;
 }
 
-@mixin bigbox{
+@mixin boxoutput{
   width:38em; 
   height:38em;
   letter-spacing:1;
-  font-size:16; 
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height:1em;    
-  color:555;
-  overflow:hidden;
-}
-
-@mixin smallbox{
-  width:38em; 
-  letter-spacing:1;
-  height:38em;
-  font-size:8; 
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height:1em;    
   color:555;
@@ -55,4 +43,12 @@
   box-shadow: inset 0px 0px 10px 3px $cream;     
   @include rounded-corners; 
 }
+
+@mixin boxpre {
+  padding:0;
+  background-color:$cream;
+  background-image: url('background.png');
+  border:none;  
+}
+
 

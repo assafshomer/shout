@@ -297,30 +297,43 @@ textarea#inputbox{
   @include box; 
 }
 .bigoutput{
+  font-size:16; 
   padding:15px;
-  @include bigbox;
+  @include boxoutput;
   @include box; 
   pre{
-    @include bigbox;
-    padding:0;
-    background-color:$cream;
-    background-image: url('background.png');
-    border:none;
+    font-size:16;
+    @include boxoutput;
+    @include boxpre;
   }  
 }
 .smalloutput{
   padding:5px;
-  @include smallbox;
+  font-size:8;
+  @include boxoutput;
   @include box; 
     &:hover {
      @include boxhover;
     }   
   pre{
-    @include smallbox;
-    padding:0;
-    background-color:$cream;
-    background-image: url('background.png');
-    border:none;
+    font-size:8;
+    @include boxoutput;
+    @include boxpre;
+  }  
+}
+
+.minioutput{
+  padding:2px;
+  font-size:4;
+  @include boxoutput;
+  @include box; 
+    &:hover {
+     @include boxhover;
+    }   
+  pre{
+    font-size:4;
+    @include boxoutput;
+    @include boxpre;
   }  
 }
 
