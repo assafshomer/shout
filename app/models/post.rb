@@ -6,6 +6,7 @@
 #  content    :text
 #  created_at :datetime
 #  updated_at :datetime
+#  published  :boolean          default(FALSE)
 #
 
 class Post < ActiveRecord::Base
