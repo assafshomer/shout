@@ -319,43 +319,44 @@ describe "PostPages" do
 		end		
 	end
 
-		# describe "linking to show" do
-		# 	describe "simple linking" do
-		# 		let!(:text) { "test simple link" }
-		# 		before do
-		# 		  visit root_path
-		# 		  fill_in 'inputbox', with: text
-		# 		  click_button preview_button_title
-		# 		  visit posts_path			  
-		# 		end
-		# 		it { should have_selector("div.smalloutput##{Post.all.ids.max}",
-		# 		 text: /#{pulverize(text,'\W')}/) }
-		# 		it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
-
-		# 	end
-		# 	describe "clicking the link to the show template should get you there" do
-		# 		before { click_link "tile_#{Post.all.ids.max}" }
-		# 		specify {current_path.should == post_path(Post.all.ids.max) }			
-		# 	end			
-		# 	describe "link with url" do
-		# 		let!(:link) { "`1 google|http://www.google.com`" }
-		# 		before do
-		# 		  visit root_path
-		# 		  fill_in 'inputbox', with: link
-		# 		  click_button preview_button_title
-		# 		  visit posts_path
-		# 		end
-		# 		it { should have_selector("div.smalloutput##{Post.all.ids.max}",
-		# 		 text: /#{pulverize("google",'\W')}/) }
-		# 		it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
-		# 		#testing that we don't get the link inside link bug
-		# 		it { should have_link('g​o​o​g​l​e​') } #note that this includes ZWSPs
-		# 		it { should_not have_xpath("//a[@href='http://www.google.com']") }
-		# 		describe "clicking the link to the show template should get you there" do
-		# 			before {  click_link 'g​o​o​g​l​e​' }
-		# 			specify {current_path.should == post_path(Post.all.ids.max) }			
-		# 		end											
-		# 	end
-		# end
+		describe "linking to show" do
+			describe "simple linking" do
+				let!(:text) { "test simple link" }
+				before do
+				  visit root_path
+				  fill_in 'inputbox', with: text
+				  click_button preview_button_title
+				  click_button publish_button_title
+				  visit posts_path			  
+				end
+				it { should have_selector("div##{Post.all.ids.max}",
+				 text: /#{pulverize(text,'\W')}/) }
+				it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
+			end
+			# describe "clicking the link to the show template should get you there" do
+			# 	before { click_link "tile_#{Post.all.ids.max}" }
+			# 	specify {current_path.should == post_path(Post.all.ids.max) }			
+			# end			
+			describe "link with url" do
+				let!(:link) { "`1 google|http://www.google.com`" }
+				before do
+				  visit root_path
+				  fill_in 'inputbox', with: link
+				  click_button preview_button_title
+				  click_button publish_button_title
+				  visit posts_path
+				end
+				it { should have_selector("div##{Post.all.ids.max}",
+				 text: /#{pulverize("google",'\W')}/) }
+				it { should have_link('', href: post_path("#{Post.all.ids.max}")) }	
+				#testing that we don't get the link inside link bug
+				it { should have_link('g​o​o​g​l​e​') } #note that this includes ZWSPs
+				it { should_not have_xpath("//a[@href='http://www.google.com']") }
+				describe "clicking the link to the show template should get you there" do
+					before {  click_link 'g​o​o​g​l​e​' }
+					specify {current_path.should == post_path(Post.all.ids.max) }			
+				end											
+			end
+		end
 	end
 end
