@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+
+  before_filter :no_edit, only: [:edit,:update]
+
   def new
   	@post=Post.new 
   end
@@ -60,6 +63,11 @@ class PostsController < ApplicationController
         flash[:success] = "Thanks for sharing"                
         redirect_to root_path      
       end
+    end
+
+    def no_edit
+      post = Post.find_by_id(params[:id])
+      redirect_to root_path if post.nil? || post.published? 
     end
 
 end

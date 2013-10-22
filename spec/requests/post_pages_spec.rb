@@ -198,34 +198,33 @@ describe "PostPages" do
 					expect {click_button publish_button_title}.to change(Post.previewed, :count).by(-1)				
 				end					
 			end
-			describe "publishing an edit" do
-				before do
-				  click_button publish_button_title
-				  visit edit_post_path(Post.first)
-				  fill_in 'inputbox', with: "moohahah"
-				  # save_and_open_page
-				end
-				it "should not change the pubilcation count" do
-					expect {click_button publish_button_title}.not_to change(Post.published, :count)
-				end
-				it "should not change the preview count" do
-					expect {click_button publish_button_title}.not_to change(Post.published, :count)
-				end				
-			end
-			describe "no publish back to preview, another method" do
-				let!(:pub) { FactoryGirl.create(:post, published: true) }
-				before do
-				  visit edit_post_path(pub)
-				  fill_in 'inputbox', with: "moohaha"
-				  click_button publish_button_title
-				end
-				it "should not toggle the published post back to preview" do
-					expect {pub.should be_published}
-				end
-			end			
+			# describe "publishing an edit" do
+			# 	before do
+			# 	  click_button publish_button_title
+			# 	  visit edit_post_path(Post.first)
+			# 	  fill_in 'inputbox', with: "moohahah"
+			# 	  # save_and_open_page
+			# 	end
+			# 	it "should not change the pubilcation count" do
+			# 		expect {click_button publish_button_title}.not_to change(Post.published, :count)
+			# 	end
+			# 	it "should not change the preview count" do
+			# 		expect {click_button publish_button_title}.not_to change(Post.published, :count)
+			# 	end				
+			# end
+			# describe "no publish back to preview, another method" do
+			# 	let!(:pub) { FactoryGirl.create(:post, published: true) }
+			# 	before do
+			# 	  visit edit_post_path(pub)
+			# 	  fill_in 'inputbox', with: "moohaha"
+			# 	  click_button publish_button_title
+			# 	end
+			# 	it "should not toggle the published post back to preview" do
+			# 		expect {pub.should be_published}
+			# 	end
+			# end			
 		end 
 	end
-
 
 	describe "show" do
 		describe "random post" do
@@ -268,57 +267,49 @@ describe "PostPages" do
 	end
 
 	describe "index" do	
-  shared_examples_for "index page" do 
-		it { should_not have_selector('textarea#inputbox') }		
-		it { should_not have_selector('input#preview_button') }		
-		it { should_not have_selector('input#publish_button') }			
-  end		
-	# let!(:preview1) { FactoryGirl.create(:post, content: "a"+"\r\n"*20+"...") }	
-	# let!(:preview2) { FactoryGirl.create(:post, content: "line 1\r\nline 2\r\nline 3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10\r\n11\r\n1...") }
-	# let!(:preview1) { FactoryGirl.create(:post, content: "foobaz") }	
-	# let!(:preview2) { FactoryGirl.create(:post) }
-	describe "no pagination" do
-		before { Post.delete_all }
-		describe "preview" do
-			let!(:preview1) { FactoryGirl.create(:post, content: "foobaz") }
-			before {visit posts_path}
+	  shared_examples_for "index page" do 
+			it { should_not have_selector('textarea#inputbox') }		
+			it { should_not have_selector('input#preview_button') }		
+			it { should_not have_selector('input#publish_button') }			
+	  end		
+		describe "no pagination" do
+			before { Post.delete_all }
+			describe "preview" do
+				let!(:preview1) { FactoryGirl.create(:post, content: "foobaz") }
+				before {visit posts_path}
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'index page'				
+				it { should_not have_selector('div.pagination') }
+				it { should_not have_selector('div.smalloutput', text: /#{pulverize(preview1.content,'\W')}/) }	
+				it { should have_content("no posts at this time") }				
+			end
+			describe "publish" do
+				let!(:published1) { FactoryGirl.create(:post, content: "buzz quuaax", published: true)  }
+				before {visit posts_path}
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'index page'					
+				it { should_not have_selector('div.pagination') }
+				it { should have_selector("div##{published1.id}", text: /#{pulverize(published1.content,'\W')}/) }					
+				it { should_not have_content("no posts at this time") }				
+			end		
+		end
+		describe "with pagination" do
+			let!(:preview2) { FactoryGirl.create(:post, content: "moonbuzz") }
+			let!(:published2) { FactoryGirl.create(:post,content: "akuna mathata", published: true)  }
+			before do
+				visit posts_path
+			end
 			it_should_behave_like 'all pages'
-			it_should_behave_like 'index page'				
-			it { should_not have_selector('div.pagination') }
-			it { should_not have_selector('div.smalloutput', text: /#{pulverize(preview1.content,'\W')}/) }	
-			it { should have_content("no posts at this time") }				
+			it_should_behave_like 'index page'		
+			it { should_not have_content("no posts at this time") }			
+			it { should have_selector('div.pagination') }
+			describe "preview" do
+				it { should_not have_selector('div.smalloutput', text: /#{pulverize(preview2.content,'\W')}/) }	
+			end
+			describe "publish" do
+				it { should have_selector("div##{published2.id}", text: /#{pulverize(published2.content,'\W')}/) }					
+			end		
 		end
-		describe "publish" do
-			let!(:published1) { FactoryGirl.create(:post, content: "buzz quuaax", published: true)  }
-			before {visit posts_path}
-			it_should_behave_like 'all pages'
-			it_should_behave_like 'index page'					
-			it { should_not have_selector('div.pagination') }
-			it { should have_selector("div##{published1.id}", text: /#{pulverize(published1.content,'\W')}/) }					
-			it { should_not have_content("no posts at this time") }				
-		end		
-	end
-	describe "with pagination" do
-		let!(:preview2) { FactoryGirl.create(:post, content: "moonbuzz") }
-		let!(:published2) { FactoryGirl.create(:post,content: "akuna mathata", published: true)  }
-		before do
-			# tile_size.times do
-			# 	FactoryGirl.create(:post, published: true)
-			# end
-			visit posts_path
-		end
-		it_should_behave_like 'all pages'
-		it_should_behave_like 'index page'		
-		it { should_not have_content("no posts at this time") }			
-		it { should have_selector('div.pagination') }
-		describe "preview" do
-			it { should_not have_selector('div.smalloutput', text: /#{pulverize(preview2.content,'\W')}/) }	
-		end
-		describe "publish" do
-			it { should have_selector("div##{published2.id}", text: /#{pulverize(published2.content,'\W')}/) }					
-		end		
-	end
-
 		describe "linking to show" do
 			describe "simple linking" do
 				let!(:text) { "test simple link" }
@@ -358,5 +349,14 @@ describe "PostPages" do
 				end											
 			end
 		end
+	end
+
+	describe "no edit of published posts" do
+		let!(:p) { FactoryGirl.create(:post, published: true) }
+		before { visit edit_post_path(p) }
+		it "should redirect to home" do
+			current_path.should == root_path
+			current_path.should_not == edit_post_path(p)
+		end		
 	end
 end
