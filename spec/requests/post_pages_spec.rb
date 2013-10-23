@@ -285,10 +285,10 @@ describe "PostPages" do
 			before do
 				visit posts_path
 			end
-			# it_should_behave_like 'all pages'
-			# it_should_behave_like 'index page'		
-			# it { should_not have_content("no posts at this time") }			
-			# it { should have_selector('div.pagination') }
+			it_should_behave_like 'all pages'
+			it_should_behave_like 'index page'		
+			it { should_not have_content("no posts at this time") }			
+			it { should have_selector('div.pagination') }
 
 
 			describe "preview" do
