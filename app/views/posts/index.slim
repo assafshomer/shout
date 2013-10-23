@@ -1,4 +1,18 @@
 div.row
 	aside.span12
   	section     
-	   	= render 'tile', pagination_pad: 3       
+			- if @all_posts.any?
+			  table
+			    tr
+			      td width="100"
+			      td
+			        = render 'shared/paginate_with_counter', pad: 3
+			      td width="100"
+			      td align="right"
+			        = render 'shared/search_fields'
+			    tr
+			      td colspan="4" 
+			        = render 'stream'
+
+			- else
+			  | no posts at this time  

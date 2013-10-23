@@ -47,7 +47,7 @@ module ViewsHelper
 	end
 
 	def tile_size
-		50
+		189 #21 rows X 9 cols
 	end
 
 end
