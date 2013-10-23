@@ -21,7 +21,7 @@ include PostsHelper
   #   string.gsub(BACKTICK_GROUPED,PRE+'\2em;>\4</div>')
   # end
 
-  def mark(string, type="show")
+  def mark(string, type="with_links")
     full_process=extract_backticks(string).map {|s| process(s, type)}
     only_pulverize=extract_compliment(string).map {|s| pulverize(s)}
     result=nil
@@ -33,8 +33,8 @@ include PostsHelper
     '<pre>'+result.stitch.join+'</pre>'
   end
 
-  def process(string, type="show")
-    if type=="show"
+  def process(string, type="with_links")
+    if type=="with_links"
       string.sub(BACKTICK_GROUPED) do |match|
         PRE+$2+"em;>"+link_and_pulverize($4)+'</div>'
       end      

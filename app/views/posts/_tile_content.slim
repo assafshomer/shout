@@ -1,0 +1,6 @@
+.superminioutput id=(tile.id) 
+  / span.timestamp
+  /   = time_ago_in_words(tile.created_at) 
+  /   |  ago
+  / br/
+  = raw(mark(tile.content,"no_links"))
