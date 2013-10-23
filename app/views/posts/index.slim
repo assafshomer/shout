@@ -16,4 +16,5 @@ div.row
 							  = render partial: 'tile', collection: @posts
 
 			- else
-			  | no posts at this time  
+			  | no posts at this time
+/ div.hidden#tilesize tilesize="#{params[:search].nil? ? 1 : 2}"

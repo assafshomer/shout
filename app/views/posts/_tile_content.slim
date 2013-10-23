@@ -1,6 +1,2 @@
-.superminioutput id=(tile.id) 
-  / span.timestamp
-  /   = time_ago_in_words(tile.created_at) 
-  /   |  ago
-  / br/
+div class=(@zoom) id=(tile.id) 
   = raw(mark(tile.content,"no_links"))

@@ -46,8 +46,12 @@ module ViewsHelper
 		'Watch'
 	end
 
-	def tile_size
-		189 #21 rows X 9 cols
+	def tile_count
+		if Rails.env == 'test'
+			10
+		else
+			189 #21 rows X 9 cols	
+		end		
 	end
 
 end

@@ -34,10 +34,12 @@ class PostsController < ApplicationController
   end
 
   def index 
+    @zoom="superminioutput"
     @all_posts=Post.published.to_a
     @search_results=search_stream(params[:search], Post.published)
     @posts=@search_results.paginate(page: params[:page],
-     per_page: tile_size).order('created_at DESC')
+     per_page: tile_count).order('created_at DESC')
+    set_zoom unless params[:search].nil?  
     redirect_to posts_path if params[:commit]=='Clear'
   end
 
@@ -68,6 +70,11 @@ class PostsController < ApplicationController
     def no_edit
       post = Post.find_by_id(params[:id])
       redirect_to root_path if post.nil? || post.published? 
+    end
+
+    def set_zoom
+      @zoom = "smalloutput" 
+      tile_count = 15
     end
 
 end

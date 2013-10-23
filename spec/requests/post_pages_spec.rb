@@ -271,7 +271,14 @@ describe "PostPages" do
 			it { should_not have_selector('textarea#inputbox') }		
 			it { should_not have_selector('input#preview_button') }		
 			it { should_not have_selector('input#publish_button') }			
-	  end		
+	  end	
+		before do
+			if tile_count>Post.count
+				(tile_count-Post.count+5).times do 
+					FactoryGirl.create(:post,content:"xx", published: true)
+				end
+			end	  	  
+	  end	  	
 		describe "no pagination" do
 			before { Post.delete_all }
 			describe "preview" do
@@ -303,6 +310,9 @@ describe "PostPages" do
 			it_should_behave_like 'index page'		
 			it { should_not have_content("no posts at this time") }			
 			it { should have_selector('div.pagination') }
+			# describe "debug" do
+			# 	specify {tile_count.should == 0}
+			# end
 			describe "preview" do
 				it { should_not have_selector('div.smalloutput', text: /#{pulverize(preview2.content,'\W')}/) }	
 			end

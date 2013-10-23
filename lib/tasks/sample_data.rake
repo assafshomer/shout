@@ -6,7 +6,7 @@ namespace :db do
 
 	def make_posts		
 		number_of_posts=500			
-		number_of_posts=50 if Rails.env="test"
+		number_of_posts=(ViewsHelper::tile_count * 3) if Rails.env="test"
 		number_of_posts.times do 			
 			hours_created_ago=rand(1..100)
 			blurb=''

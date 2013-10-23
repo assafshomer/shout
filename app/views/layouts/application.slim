@@ -5,7 +5,7 @@ html
       = app_title
     = render 'layouts/includes'
     = render 'layouts/shim'
-  body
+  body class=(params[:controller])
     = render 'layouts/header'
     .container
       = yield
