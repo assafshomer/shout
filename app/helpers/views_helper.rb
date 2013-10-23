@@ -54,4 +54,12 @@ module ViewsHelper
 		end		
 	end
 
+	def search_tile_count
+		if Rails.env == 'test'
+			5
+		else
+			15 
+		end		
+	end
+
 end

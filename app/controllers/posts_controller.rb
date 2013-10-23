@@ -35,11 +35,12 @@ class PostsController < ApplicationController
 
   def index 
     @zoom="superminioutput"
+    @count=tile_count
     @all_posts=Post.published.to_a
     @search_results=search_stream(params[:search], Post.published)
-    @posts=@search_results.paginate(page: params[:page],
-     per_page: tile_count).order('created_at DESC')
     set_zoom unless params[:search].nil?  
+    @posts=@search_results.paginate(page: params[:page],
+     per_page: @count).order('created_at DESC')    
     redirect_to posts_path if params[:commit]=='Clear'
   end
 
@@ -74,7 +75,7 @@ class PostsController < ApplicationController
 
     def set_zoom
       @zoom = "smalloutput" 
-      tile_count = 15
+      @count = search_tile_count
     end
 
 end

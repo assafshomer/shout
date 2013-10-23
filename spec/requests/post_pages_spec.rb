@@ -278,44 +278,33 @@ describe "PostPages" do
 					FactoryGirl.create(:post,content:"xx", published: true)
 				end
 			end	  	  
-	  end	  	
-		describe "no pagination" do
-			before { Post.delete_all }
-			describe "preview" do
-				let!(:preview1) { FactoryGirl.create(:post, content: "foobaz") }
-				before {visit posts_path}
-				it_should_behave_like 'all pages'
-				it_should_behave_like 'index page'				
-				it { should_not have_selector('div.pagination') }
-				it { should_not have_selector('div.smalloutput', text: /#{pulverize(preview1.content,'\W')}/) }	
-				it { should have_content("no posts at this time") }				
-			end
-			describe "publish" do
-				let!(:published1) { FactoryGirl.create(:post, content: "buzz quuaax", published: true)  }
-				before {visit posts_path}
-				it_should_behave_like 'all pages'
-				it_should_behave_like 'index page'					
-				it { should_not have_selector('div.pagination') }
-				it { should have_selector("div##{published1.id}", text: /#{pulverize(published1.content,'\W')}/) }					
-				it { should_not have_content("no posts at this time") }				
-			end		
-		end
+	  end	
 		describe "with pagination" do
 			let!(:preview2) { FactoryGirl.create(:post, content: "moonbuzz") }
 			let!(:published2) { FactoryGirl.create(:post,content: "akuna mathata", published: true)  }
 			before do
 				visit posts_path
 			end
-			it_should_behave_like 'all pages'
-			it_should_behave_like 'index page'		
-			it { should_not have_content("no posts at this time") }			
-			it { should have_selector('div.pagination') }
-			# describe "debug" do
-			# 	specify {tile_count.should == 0}
-			# end
+			# it_should_behave_like 'all pages'
+			# it_should_behave_like 'index page'		
+			# it { should_not have_content("no posts at this time") }			
+			# it { should have_selector('div.pagination') }
+
+
 			describe "preview" do
-				it { should_not have_selector('div.smalloutput', text: /#{pulverize(preview2.content,'\W')}/) }	
+				it { should_not have_selector("div##{preview2.id}", text: /#{pulverize(preview2.content,'\W')}/) }	
 			end
+			describe "tile count should be right" do
+				before do
+					(tile_count*2).times do
+						FactoryGirl.create(:post, published: true, content: "foogazi")
+					end 
+					fill_in 'search', with: 'foogazi'
+					click_button 'Search'
+					# save_and_open_page
+				end	
+				it { should_not have_selector("div##{Post.ids.sort[Post.count-1-search_tile_count]}") }					
+			end			
 			describe "publish" do
 				it { should have_selector("div##{published2.id}", text: /#{pulverize(published2.content,'\W')}/) }					
 			end		
@@ -359,6 +348,27 @@ describe "PostPages" do
 				end											
 			end
 		end
+		describe "no pagination" do
+			before { Post.delete_all }
+			describe "preview" do
+				let!(:preview1) { FactoryGirl.create(:post, content: "foobaz") }
+				before {visit posts_path}
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'index page'				
+				it { should_not have_selector('div.pagination') }
+				it { should_not have_selector("div##{preview1.id}", text: /#{pulverize(preview1.content,'\W')}/) }	
+				it { should have_content("no posts at this time") }				
+			end
+			describe "publish" do
+				let!(:published1) { FactoryGirl.create(:post, content: "buzz quuaax", published: true)  }
+				before {visit posts_path}
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'index page'					
+				it { should_not have_selector('div.pagination') }
+				it { should have_selector("div##{published1.id}", text: /#{pulverize(published1.content,'\W')}/) }					
+				it { should_not have_content("no posts at this time") }				
+			end		
+		end		
 	end
 
 	describe "no edit of published posts" do
