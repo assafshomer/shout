@@ -12,7 +12,8 @@ div.row
 			        = render 'shared/search_fields'
 			    tr
 			      td colspan="4" 
-			        = render 'stream'
+							ul
+							  = render partial: 'stream_item', collection: @posts
 
 			- else
 			  | no posts at this time  
