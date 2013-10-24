@@ -39,7 +39,7 @@ module ViewsHelper
 	end
 
 	def home_title
-		'Contribute'
+		'Post'
 	end
 	
 	def tile_title
