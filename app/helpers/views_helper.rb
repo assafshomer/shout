@@ -6,7 +6,7 @@ module ViewsHelper
 
 	def publish_button_title
 		# app_title
-		"Publish"
+		"Post"
 	end
 
 	def button_space

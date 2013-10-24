@@ -54,11 +54,15 @@
 @mixin output {
   @include boxoutput;
   @include box; 
-    &:hover {
-     @include boxhover;
-    }   
   pre {
     @include boxoutput;
     @include boxpre;
   }  
+}
+
+@mixin tile {
+  @include output; 
+    &:hover {
+     @include boxhover;
+    }   
 }

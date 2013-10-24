@@ -308,7 +308,7 @@ textarea#inputbox{
 }
 
 .smalloutput{
-  @include output;
+  @include tile;
   padding:4px;
   font-size:8;
   pre{
@@ -317,7 +317,7 @@ textarea#inputbox{
 }
 
 .minioutput{
-  @include output;
+  @include tile;
   padding:2px;
   font-size:4;
   pre{
@@ -326,7 +326,7 @@ textarea#inputbox{
 }
 
 .superminioutput{
-  @include output;
+  @include tile;
   padding:1px;
   font-size:2;
   pre{
