@@ -24,11 +24,11 @@ describe "PostPages" do
 		it { should have_selector('textarea#inputbox', text: "") }
 		it { should_not have_selector('div.bigoutput') }		
 		it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
-		it { should have_button "Preview"}
+		it { should have_button preview_button_title}
 		it { should have_selector('input#preview_button') }
 		it { should have_xpath("//input[@value=\'#{preview_button_title}\']") }	
 		it { should_not have_xpath("//input[@value=\'#{preview_button_title}\'][@disabled='disabled']") }		
-		it { should_not have_button "Publish"}
+		it { should_not have_button publish_button_title}
 		it { should_not have_selector('input#publish_button') }
 		it { should_not have_xpath("//input[@value=\'#{publish_button_title}\']") }
 		# it { should have_xpath("//input[@value=\'#{publish_button_title}\'][@disabled='disabled']") }		
@@ -38,9 +38,9 @@ describe "PostPages" do
 			describe "clicking the preview button with an empty post should raise an error" do
 				before { click_button preview_button_title }
 				it { should have_selector('div.alert.alert-error', text: 'too short') }
-				it { should have_button "Preview"}
+				it { should have_button preview_button_title}
 				it { should_not have_selector('div.bigoutput') }		
-				it { should_not have_button "Publish" }
+				it { should_not have_button publish_button_title }
 			end
 			describe "clicking the preview button with a single character post should raise an error" do
 				before do
@@ -48,9 +48,9 @@ describe "PostPages" do
 				  click_button preview_button_title
 				end
 				it { should have_selector('div.alert.alert-error', text: 'too short') }
-				it { should have_button "Preview"}
+				it { should have_button preview_button_title}
 				it { should_not have_selector('div.bigoutput') }		
-				it { should_not have_button "Publish" }				
+				it { should_not have_button publish_button_title }				
 			end
 			describe "preveiwing OK should not raise errors, flash, preview the content and redirect to the edit page" do
 				before do
@@ -62,8 +62,8 @@ describe "PostPages" do
 				it { should have_selector('textarea#inputbox', text: "OK") }
 				it { should have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }
 				specify {current_path.should == edit_post_path(Post.ids.max)}
-				it { should have_button "Preview"}
-				it { should have_button "Publish" }	
+				it { should have_button preview_button_title}
+				it { should have_button publish_button_title }	
 			end				
 		end
 
@@ -79,8 +79,8 @@ describe "PostPages" do
 				it { should_not have_selector('textarea#inputbox', text: "OK") }
 				it { should_not have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }	
 				it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }	
-				it { should have_button "Preview"}
-				it { should_not have_button "Publish" }							
+				it { should have_button preview_button_title}
+				it { should_not have_button publish_button_title }							
 				specify {current_path.should == root_path}
 			end				
 		end
@@ -289,8 +289,6 @@ describe "PostPages" do
 			it_should_behave_like 'index page'		
 			it { should_not have_content("no posts at this time") }			
 			it { should have_selector('div.pagination') }
-
-
 			describe "preview" do
 				it { should_not have_selector("div##{preview2.id}", text: /#{pulverize(preview2.content,'\W')}/) }	
 			end
