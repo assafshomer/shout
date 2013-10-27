@@ -17,6 +17,10 @@ module ViewsHelper
 		'bilbox'
 	end
 
+	def full_title(string)
+		app_title + " - " + string
+	end
+
 	def app_mantra
 		'...think inside the box...'
 	end
@@ -61,5 +65,7 @@ module ViewsHelper
 			15 
 		end		
 	end
+
+
 
 end

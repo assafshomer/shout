@@ -2,10 +2,10 @@ class PostsController < ApplicationController
 
   before_filter :no_edit, only: [:edit,:update]
 
-  def new
-    @title="Home"
-  	@post=Post.new 
-  end
+  # def new
+  #   @title="Home"
+  # 	@post=Post.new 
+  # end
 
   def create
     # binding.pry
@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     if @post.save
       fork(@post)
     else
-      render 'new'      
+      render 'static/home'      
     end
   end 
 

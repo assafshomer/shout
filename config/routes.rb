@@ -1,6 +1,15 @@
 Shout::Application.routes.draw do
- resources :posts
+  get "static/home"
+  get "static/help"
+  get "static/about"
+  get "static/contact"
+
+ resources :posts, except: [:new]
  
- root to: "posts#new"
+ root to: "static#home"
+
+  match "/help",    to: 'static#help',          via: :get
+  match "/about",   to: 'static#about',         via: :get
+  match "/contact", to: 'static#contact',       via: :get
  
 end
