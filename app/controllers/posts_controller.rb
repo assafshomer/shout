@@ -3,11 +3,13 @@ class PostsController < ApplicationController
   before_filter :no_edit, only: [:edit,:update]
 
   def new
+    @title="Home"
   	@post=Post.new 
   end
 
   def create
     # binding.pry
+    @title="Home"
   	@post=Post.new(post_params)
     if @post.save
       fork(@post)
@@ -17,10 +19,12 @@ class PostsController < ApplicationController
   end 
 
   def edit
+    @title="Preview"
     @post=Post.find(params[:id])
   end
 
   def update
+    @title="Preview"
     @post=Post.find(params[:id])
     if @post.update_attributes(post_params)
       fork(@post)
@@ -30,10 +34,12 @@ class PostsController < ApplicationController
   end 
 
   def show
+    @title="Show"
     @post=Post.find(params[:id]) 
   end
 
   def index 
+    @title="Watch"
     @zoom="superminioutput"
     @count=tile_count
     @all_posts=Post.published.to_a

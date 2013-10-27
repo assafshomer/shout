@@ -2,7 +2,7 @@ doctype
 html
   head
     title
-      = app_title
+      = app_title + " - " + @title
     = render 'layouts/includes'
     = render 'layouts/shim'
   body class=(params[:controller])

@@ -8,16 +8,15 @@ After"
 describe "PostPages" do
 	subject { page }
   shared_examples_for "all pages" do 
-		it { should have_title app_title }
+		it { should have_title app_title+" - " + page_title }
 		it { should have_content('footer') }	
 		it { should have_link home_title }
 		it { should have_link tile_title }			
   end
 
 	describe "Home" do
-		
+		let!(:page_title) { "Home" }		
 		before do
-			# Post.delete_all # I should fix the suite to work also when the test db is empty
 			visit root_path
 		end			
 		it_should_behave_like 'all pages'
@@ -104,6 +103,7 @@ describe "PostPages" do
 	end
 
 	describe "edit" do
+		let!(:page_title) { "Preview" }		
 		before do
 			visit root_path
 			fill_in 'inputbox', with: "blah blah"
@@ -227,6 +227,8 @@ describe "PostPages" do
 	end
 
 	describe "show" do
+		let!(:page_title) { "Show" }		
+		
 		describe "random post" do
 			let!(:p1) {FactoryGirl.create(:post)}
 			before(:each) do		  
@@ -267,6 +269,7 @@ describe "PostPages" do
 	end
 
 	describe "index" do	
+		let!(:page_title) { "Watch" }		
 	  shared_examples_for "index page" do 
 			it { should_not have_selector('textarea#inputbox') }		
 			it { should_not have_selector('input#preview_button') }		
