@@ -26,7 +26,7 @@ module ViewsHelper
 	end
 
 	def post_place_holder
-		"think inside the box"
+		"try it, it's fun"
 	end
 
 	def feed_title

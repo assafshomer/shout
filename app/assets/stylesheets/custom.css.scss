@@ -371,15 +371,15 @@ div.cheatsheet {
     display:inline;
   }
   .mark{
-    color:red;
-  }
-  .link{
-    color:red;
+    color:green;
+    font-weight:bold;
+    font-size:14;
   }
   .gray{
     color:gray;
   }
   .arrow{
     font-size:3em;
+    color:gray;
   }  
 }
