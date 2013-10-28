@@ -41,6 +41,13 @@ textarea {
 .center {  
   text-align: center;
 }
+
+div.center{
+  margin-left:auto;
+  margin-right:auto;
+  width:70%;
+}
+
 .table_header{
   color:yellow;
   font-weight:none;  
@@ -352,4 +359,27 @@ textarea#inputbox{
 }
 .hidden {
   display: none;
+}
+.cheatsheet{
+  background-color:$cream;
+}
+div.cheatsheet {
+  white-space: nowrap;
+  @include box;
+  @include rounded-corners;
+  div {
+    display:inline;
+  }
+  .mark{
+    color:red;
+  }
+  .link{
+    color:red;
+  }
+  .gray{
+    color:gray;
+  }
+  .arrow{
+    font-size:3em;
+  }  
 }

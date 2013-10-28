@@ -1,0 +1,73 @@
+div.cheatsheet
+	table cellpadding="5"
+		tr
+			th colspan="3" style="font-size:2em;color:gray;font-weight:normal;"
+				| The Rules
+		tr title="write anything, it just shows normally"
+			td 
+				div.gray
+					| a
+			td.arrow
+				| →					
+			td
+				| a
+		tr title="To have your content displayed bigger, wrap it in backtics followed by a number, it will show that many times bigger"
+			td
+				div.mark
+				  | `2
+				div.gray
+					|  a
+				div.mark
+				  | `			
+			td.arrow
+				| →						  	
+			td
+				div style="font-size:2em;"
+					|  a		
+		tr title="To have your content displayed bigger, wrap it in backtics followed by a number, it will show that many times bigger"
+			td
+				div.mark
+				  | `3
+				div.gray
+					|  a
+				div.mark
+				  | `		
+			td.arrow
+				| →						  		
+			td
+				div style="font-size:3em;"
+					|  a								
+		tr title="You can go crazy big, and use any symbol"
+			td
+				div.mark
+				  | `8
+				div.gray
+					|  ♥
+				div.mark
+				  | `		
+			td.arrow
+				| →						  
+			td
+				div style="font-size:8em;"
+					| ♥
+		tr title="Wrap in backticks and append a valid internet address after a pipe symbol to link to a page on the internet"
+			td
+				div.mark
+				  | `2
+				div.gray
+					|  goo 
+				div.mark
+				  | |
+				div.link
+				  |  http://..com
+				div.mark
+				  | `		
+			td.arrow
+				| →						  
+			td
+				div style="font-size:2em;"
+					a href="http://bit.ly/2V6CFi"
+						| goog
+		tr
+			td colspan="3" style="color:#7A8B8B;"
+				| ... and you are limited to the size of the box...						

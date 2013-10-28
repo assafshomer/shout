@@ -1,1 +1,10 @@
-= render 'posts/new_post'
+div.row
+	div.span5
+		ul
+			= render partial: 'shared/cheatsheet'
+	aside.span12
+		div.center
+			= render 'posts/new_post'
+	div.span4
+		ul
+			= render partial: 'posts/tile', collection: @posts	  	

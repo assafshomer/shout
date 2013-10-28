@@ -2,6 +2,8 @@ class StaticController < ApplicationController
   def home
   	@title="Home"
     @post=Post.new 
+    @posts=Post.last(24).sort.reverse
+    @zoom="superminioutput"
   end
 
   def help
