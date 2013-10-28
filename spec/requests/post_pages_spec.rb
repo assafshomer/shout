@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'shared_examples'
 include TestHelper
 
 	two_lines="of.
