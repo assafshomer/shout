@@ -8,6 +8,11 @@ describe "Static" do
   	let!(:page_title) { "Home" }
   	before { visit root_path }
   	it_should_behave_like 'all pages'  	
+    it { should have_selector('div.cheatsheet') }
+    it { should have_content "The Rules" }
+    it { should have_selector('li.tile') }
+    it { should have_selector("a#tile_#{Post.published.first.id}", 
+      href="#{post_path(Post.published.first)}")}
   end
 
   describe "Help page" do
