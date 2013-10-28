@@ -2,10 +2,10 @@ class PostsController < ApplicationController
 
   before_filter :no_edit, only: [:edit,:update]
 
-  # def new
-  #   @title="Home"
-  # 	@post=Post.new 
-  # end
+  def new
+    @title="New Post"
+  	@post=Post.new 
+  end
 
   def create
     # binding.pry

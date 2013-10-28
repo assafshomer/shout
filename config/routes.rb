@@ -4,7 +4,7 @@ Shout::Application.routes.draw do
   get "static/about"
   get "static/contact"
 
- resources :posts, except: [:new]
+ resources :posts
  
  root to: "static#home"
 

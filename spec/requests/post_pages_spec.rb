@@ -14,10 +14,10 @@ describe "PostPages" do
 		it { should have_link tile_title }			
   end
 
-	describe "Home" do
-		let!(:page_title) { "Home" }		
+	describe "New" do
+		let!(:page_title) { "New Post" }		
 		before do
-			visit root_path
+			visit new_post_path
 		end			
 		it_should_behave_like 'all pages'
 		it { should have_selector('textarea#inputbox', text: "") }
@@ -84,7 +84,7 @@ describe "PostPages" do
 			end				
 		end
 
-		describe "persistance on home page" do
+		describe "persistance" do
 			before { fill_in 'inputbox', with: 'foobar' }
 			it "should save the post to the db" do
 				expect {click_button preview_button_title}.to change(Post.previewed, :count).by(1)				
