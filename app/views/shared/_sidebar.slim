@@ -1,0 +1,6 @@
+div#cheatsheet
+	= render partial: 'shared/cheatsheet'
+| Recent posts
+div#stream
+	ul
+		= render partial: 'posts/tile', collection: @posts	 

@@ -1,8 +1,6 @@
 div.row
-	div#cheatsheet.span4
-		= render partial: 'shared/cheatsheet'
-	div.center.span8
-		= render 'posts/edit_post'
-	div#stream.span4
-		ul
-			= render partial: 'posts/tile', collection: @posts	  	
+	aside.span5#help
+		= render 'shared/sidebar' 	
+	aside.span2
+		div.center
+			= render 'posts/edit_post'			
