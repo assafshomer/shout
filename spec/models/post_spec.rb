@@ -11,6 +11,14 @@
 require 'spec_helper'
 
 describe Post do
+	describe "class methods" do
+		it {Post.should respond_to(:publication_tail)	 }
+		describe "publication_tail" do
+			it { Post.publication_tail.should include(Post.published.first) }
+			it { Post.publication_tail.should_not include(Post.previewed.first) }
+		end
+	end
+
 	before(:each) do
 	  @attr={}
 	  @post=Post.new(@attr)
@@ -19,6 +27,7 @@ describe Post do
  	
  	it { should respond_to(:content) }
  	it { should respond_to(:published) }
+ 	
  
 	describe "validations" do
 		describe "Empty posts should be invalid" do

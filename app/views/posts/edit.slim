@@ -1,16 +1,8 @@
-= form_for(@post) do |f|
-	table cellpadding="15px" align="center"
-		tr
-			td valign="top"
-				= f.text_area :content, placeholder: post_place_holder, id: :inputbox
-			td valign="top"
-				= render 'shared/preview', post: @post
-		tr
-			td align="center" 
-				= f.submit preview_button_title,  id: "preview_button", class: "btn btn-large btn-success btn-long"	
-			td align="center"
-				- if @post.valid?				
-					= f.submit publish_button_title, id: "publish_button", class: "btn btn-large btn-danger btn-long"
-		tr
-			td 
-				= render 'shared/errors', object: f.object
+div.row
+	div#cheatsheet.span4
+		= render partial: 'shared/cheatsheet'
+	div.center.span8
+		= render 'posts/edit_post'
+	div#stream.span4
+		ul
+			= render partial: 'posts/tile', collection: @posts	  	

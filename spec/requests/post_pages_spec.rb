@@ -111,6 +111,11 @@ describe "PostPages" do
 		it { should have_selector('div.bigoutput', text: /#{pulverize('blah blah','\W')}/) }
 		it { should have_selector('input#preview_button') }
 		it { should have_selector('input#publish_button') }
+    it { should have_selector('div.cheatsheet') }
+    it { should have_content cheatsheet_text }
+    it { should have_selector('li.tile') }
+    it { should have_selector("a#tile_#{Post.published.first.id}", 
+      href="#{post_path(Post.published.first)}")}		
 		  
 		describe "preview_button" do
 			describe "clicking the preview button with an empty post should raise an error" do

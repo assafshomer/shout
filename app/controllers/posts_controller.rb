@@ -21,6 +21,8 @@ class PostsController < ApplicationController
   def edit
     @title="Preview"
     @post=Post.find(params[:id])
+    @posts=Post.publication_tail
+    @zoom="minioutput"
   end
 
   def update

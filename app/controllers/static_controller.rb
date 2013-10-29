@@ -2,7 +2,7 @@ class StaticController < ApplicationController
   def home
   	@title="Home"
     @post=Post.new 
-    @posts=Post.last(4).sort.reverse
+    @posts=Post.publication_tail
     @zoom="minioutput"
   end
 

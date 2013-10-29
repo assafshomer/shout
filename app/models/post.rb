@@ -17,4 +17,7 @@ class Post < ActiveRecord::Base
   scope :previewed, -> {where(published: false)}
   before_save { |post| post.content = post.content[0..2545].split("​").join } # 67*38
 
+  def self.publication_tail(n=4)
+  	published.last(n).sort.reverse
+  end
 end
