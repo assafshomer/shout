@@ -10,7 +10,7 @@ describe "Static" do
   	before { visit root_path }
   	it_should_behave_like 'all pages'  	
     it { should have_selector('div.cheatsheet') }
-    it { should have_content "The Rules" }
+    it { should have_content cheatsheet_text }
     it { should have_selector('li.tile') }
     it { should have_selector("a#tile_#{Post.published.first.id}", 
       href="#{post_path(Post.published.first)}")}

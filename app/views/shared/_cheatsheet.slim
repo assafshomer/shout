@@ -1,11 +1,11 @@
 div.cheatsheet
-	table cellpadding="15"
-		tr
-			th colspan="3" style="font-size:2em;color:gray;font-weight:normal;"
-				| The Rules
+	table cellpadding="10" style="font-size:14;"
+		/ tr
+		/ 	th colspan="3" style="font-size:2em;color:gray;font-weight:normal;"
+		/ 		| The Rules
 		tr title="write anything, it just shows normally"
 			td 
-				div.gray
+				div.plain
 					| a
 			td.arrow
 				| →					
@@ -15,7 +15,7 @@ div.cheatsheet
 			td style="padding-left:10px;"
 				div.mark
 				  | `2
-				div.gray
+				div.plain
 					|  a
 				div.mark
 				  | `			
@@ -24,37 +24,24 @@ div.cheatsheet
 			td
 				div style="font-size:2em;"
 					|  a		
-		tr title="To have your content displayed bigger, wrap it in backtics followed by a number, it will show that many times bigger"
+		tr title="You can go crazy big, and use any symbol"
 			td
 				div.mark
-				  | `3
-				div.gray
-					|  a
+				  | `4
+				div.plain
+					|  a♥
 				div.mark
 				  | `		
 			td.arrow
 				| →						  		
 			td
-				div style="font-size:3em;"
-					|  a								
-		tr title="You can go crazy big, and use any symbol"
-			td
-				div.mark
-				  | `8
-				div.gray
-					|  ♥
-				div.mark
-				  | `		
-			td.arrow
-				| →						  
-			td
-				div style="font-size:8em;"
-					| ♥
+				div style="font-size:4em;"
+					|  a♥								
 		tr title="Wrap in backticks and append a valid internet address after a pipe symbol to link to a page on the internet"
-			td
+			td colspan="2"
 				div.mark
 				  | `2
-				div.gray
+				div.plain
 					|  goo 
 				div.mark
 				  | |
@@ -62,12 +49,12 @@ div.cheatsheet
 				  |  http://..com
 				div.mark
 				  | `		
-			td.arrow
-				| →						  
+				div.smallarrow
+					| →						  
 			td
 				div style="font-size:2em;"
 					a href="http://bit.ly/2V6CFi"
-						| goog
+						| goo
 		tr
-			td colspan="3" style="color:gray;"
-				| ... and you are limited to the size of the box...						
+			td colspan="3" style="color:#333;text-align: center;"
+				| #{cheatsheet_text}

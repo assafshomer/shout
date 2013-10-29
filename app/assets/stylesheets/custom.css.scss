@@ -363,6 +363,10 @@ textarea#inputbox{
 .cheatsheet{
   background-color:$cream;
 }
+.span4#cheatsheet, .span4#stream{
+  padding-top:15;
+  padding-left:25;
+}
 div.cheatsheet {
   white-space: nowrap;
   @include box;
@@ -371,15 +375,19 @@ div.cheatsheet {
     display:inline;
   }
   .mark{
-    color:green;
+    color:brown;
     font-weight:bold;
     font-size:14;
   }
-  .gray{
-    color:gray;
+  .plain{
+    color:black;
   }
   .arrow{
     font-size:3em;
     color:gray;
   }  
+  .smallarrow{
+    font-size:2em;
+    color:gray;
+  }    
 }

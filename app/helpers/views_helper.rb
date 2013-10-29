@@ -58,6 +58,10 @@ module ViewsHelper
 		end		
 	end
 
+	def cheatsheet_text
+		"...limited to within the box..."
+	end
+
 	def search_tile_count
 		if Rails.env == 'test'
 			5
