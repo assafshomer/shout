@@ -11,6 +11,8 @@ class PostsController < ApplicationController
     # binding.pry
     @title="Home"
   	@post=Post.new(post_params)
+    @posts=Post.publication_tail
+    @zoom="minioutput"    
     if @post.save
       fork(@post)
     else
@@ -28,6 +30,8 @@ class PostsController < ApplicationController
   def update
     @title="Preview"
     @post=Post.find(params[:id])
+    @posts=Post.publication_tail
+    @zoom="minioutput"    
     if @post.update_attributes(post_params)
       fork(@post)
     else
@@ -67,7 +71,7 @@ class PostsController < ApplicationController
     end
 
     def fork(post)
-      if params[:commit]=="Preview"
+      if params[:commit]==preview_button_title
         redirect_to edit_post_path(post)
       else
         post.toggle!(:published) unless post.published

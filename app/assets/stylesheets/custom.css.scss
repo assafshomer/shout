@@ -369,9 +369,44 @@ textarea#inputbox{
   margin-right:auto;
 }
 
+aside.span5#sidebar{
+  margin-top:3;
+}
+
+div#stream{
+  margin-left:5;
+}
+
+p.stream_title{
+  color:orange;
+  text-align:center;
+  font-size:15;
+  margin-top:10;
+}
+
+th.box_title{
+  color:orange;
+  text-align:center;
+  font-size:15;
+  font-weight:normal;
+  margin-top:10;
+}
+
+p.cheatsheet_title{
+  color:orange;
+  text-align:center;
+  font-size:15;
+  margin-top:350;
+}
+
+div#cheatsheet{
+  
+}
+
 div.cheatsheet {
-  margin-left:30;
-  margin-right:40;
+  margin-left:auto;
+  margin-right:auto;
+  width:75%;
   white-space: nowrap;
   @include box;
   @include rounded-corners;

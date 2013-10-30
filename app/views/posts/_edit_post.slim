@@ -1,5 +1,10 @@
 = form_for(@post) do |f|
-	table cellpadding="15px" align="center"
+	table cellpadding="9px" align="center"
+		tr
+			th.box_title valign="top"	
+				| make changes if you like
+			th.box_title valign="top"	
+				| this is what it's gonna look like				
 		tr
 			td valign="top"
 				= f.text_area :content, placeholder: post_place_holder, id: :inputbox

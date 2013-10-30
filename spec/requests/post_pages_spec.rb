@@ -10,12 +10,11 @@ describe "PostPages" do
 	subject { page }
 
 
-	describe "New" do
-		let!(:page_title) { "New Post" }		
+	describe "Home" do
+		let!(:page_title) { "Home" }		
 		before do
-			visit new_post_path
+			visit root_path
 		end			
-		it_should_behave_like 'all pages'
 		it { should have_selector('textarea#inputbox', text: "") }
 		it { should_not have_selector('div.bigoutput') }		
 		it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
@@ -30,35 +29,42 @@ describe "PostPages" do
 
 
 		describe "preview_button" do
-			describe "clicking the preview button with an empty post should raise an error" do
-				before { click_button preview_button_title }
+			shared_examples_for "an invalid post" do
 				it { should have_selector('div.alert.alert-error', text: 'too short') }
 				it { should have_button preview_button_title}
 				it { should_not have_selector('div.bigoutput') }		
 				it { should_not have_button publish_button_title }
+				it { should_not have_selector('div.alert.alert-success') }
 			end
-			describe "clicking the preview button with a single character post should raise an error" do
+			describe "clicking the preview button with an empty post should raise an error and not post" do
+				before { click_button preview_button_title }
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'a page with sidebar'
+				it_should_behave_like 'an invalid post'
+			end
+			describe "clicking the preview button with a single character post should raise an error and not post" do
 				before do
 				  fill_in 'inputbox', with: 'x'
 				  click_button preview_button_title
 				end
-				it { should have_selector('div.alert.alert-error', text: 'too short') }
-				it { should have_button preview_button_title}
-				it { should_not have_selector('div.bigoutput') }		
-				it { should_not have_button publish_button_title }				
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'a page with sidebar'
+				it_should_behave_like 'an invalid post'
 			end
 			describe "preveiwing OK should not raise errors, flash, preview the content and redirect to the edit page" do
 				before do
 				  fill_in 'inputbox', with: 'OK'
 				  click_button preview_button_title
 				end
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'a page with sidebar'
 				it { should_not have_selector('div.alert.alert-error', text: 'error') }
 				it { should_not have_selector('div.alert.alert-success') }
 				it { should have_selector('textarea#inputbox', text: "OK") }
 				it { should have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }
 				specify {current_path.should == edit_post_path(Post.ids.max)}
 				it { should have_button preview_button_title}
-				it { should have_button publish_button_title }	
+				it { should have_button publish_button_title}	
 			end				
 		end
 
@@ -106,23 +112,21 @@ describe "PostPages" do
 			click_button preview_button_title			
 		end
 		it_should_behave_like 'all pages'
+		it_should_behave_like 'a page with sidebar'
 		specify {current_path.should == edit_post_path(Post.ids.max)}					
 		it { should have_selector('textarea#inputbox', text: "blah blah") }
 		it { should have_selector('div.bigoutput', text: /#{pulverize('blah blah','\W')}/) }
 		it { should have_selector('input#preview_button') }
 		it { should have_selector('input#publish_button') }
-    it { should have_selector('div.cheatsheet') }
-    it { should have_content cheatsheet_text }
-    it { should have_selector('li.tile') }
-    it { should have_selector("a#tile_#{Post.published.first.id}", 
-      href="#{post_path(Post.published.first)}")}		
-		  
+
 		describe "preview_button" do
 			describe "clicking the preview button with an empty post should raise an error" do
 				before do 
 					fill_in 'inputbox', with: ""
 					click_button preview_button_title						
 				end
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'a page with sidebar'
 				it { should have_selector('div.alert.alert-error', text: 'too short') }
 			end
 			describe "clicking the preview button with a single character post should raise an error" do
@@ -130,6 +134,8 @@ describe "PostPages" do
 				  fill_in 'inputbox', with: 'x'
 				  click_button preview_button_title
 				end
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'a page with sidebar'				
 				it { should have_selector('div.alert.alert-error', text: 'too short') }
 			end
 			describe "preveiwing OK should not raise errors, flash, preview the content and redirect to the edit page" do
@@ -137,6 +143,8 @@ describe "PostPages" do
 				  fill_in 'inputbox', with: 'OK'
 				  click_button preview_button_title
 				end
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'a page with sidebar'				
 				it { should_not have_selector('div.alert.alert-error', text: 'error') }
 				it { should_not have_selector('div.alert.alert-success') }
 				it { should have_selector('textarea#inputbox', text: "OK") }
@@ -151,6 +159,8 @@ describe "PostPages" do
 					fill_in 'inputbox', with: ""
 					click_button preview_button_title						
 				end
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'a page with sidebar'				
 				it { should have_selector('div.alert.alert-error', text: 'too short') }
 			end
 			describe "clicking the publish button with a single character post should raise an error" do
@@ -158,6 +168,8 @@ describe "PostPages" do
 				  fill_in 'inputbox', with: 'x'
 				  click_button publish_button_title
 				end
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'a page with sidebar'				
 				it { should have_selector('div.alert.alert-error', text: 'too short') }
 			end
 			describe "publishing OK should not raise any errors, flash and return to the new template" do
@@ -165,12 +177,15 @@ describe "PostPages" do
 				  fill_in 'inputbox', with: 'OK'
 				  click_button publish_button_title
 				end
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'a page with sidebar'				
 				it { should_not have_selector('div.alert.alert-error', text: 'error') }
 				it { should have_selector('div.alert.alert-success') }
 				it { should_not have_selector('textarea#inputbox', text: "OK") }
 				it { should_not have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }	
 				it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }				
 				specify {current_path.should == root_path}
+				it { should have_title app_title+" - " + "Home" }
 			end				
 		end
 

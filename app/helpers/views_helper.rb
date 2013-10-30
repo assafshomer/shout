@@ -1,7 +1,7 @@
 module ViewsHelper
 	def preview_button_title
 		# app_title
-		"Preview"
+		"click to preview"
 	end
 
 	def publish_button_title
@@ -42,10 +42,6 @@ module ViewsHelper
 		content[0..content.length-2]
 	end
 
-	def home_title
-		'Post'
-	end
-	
 	def tile_title
 		'Watch'
 	end
