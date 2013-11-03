@@ -10,6 +10,11 @@ class StaticController < ApplicationController
   	@title="Help"
   end
 
+  def shapes
+    @title=shapes_title
+    @ascii_array=ascii_array
+  end  
+
   def about
   	@title="About"
   end
