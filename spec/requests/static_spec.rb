@@ -18,6 +18,13 @@ describe "Static" do
     it_should_behave_like "all pages"
   end
 
+  describe "Shapes page" do
+    before { visit shapes_path }
+    let(:page_title) {'Shapes'}
+    it_should_behave_like "all pages"
+    it { should have_content "♥" }
+  end  
+
   describe "About page" do
     before { visit about_path }
     let(:page_title) {'About'}
@@ -38,7 +45,7 @@ describe "Static" do
     # page.should have_title full_title('Help')
     # click_link "Contact"
     # page.should have_title full_title('Contact')
-    click_link app_title
+    # click_link app_title
     page.should have_title full_title('Home')
   end  
 end
