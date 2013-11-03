@@ -22,7 +22,14 @@ describe "Static" do
     before { visit shapes_path }
     let(:page_title) {'Shapes'}
     it_should_behave_like "all pages"
-    it { should have_content "♥" }
+    it { should_not have_content "♥" }
+    it { should have_content "♜" }
+    it { should have_selector('div.pagination') }
+    describe "clicking on pagination link" do
+      before { click_link 4 }
+      it { should have_content "♥" }
+      it { should_not have_content "♜" }      
+    end
   end  
 
   describe "About page" do

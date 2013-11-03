@@ -1,5 +1,12 @@
+= will_paginate @ascii_array
 ul
-	- ascii_array.each do |n|
+	- @ascii_array.each do |n|
 		li.shapes title="#{n}"
 			= "#{n.chr}"
 			// = "#{n}=>#{n.chr}"
+/ table
+/   - @ascii_array.each do |n|
+/     - if (n-@ascii_array.first)% @columns == 0
+/       tr
+/     td.shapes
+/       = "#{n.chr}"
