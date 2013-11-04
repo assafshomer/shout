@@ -36,7 +36,7 @@ div.cheatsheet
 				| →						  		
 			td
 				div style="font-size:4em;"
-					|  a♥								
+					|  a♥		
 		tr title="Wrap in backticks and append a valid internet address after a pipe symbol to link to a page on the internet"
 			td colspan="2"
 				div.mark
@@ -57,4 +57,8 @@ div.cheatsheet
 						| goo
 		tr
 			td colspan="3" style="color:#333;text-align: center;"
-				| #{cheatsheet_text}
+				= cheatsheet_text
+				br
+				| here are some more 
+				= link_to shapes_title, shapes_path 
+				|  if you like

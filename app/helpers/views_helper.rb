@@ -22,7 +22,7 @@ module ViewsHelper
 	end
 
 	def shapes_title
-		'Shapes'
+		'shapes'
 	end
 
 	def app_mantra
@@ -59,7 +59,7 @@ module ViewsHelper
 	end
 
 	def cheatsheet_text
-		"...limited to within the box..."
+		"You are limited to within the box"
 	end
 
 	def search_tile_count
