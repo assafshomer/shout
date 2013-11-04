@@ -21,6 +21,7 @@ section {
   float:left;
   @include rounded-corners;  
 }
+
 div.container {
   width:1800;
 }
@@ -136,6 +137,10 @@ footer {
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
   color: $grayLight;
+  position:absolute;
+  bottom:0;
+  width:95%;
+  height:40px;   /* Height of the footer */
 }
 
 footer a {
