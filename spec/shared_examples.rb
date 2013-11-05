@@ -2,6 +2,7 @@ shared_examples_for "all pages" do
 	it { should have_selector('header.navbar.navbar-fixed-top.navbar-inverse') }
 	it { should have_selector('footer.footer') }
 	it { should have_link(tile_title, href: posts_path) }
+  it { should have_link(new_title, href: new_post_path) }
 	it { should have_link(app_title, href: root_path) }		
 end	
 
