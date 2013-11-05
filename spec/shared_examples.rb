@@ -11,5 +11,5 @@ shared_examples_for "a page with sidebar" do
   it { should have_selector('li.tile') }
   it { should have_selector("a#tile_#{Post.published.first.id}", 
     href="#{post_path(Post.published.first)}")}
-  it { should have_link(shapes_title, href: shapes_path) }
+  it { should have_link(shapes_title.strip, href: shapes_path) }
  end

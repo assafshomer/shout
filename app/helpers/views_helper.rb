@@ -22,7 +22,7 @@ module ViewsHelper
 	end
 
 	def shapes_title
-		' - interesting characters'
+		' - interesting characters'+  ' Ⱘ,㊥,Ѽ,㊿...'
 	end
 
 	def app_mantra
