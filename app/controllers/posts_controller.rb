@@ -3,32 +3,34 @@ class PostsController < ApplicationController
   before_filter :no_edit, only: [:edit,:update]
 
   def new
-    @title="New Post"
-  	@post=Post.new 
+    @title=new_title
+    @post=Post.new 
+    @posts=Post.publication_tail
+    @zoom="minioutput"
   end
 
   def create
     # binding.pry
-    @title="Home"
+    @title=new_title
   	@post=Post.new(post_params)
     @posts=Post.publication_tail
     @zoom="minioutput"    
     if @post.save
       fork(@post)
     else
-      render 'static/home'      
+      render 'new'      
     end
   end 
 
   def edit
-    @title="Preview"
+    @title=edit_title
     @post=Post.find(params[:id])
     @posts=Post.publication_tail
     @zoom="minioutput"
   end
 
   def update
-    @title="Preview"
+    @title=edit_title
     @post=Post.find(params[:id])
     @posts=Post.publication_tail
     @zoom="minioutput"    
@@ -40,12 +42,12 @@ class PostsController < ApplicationController
   end 
 
   def show
-    @title="Show"
+    @title=show_title
     @post=Post.find(params[:id]) 
   end
 
   def index 
-    @title="Watch"
+    @title=index_title
     @zoom="superminioutput"
     @count=tile_count
     @all_posts=Post.published.to_a
@@ -76,13 +78,13 @@ class PostsController < ApplicationController
       else
         post.toggle!(:published) unless post.published
         flash[:success] = "Thanks for sharing"                
-        redirect_to root_path      
+        redirect_to new_post_path      
       end
     end
 
     def no_edit
       post = Post.find_by_id(params[:id])
-      redirect_to root_path if post.nil? || post.published? 
+      redirect_to new_post_path if post.nil? || post.published? 
     end
 
     def set_zoom

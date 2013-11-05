@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'shared_examples'
 include TestHelper
+include ViewsHelper
 
 	two_lines="of.
 After"
@@ -10,10 +11,10 @@ describe "PostPages" do
 	subject { page }
 
 
-	describe "Home" do
-		let!(:page_title) { "Home" }		
+	describe "new" do
+		let!(:page_title) { new_title }		
 		before do
-			visit root_path
+			visit new_post_path
 		end			
 		it { should have_selector('textarea#inputbox', text: "") }
 		it { should_not have_selector('div.bigoutput') }		
@@ -82,7 +83,7 @@ describe "PostPages" do
 				it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }	
 				it { should have_button preview_button_title}
 				it { should_not have_button publish_button_title }							
-				specify {current_path.should == root_path}
+				specify {current_path.should == new_post_path}
 			end				
 		end
 
@@ -105,9 +106,9 @@ describe "PostPages" do
 	end
 
 	describe "edit" do
-		let!(:page_title) { "Preview" }		
+		let!(:page_title) { edit_title }		
 		before do
-			visit root_path
+			visit new_post_path
 			fill_in 'inputbox', with: "blah blah"
 			click_button preview_button_title			
 		end
@@ -184,8 +185,8 @@ describe "PostPages" do
 				it { should_not have_selector('textarea#inputbox', text: "OK") }
 				it { should_not have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }	
 				it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }				
-				specify {current_path.should == root_path}
-				it { should have_title app_title+" - " + "Home" }
+				specify {current_path.should == new_post_path}
+				it { should have_title full_title(new_title) }
 			end				
 		end
 
@@ -243,7 +244,7 @@ describe "PostPages" do
 	end
 
 	describe "show" do
-		let!(:page_title) { "Show" }		
+		let!(:page_title) { show_title }		
 		
 		describe "random post" do
 			let!(:p1) {FactoryGirl.create(:post)}
@@ -272,7 +273,7 @@ describe "PostPages" do
 		describe "posts with active links" do
 			let!(:link) { "`1 google|http://www.google.com`" }
 			before do
-			  visit root_path
+			  visit new_post_path
 			  fill_in 'inputbox', with: link
 			  click_button preview_button_title
 			  visit post_path(Post.all.ids.max)
@@ -285,7 +286,7 @@ describe "PostPages" do
 	end
 
 	describe "index" do	
-		let!(:page_title) { "Watch" }		
+		let!(:page_title) { index_title }		
 	  shared_examples_for "index page" do 
 			it { should_not have_selector('textarea#inputbox') }		
 			it { should_not have_selector('input#preview_button') }		
@@ -330,7 +331,7 @@ describe "PostPages" do
 			describe "simple linking" do
 				let!(:text) { "test simple link" }
 				before do
-				  visit root_path
+				  visit new_post_path
 				  fill_in 'inputbox', with: text
 				  click_button preview_button_title
 				  click_button publish_button_title
@@ -347,7 +348,7 @@ describe "PostPages" do
 			describe "link with url" do
 				let!(:link) { "`1 google|http://www.google.com`" }
 				before do
-				  visit root_path
+				  visit new_post_path
 				  fill_in 'inputbox', with: link
 				  click_button preview_button_title
 				  click_button publish_button_title
@@ -392,7 +393,7 @@ describe "PostPages" do
 		let!(:p) { FactoryGirl.create(:post, published: true) }
 		before { visit edit_post_path(p) }
 		it "should redirect to home" do
-			current_path.should == root_path
+			current_path.should == new_post_path
 			current_path.should_not == edit_post_path(p)
 		end		
 	end

@@ -76,7 +76,7 @@ describe "Search Posts" do
 		describe "search should filter correctly" do
 			let!(:s) { 'supercalifragilisticexpialidocious'[0..29] }
 			before do
-				visit root_path 
+				visit new_post_path 
 				fill_in 'inputbox', with: s
 				click_button preview_button_title
 				click_button publish_button_title

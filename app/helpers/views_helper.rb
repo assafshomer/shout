@@ -33,6 +33,22 @@ module ViewsHelper
 		"try it, it`s fun"
 	end
 
+	def new_title
+		'Compose'
+	end
+
+	def edit_title
+		"Preview"
+	end
+
+	def show_title
+		"Show"
+	end
+
+	def index_title
+		"Watch"
+	end
+
 	def feed_title
 		'stream'
 	end

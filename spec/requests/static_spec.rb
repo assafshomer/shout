@@ -7,7 +7,7 @@ describe "Static" do
 
   describe "Home page" do
   	let!(:page_title) { "Home" }
-  	before { visit root_path }
+  	before { visit new_post_path }
   	it_should_behave_like 'all pages'  	
     it_should_behave_like 'a page with sidebar'
   end
@@ -45,7 +45,7 @@ describe "Static" do
   end 
 
   it "should have the right links on the layout" do
-    visit root_path
+    visit new_post_path
     # click_link "About"
     # page.should have_title full_title('About')
     # click_link "Help"
@@ -53,6 +53,6 @@ describe "Static" do
     # click_link "Contact"
     # page.should have_title full_title('Contact')
     # click_link app_title
-    page.should have_title full_title('Home')
+    page.should have_title full_title(new_title)
   end  
 end
