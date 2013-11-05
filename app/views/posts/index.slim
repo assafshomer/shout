@@ -1,18 +1,19 @@
-div.row
-	- if @all_posts.any?
-	  table
-	    tr
-	      td width="100"
-	      td
-	        = render 'shared/paginate_with_counter', pad: 3
-	      td width="100"
-	      td align="right" valign="bottom"
-	        = render 'shared/search_fields'
-	    tr
-	      td colspan="4" 
-					ul
-					  = render partial: 'tile', collection: @posts
+section
+	div.row
+		- if @all_posts.any?
+		  table
+		    tr
+		      td width="100"
+		      td
+		        = render 'shared/paginate_with_counter', pad: 3
+		      td width="100"
+		      td align="right" valign="bottom"
+		        = render 'shared/search_fields'
+		    tr
+		      td colspan="4" 
+						ul
+						  = render partial: 'tile', collection: @posts
 
-	- else
-	  | no posts at this time
-/ div.hidden#tilesize tilesize="#{params[:search].nil? ? 1 : 2}"
+		- else
+		  | no posts at this time
+	/ div.hidden#tilesize tilesize="#{params[:search].nil? ? 1 : 2}"
