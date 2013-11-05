@@ -74,3 +74,19 @@
   filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.5);
   opacity:.50; 
 }
+@mixin opacity25{
+  -khtml-opacity:.25; 
+  -moz-opacity:.25; 
+  -ms-filter:"alpha(opacity=25)";
+  filter:alpha(opacity=25);
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.25);
+  opacity:.25; 
+}
+@mixin opacity75{
+  -khtml-opacity:.75; 
+  -moz-opacity:.75; 
+  -ms-filter:"alpha(opacity=75)";
+  filter:alpha(opacity=75);
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.75);
+  opacity:.75; 
+}
