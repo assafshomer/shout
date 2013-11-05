@@ -6,21 +6,29 @@ describe "Static" do
 	subject { page }
 
   describe "Home page" do
-  	let!(:page_title) { "Home" }
+    before { visit root_path }
+    it_should_behave_like 'all pages'   
+    it { should have_title full_title(home_title) }
+    it { should have_selector('div.home')}
+  end
+
+  describe "Compose page" do
   	before { visit new_post_path }
   	it_should_behave_like 'all pages'  	
     it_should_behave_like 'a page with sidebar'
+    it { should have_title full_title(new_title) }
   end
 
   describe "Help page" do
     before { visit help_path }
     let(:page_title) {'Help'}
     it_should_behave_like "all pages"
+    it { should have_title full_title("Help") }
   end
 
   describe "Shapes page" do
     before { visit shapes_path }
-    let(:page_title) {'Shapes'}
+    it { should have_title full_title(shapes_title) }
     it_should_behave_like "all pages"
     it { should_not have_content "♥" }
     it { should have_content "♜" }
@@ -34,13 +42,13 @@ describe "Static" do
 
   describe "About page" do
     before { visit about_path }
-    let(:page_title) {'About'}
+    it { should have_title full_title("About") }
     it_should_behave_like "all pages"
   end
 
   describe "Contact page" do
     before { visit contact_path }
-    let(:page_title) {'Contact'}
+    it { should have_title full_title("Contact") }
     it_should_behave_like "all pages"
   end 
 

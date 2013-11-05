@@ -21,7 +21,7 @@ module ViewsHelper
 		app_title + " - " + string
 	end
 
-	def shapes_title
+	def shapes_text
 		' - interesting characters'+  ' Ⱘ,㊥,Ѽ,㊿...'
 	end
 
@@ -31,6 +31,10 @@ module ViewsHelper
 
 	def post_place_holder
 		"try it, it`s fun"
+	end
+
+	def home_title
+		'Home'
 	end
 
 	def new_title
@@ -53,6 +57,9 @@ module ViewsHelper
 		'stream'
 	end
 
+	def shapes_title
+		'Shapes'
+	end
 	def fake_content
 		content=''
 		(1..10).to_a.sample.times do
