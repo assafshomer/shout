@@ -6,6 +6,7 @@ Shout::Application.routes.draw do
   get "static/shapes"
 
  resources :posts
+ resources :sessions, only: [:new, :create]
  
  root to: "static#home"
 
@@ -13,5 +14,6 @@ Shout::Application.routes.draw do
   match "/about",   to: 'static#about',         via: :get
   match "/contact", to: 'static#contact',       via: :get
  	match "/shapes", 	to: 'static#shapes', 				via: :get
+ 	match "/signin", 	to: 'sessions#new', 				via: :get
 
 end

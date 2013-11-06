@@ -4,6 +4,18 @@ module ViewsHelper
 		"click to preview"
 	end
 
+	def signin_title
+		"Locate"
+	end
+
+	def signin_button_title
+		"Position"
+	end
+
+	def location_placeholder
+		"What is your location"
+	end
+
 	def publish_button_title
 		# app_title
 		"Post"
