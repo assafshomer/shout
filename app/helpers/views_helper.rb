@@ -105,6 +105,11 @@ module ViewsHelper
 		end		
 	end
 
+	def wrap_location(string)
+		return '' if string.blank? || string=='unknown' 
+		'('+string.strip+')' 
+	end	
+
 	def ascii_array
 		if Rails.env == 'test'
 			array = (9820..9830).to_a
