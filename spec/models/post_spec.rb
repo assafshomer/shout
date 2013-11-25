@@ -9,12 +9,15 @@
 #
 
 require 'spec_helper'
+# include ActionView::Helpers::DateHelper
 
 describe Post do
 	describe "class methods" do
 		it {Post.should respond_to(:publication_tail)	 }
 		describe "publication_tail" do
 			it { Post.publication_tail.should include(Post.published.first) }
+			# it { Post.published.map(&:created_at).should be_nil}
+			# it { Post.publication_tail.map {|p| time_ago_in_words(p.created_at)}.should be_nil }
 			it { Post.publication_tail.should_not include(Post.previewed.first) }
 		end
 	end
@@ -27,6 +30,7 @@ describe Post do
  	
  	it { should respond_to(:content) }
  	it { should respond_to(:published) }
+ 	it { should respond_to(:location) }
  	
  
 	describe "validations" do
