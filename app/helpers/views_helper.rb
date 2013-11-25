@@ -101,7 +101,7 @@ module ViewsHelper
 		if Rails.env == 'test'
 			5
 		else
-			15 
+			10
 		end		
 	end
 
