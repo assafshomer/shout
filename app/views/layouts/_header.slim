@@ -2,7 +2,7 @@ header.navbar.navbar-fixed-top.navbar-inverse
   .navbar-inner
     .container
       = link_to app_title, root_path, id: "logo"
-      = link_to wrap_location(@location), signin_path, id: "location" unless @location.blank?
+      = link_to wrap_location(@location), signin_path, id: "location", title: "Change location" unless @location.blank?
       nav
         ul#head-links.nav.pull-right
           li= link_to new_title, new_post_path        

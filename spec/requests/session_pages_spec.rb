@@ -21,6 +21,16 @@ describe "signup" do
 		# it { should have_link('#location', text: wrap_location('foobar')) }
 	end
 
+	describe "filling in a location and trimming" do
+		before do
+		  fill_in "location",             with: "   a  b   "  
+		  click_button signin_button_title
+		  visit root_path
+		end
+		it { should have_title home_title }
+		it { should have_link('(a b)', href: signin_path) }	
+	end	
+
 	describe "filling in a blank location" do
 		before do
 		  fill_in "location",             with: ''  

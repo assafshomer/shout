@@ -112,6 +112,15 @@ p {
       line-height: 1;
       font-weight:bold;
     } 
+    #location {
+      float: left;
+      margin-right: 10px;
+      font-size: 1em;      
+      letter-spacing: -1px;
+      padding-top: 1em;  
+      line-height: 1;
+      font-weight:normal;
+    }     
     .nav {
       a {
         color:$almostWhite;
