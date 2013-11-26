@@ -6,6 +6,8 @@
 #  content    :text
 #  created_at :datetime
 #  updated_at :datetime
+#  published  :boolean          default(FALSE)
+#  location   :string(255)
 #
 
 require 'spec_helper'

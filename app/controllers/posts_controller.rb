@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
 
   before_filter :no_edit, only: [:edit,:update]
+  before_filter :set_location
 
   def new
     @title=new_title
-    @location=cookies[:location] || 'unknown'
     @post=Post.new 
     @posts=Post.publication_tail
     @zoom="minioutput"
@@ -13,8 +13,9 @@ class PostsController < ApplicationController
   def create
     # binding.pry
     @title=new_title
-    @location=cookies[:location] || 'unknown'
+    # @location=cookies[:location] || 'unknown'
   	@post=Post.new(post_params)
+    @post.location=@location
     @posts=Post.publication_tail
     @zoom="minioutput"    
     if @post.save
@@ -26,7 +27,7 @@ class PostsController < ApplicationController
 
   def edit
     @title=edit_title
-    @location=cookies[:location] || 'unknown'
+    # @location=cookies[:location] || 'unknown'
     @post=Post.find(params[:id])
     @posts=Post.publication_tail
     @zoom="minioutput"
@@ -34,7 +35,7 @@ class PostsController < ApplicationController
 
   def update
     @title=edit_title
-    @location=cookies[:location] || 'unknown'
+    # @location=cookies[:location] || 'unknown'
     @post=Post.find(params[:id])
     @posts=Post.publication_tail
     @zoom="minioutput"    
@@ -47,13 +48,13 @@ class PostsController < ApplicationController
 
   def show
     @title=show_title
-    @location=cookies[:location] || 'unknown'
+    # @location=cookies[:location] || 'unknown'
     @post=Post.find(params[:id]) 
   end
 
   def index 
     @title=index_title
-    @location=cookies[:location] || 'unknown'
+    # @location=cookies[:location] || 'unknown'
     @zoom="superminioutput"
     @count=tile_count
     @all_posts=Post.published.to_a
@@ -98,4 +99,7 @@ class PostsController < ApplicationController
       @count = search_tile_count
     end
 
+    def set_location
+      @location=cookies[:location]
+    end
 end

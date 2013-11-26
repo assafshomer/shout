@@ -40,4 +40,17 @@ describe "signup" do
 		it { should have_title home_title }
 		it { should_not have_link(wrap_location(''), href: signin_path) }	
 	end	
+
+	describe "persistance in Post model" do
+		before do
+		  fill_in "location",             with: 'Tel-Aviv'  
+		  click_button signin_button_title
+		  visit new_post_path
+		  fill_in 'inputbox', with: 'OK'
+			click_button preview_button_title
+		end
+		it "should recored the location in the new post" do
+			expect {Post.first.location.should == 'Tel-Aviv'}
+		end
+	end		
 end
