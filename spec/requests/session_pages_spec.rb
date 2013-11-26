@@ -11,46 +11,68 @@ describe "signup" do
 	it { should have_xpath("//input[@placeholder=\'#{location_placeholder}\']") }
 
 	describe "filling in a location" do
-		before do
-		  fill_in "location",             with: "foobar"  
-		  click_button signin_button_title
-		  visit root_path
+		describe "well formed location" do
+			before do
+			  fill_in "location",             with: "foobar"  
+			  click_button signin_button_title
+			  visit root_path
+			end
+			it { should have_title home_title }
+			it { should have_link(wrap_location('foobar'), href: signin_path) }	
+			# it { should have_link('#location', text: wrap_location('foobar')) }
 		end
-		it { should have_title home_title }
-		it { should have_link(wrap_location('foobar'), href: signin_path) }	
-		# it { should have_link('#location', text: wrap_location('foobar')) }
+
+		describe "trimming" do
+			before do
+			  fill_in "location",             with: "   a  b   "  
+			  click_button signin_button_title
+			  visit root_path
+			end
+			it { should have_title home_title }
+			it { should have_link('(a b)', href: signin_path) }	
+			it { should_not have_link('foobar', href: signin_path) }	
+		end	
+
+		describe "blank location" do
+			before do
+			  fill_in "location",             with: ''  
+			  click_button signin_button_title
+			  visit root_path
+			end
+			it { should have_title home_title }
+			it { should_not have_link(wrap_location(''), href: signin_path) }	
+		end		
 	end
 
-	describe "filling in a location and trimming" do
-		before do
-		  fill_in "location",             with: "   a  b   "  
-		  click_button signin_button_title
-		  visit root_path
-		end
-		it { should have_title home_title }
-		it { should have_link('(a b)', href: signin_path) }	
-	end	
-
-	describe "filling in a blank location" do
-		before do
-		  fill_in "location",             with: ''  
-		  click_button signin_button_title
-		  visit root_path
-		end
-		it { should have_title home_title }
-		it { should_not have_link(wrap_location(''), href: signin_path) }	
-	end	
 
 	describe "persistance in Post model" do
-		before do
-		  fill_in "location",             with: 'Tel-Aviv'  
-		  click_button signin_button_title
-		  visit new_post_path
-		  fill_in 'inputbox', with: 'OK'
-			click_button preview_button_title
-		end
-		it "should recored the location in the new post" do
-			expect {Post.first.location.should == 'Tel-Aviv'}
-		end
-	end		
+
+		describe "well formed location" do
+			let!(:loc) { 'Tel-Aviv' }
+			before do
+			  fill_in "location",             with: loc
+			  click_button signin_button_title
+			  visit new_post_path
+			  fill_in 'inputbox', with: 'blah blah'
+				click_button preview_button_title
+			end
+			specify {Post.first.location.should == loc}
+			specify {Post.first.location.should_not == 'foobar'}
+		end			
+
+		describe "well formed location" do
+			let!(:loc) { '' }
+			before do
+			  fill_in "location",             with: loc
+			  click_button signin_button_title
+			  visit new_post_path
+			  fill_in 'inputbox', with: 'blah blah'
+				click_button preview_button_title
+			end
+			specify {Post.first.location.should be_nil}
+		end								
+
+	end
+
+
 end
