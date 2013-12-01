@@ -9,7 +9,7 @@ module ViewsHelper
 	end
 
 	def signin_button_title
-		"Position"
+		"set your location"
 	end
 
 	def location_placeholder

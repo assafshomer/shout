@@ -1,8 +1,13 @@
+- if @location.blank?
+	-	signin_link=wrap_location(signin_button_title)
+- else 
+	- signin_link=wrap_location(@location)
+
 header.navbar.navbar-fixed-top.navbar-inverse
   .navbar-inner
     .container
       = link_to app_title, root_path, id: "logo"
-      = link_to wrap_location(@location), signin_path, id: "location", title: "Change location" unless @location.blank?
+      = link_to signin_link, signin_path, id: "location", title: "Change location" 
       nav
         ul#head-links.nav.pull-right
           li= link_to new_title, new_post_path        

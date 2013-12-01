@@ -1,19 +1,19 @@
 class StaticController < ApplicationController
+  
+  before_filter :set_location
+
   def home
   	@title="Home"
-    @location=cookies[:location] || 'unknown'
     @post=Post.new 
     @posts=Post.publication_tail
     @zoom="minioutput"
   end
 
   def help
-    @location=cookies[:location] || 'unknown'
   	@title="Help"
   end
 
   def shapes
-    @location=cookies[:location] || 'unknown'
     @title=shapes_title
     @rows=7
     @columns=15
@@ -22,12 +22,10 @@ class StaticController < ApplicationController
   end  
 
   def about
-    @location=cookies[:location] || 'unknown'
   	@title="About"
   end
 
   def contact
-    @location=cookies[:location] || 'unknown'
   	@title="Contact"
   end
 end
