@@ -13,20 +13,12 @@ describe "signup" do
 	describe "null location should show 'set your location'" do
 		before { visit root_path }
 		it { should have_link(wrap_location(signin_button_title), href: signin_path) }	
-	end
-	describe "null location should show 'set your location'" do
 		before { visit help_path }
 		it { should have_link(wrap_location(signin_button_title), href: signin_path) }	
-	end
-	describe "null location should show 'set your location'" do
 		before { visit shapes_path }
 		it { should have_link(wrap_location(signin_button_title), href: signin_path) }	
-	end
-	describe "null location should show 'set your location'" do
 		before { visit about_path }
 		it { should have_link(wrap_location(signin_button_title), href: signin_path) }	
-	end		
-	describe "null location should show 'set your location'" do
 		before { visit contact_path }
 		it { should have_link(wrap_location(signin_button_title), href: signin_path) }	
 	end			
