@@ -70,7 +70,7 @@ class PostsController < ApplicationController
 
     def search_stream(space_separated_search_terms, stream)    
       if !space_separated_search_terms.blank?      
-        stream.where(generate_LIKE_sql(space_separated_search_terms, 'content',Post))
+        stream.where(generate_LIKE_sql(space_separated_search_terms, 'content location',Post))
       else
         stream
       end

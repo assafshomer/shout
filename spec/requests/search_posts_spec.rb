@@ -86,6 +86,22 @@ describe "Search Posts" do
 			end			
 			it { should have_selector("div##{Post.first.id}", text: /#{pulverize(s,'\W')}/) }
 		end
+
+		describe "search in location" do
+			before do
+				visit signin_path
+				fill_in 'location', 	with: 'Vietnam'
+				click_button signin_button_title
+				visit new_post_path
+				fill_in 'inputbox', 	with: 'Norm from Saigon'
+				click_button preview_button_title
+				click_button publish_button_title
+				visit posts_path
+				fill_in 'search', 		with: 'Viet'
+				click_button 'Search'			  
+			end
+			it { should have_selector("div##{Post.first.id}", text: /#{pulverize('Norm from Saigon','\W')}/) }
+		end		
 	end
 
 end
