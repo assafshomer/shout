@@ -3,7 +3,7 @@ require 'shared_examples'
 include TestHelper
 
 describe "signup" do
-	subject { page }
+	subject { page } 
 	before { visit signin_path }
 	it { should have_title signin_title }
 	it { should have_selector('input#location') }

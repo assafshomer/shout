@@ -4,6 +4,7 @@ shared_examples_for "all pages" do
 	it { should have_link(tile_title, href: posts_path) }
   it { should have_link(new_title, href: new_post_path) }
 	it { should have_link(app_title, href: root_path) }		
+  it { should have_selector('a#location', href="#{signin_path}")}  
 end	
 
 shared_examples_for "a page with sidebar" do
