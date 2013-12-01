@@ -253,6 +253,7 @@ describe "PostPages" do
 			end
 			it_should_behave_like 'all pages'			
 			it { should have_selector('div.bigoutput', text: /#{pulverize(p1.content,'\W')}/) }				
+			it { should have_selector('p.metadata', text: /#{metadata(p1)}/) }	
 		end
 		describe "post with newline" do
 			let!(:p1) { FactoryGirl.create(:post, content: two_lines) }
