@@ -59,6 +59,7 @@ class PostsController < ApplicationController
     set_zoom unless params[:search].nil?  
     @posts=@search_results.paginate(page: params[:page],
      per_page: @count).order('created_at DESC')    
+    @local_posts=local_stream(@location, Post.published) 
     redirect_to posts_path if params[:commit]=='Clear'
   end
 
@@ -75,6 +76,12 @@ class PostsController < ApplicationController
         stream
       end
     end
+
+    def local_stream(space_separated_search_terms, stream)    
+      if !space_separated_search_terms.blank?      
+        stream.where(generate_LIKE_sql(space_separated_search_terms, 'location',Post))
+      end
+    end  
 
     def fork(post)
       if params[:commit]==preview_button_title

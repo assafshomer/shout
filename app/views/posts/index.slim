@@ -10,9 +10,12 @@ section
 		      td align="right" valign="bottom"
 		        = render 'shared/search_fields'
 		    tr
-		      td colspan="4" 
+		      td colspan="2" id="stream"
 						ul
 						  = render partial: 'tile', collection: @posts
+		      td colspan="2" id="local_stream"
+						ul
+						  = render partial: 'tile', collection: @local_posts	unless @local_posts.nil?				  
 
 		- else
 		  | no posts at this time

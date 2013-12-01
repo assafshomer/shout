@@ -385,7 +385,9 @@ describe "PostPages" do
 				it_should_behave_like 'index page'					
 				it { should_not have_selector('div.pagination') }
 				it { should have_selector("div##{published1.id}", text: /#{pulverize(published1.content,'\W')}/) }					
-				it { should_not have_content("no posts at this time") }				
+				it { should_not have_content("no posts at this time") }	
+				it { should have_selector('td#stream') }
+				it { should have_selector('td#local_stream') }							
 			end		
 		end	
 		describe "metadata" do
