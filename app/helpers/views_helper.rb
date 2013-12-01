@@ -116,9 +116,15 @@ module ViewsHelper
 		else
 			array = clean_blanks((256..13038).to_a)
 		end
-
 	end
 
+	def metadata(post)
+		if post.published?
+			prefix='Posted ' + time_ago_in_words(post.created_at) + ' ago in '
+			return prefix + post.location unless post.location.nil?
+			prefix + 'an unknown location'
+		end
+	end
 
 # def findrange(string)
 # 	result= string.scan(/\d{4}=>/).each do |s|

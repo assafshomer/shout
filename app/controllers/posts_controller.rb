@@ -96,5 +96,4 @@ class PostsController < ApplicationController
       @count = search_tile_count
     end
 
-
 end

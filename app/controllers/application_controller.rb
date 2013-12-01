@@ -5,4 +5,5 @@ class ApplicationController < ActionController::Base
   include SearchHelper  
   include ViewsHelper
   include SessionsHelper
+  include ActionView::Helpers::DateHelper
 end

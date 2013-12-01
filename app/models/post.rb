@@ -22,4 +22,5 @@ class Post < ActiveRecord::Base
   def self.publication_tail(n=4)
   	published.sort_by! {|p| p.created_at}.reverse.first(n)
   end
+
 end

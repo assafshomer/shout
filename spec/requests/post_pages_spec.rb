@@ -386,7 +386,39 @@ describe "PostPages" do
 				it { should have_selector("div##{published1.id}", text: /#{pulverize(published1.content,'\W')}/) }					
 				it { should_not have_content("no posts at this time") }				
 			end		
-		end		
+		end	
+		describe "metadata" do
+			describe "for newly published post WITHOUT location" do
+				before do
+				  visit new_post_path
+				  fill_in 'inputbox', with: 'testing metadata'
+				  click_button preview_button_title
+				  click_button publish_button_title
+				  visit posts_path
+				end
+				it { should have_selector("div##{Post.first.id}", text: /#{pulverize('testing metadata','\W')}/) }					
+				it "should show the metadata mousehover on the title" do
+					page.should have_xpath("//div[@id=\'#{Post.first.id}\'][@title=\'Posted less than a minute ago in an unknown location\']") 
+				end
+			end	
+			describe "for newly published post WITH location" do
+				before do
+					visit signin_path
+					fill_in 'location', 		with: 'New York'
+				  click_button signin_button_title
+				  visit new_post_path
+				  fill_in 'inputbox', with: 'testing metadata 2'
+				  click_button preview_button_title
+				  click_button publish_button_title
+				  visit posts_path
+				end
+				it { should have_selector("div##{Post.first.id}", text: /#{pulverize('testing metadata 2','\W')}/) }					
+				it "should show the metadata mousehover on the title" do
+					page.should have_xpath("//div[@id=\'#{Post.first.id}\'][@title=\'Posted less than a minute ago in New York\']") 
+				end
+			end									
+		end
+	
 	end
 
 	describe "no edit of published posts" do
@@ -397,4 +429,6 @@ describe "PostPages" do
 			current_path.should_not == edit_post_path(p)
 		end		
 	end
+
+
 end

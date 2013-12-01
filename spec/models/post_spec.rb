@@ -11,7 +11,7 @@
 #
 
 require 'spec_helper'
-# include ActionView::Helpers::DateHelper
+include TestHelper
 
 describe Post do
 	describe "class methods" do
