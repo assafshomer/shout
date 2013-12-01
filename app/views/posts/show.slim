@@ -3,5 +3,5 @@ div.show
 		tr
 			td 
 				= render 'shared/preview', post: @post
-				p.metadata
+				p.metadata title="Posted on #{@post.created_at}"
 					= metadata(@post)
