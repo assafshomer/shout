@@ -5,14 +5,14 @@ section
 		    tr
 		      td width="100"
 		      td
-		        = render 'shared/paginate_with_counter', pad: 3
+		        = render 'shared/paginate_with_counter', pad: 2
 		      td width="100"
 		      td align="right" valign="bottom"
 		        = render 'shared/search_fields'
 		    tr
-		      td colspan="2" id="stream"
+		      td colspan="2" id="search_stream"
 						ul
-						  = render partial: 'tile', collection: @posts
+						  = render partial: 'tile', collection: @posts unless @posts.nil?
 		      td colspan="2" id="local_stream"
 						ul
 						  = render partial: 'tile', collection: @local_posts	unless @local_posts.nil?				  
@@ -20,7 +20,7 @@ section
 		- else
 			table
 				tr
-					td id="stream"
+					td id="search_stream"
 		  			| no posts at this time					
 				tr
 					td id="local_stream"

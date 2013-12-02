@@ -130,6 +130,10 @@ p {
 }
 .pagination{
   ul{
+    font-size:small;
+    li a {
+      padding:3px 8px;
+    }    
     .active{
       a{
         color:blue;

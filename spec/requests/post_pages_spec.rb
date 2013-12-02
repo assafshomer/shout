@@ -292,7 +292,7 @@ describe "PostPages" do
 			it { should_not have_selector('textarea#inputbox') }		
 			it { should_not have_selector('input#preview_button') }		
 			it { should_not have_selector('input#publish_button') }			
-			it { should have_selector('td#stream') }
+			it { should have_selector('td#search_stream') }
 			it { should have_selector('td#local_stream') }				
 	  end	
 		before do
@@ -302,37 +302,70 @@ describe "PostPages" do
 				end
 			end	  	  
 	  end	
-	  describe "streams" do
-	  	
-	  end
-		describe "with pagination" do
-			let!(:preview2) { FactoryGirl.create(:post, content: "moonbuzz") }
-			let!(:published2) { FactoryGirl.create(:post,content: "akuna mathata", published: true)  }
-			before do
-				visit posts_path
-			end
-			it_should_behave_like 'all pages'
-			it_should_behave_like 'index page'		
-			it { should_not have_content("no posts at this time") }			
-			it { should have_selector('div.pagination') }
-			describe "preview" do
-				it { should_not have_selector("div##{preview2.id}", text: /#{pulverize(preview2.content,'\W')}/) }	
-			end
-			describe "tile count should be right" do
+	  describe "search stream" do
+			describe "with pagination" do
+				let!(:preview2) { FactoryGirl.create(:post, content: "moonbuzz") }
+				let!(:published2) { FactoryGirl.create(:post,content: "akuna mathata", published: true)  }
 				before do
-					(tile_count*2).times do
-						FactoryGirl.create(:post, published: true, content: "foogazi")
-					end 
-					fill_in 'search', with: 'foogazi'
-					click_button 'Search'
-					# save_and_open_page
-				end	
-				it { should_not have_selector("div##{Post.ids.sort[Post.count-1-search_tile_count]}") }					
-			end			
-			describe "publish" do
-				it { should have_selector("div##{published2.id}", text: /#{pulverize(published2.content,'\W')}/) }					
-			end		
-		end
+					visit posts_path
+				end
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'index page'		
+				it { should_not have_content("no posts at this time") }			
+				it { should have_selector('div.pagination#search') }
+				describe "preview" do
+					it { should_not have_selector("div##{preview2.id}", text: /#{pulverize(preview2.content,'\W')}/) }	
+				end
+				describe "tile count should be right" do
+					before do
+						(tile_count*2).times do
+							FactoryGirl.create(:post, published: true, content: "foogazi")
+						end 
+						fill_in 'search', with: 'foogazi'
+						click_button 'Search'
+						# save_and_open_page
+					end	
+					it { should_not have_selector("div##{Post.ids.sort[Post.count-1-search_tile_count]}") }					
+				end			
+				describe "publish" do
+					it { should have_selector("div##{published2.id}", text: /#{pulverize(published2.content,'\W')}/) }					
+				end		
+			end	  	
+	  end
+	  describe "local stream" do
+			describe "with pagination" do
+				let!(:pre3) { FactoryGirl.create(:post, content: "fuckbuttons") }
+				let!(:pub3) { FactoryGirl.create(:post,content: "grandaddy hohoho", published: true, location: 'Tehran')  }
+				before do
+					visit signin_path
+					fill_in 'location', with: 'Tehran'
+					click_button signin_button_title
+					visit posts_path
+				end
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'index page'		
+				it { should_not have_content("no posts at this time") }			
+				it { should have_content('Local posts from Tehran') }
+				it { should have_selector('div.pagination#local') }
+				describe "preview" do
+					it { should_not have_selector("div##{pre3.id}", text: /#{pulverize(pre3.content,'\W')}/) }	
+				end
+				describe "tile count should be right" do
+					let!(:localposts) { Post.where("location = 'Tehran'") }
+					before do
+						(tile_count*2).times do
+							FactoryGirl.create(:post, published: true, location: 'Tehran')
+						end 
+						visit posts_path
+					end	
+					it { should_not have_selector("div##{localposts.ids.sort[localposts.count-1-search_tile_count]}") }					
+				end			
+				describe "publish" do
+					it { should have_selector("div##{pub3.id}", text: /#{pulverize(pub3.content,'\W')}/) }					
+				end		
+			end	  	
+	  end	  
+
 		describe "linking to show" do
 			describe "simple linking" do
 				let!(:text) { "test simple link" }
@@ -393,7 +426,7 @@ describe "PostPages" do
 				it { should_not have_content("no posts at this time") }	
 			end		
 		end	
-		describe "metadata" do
+		describe "metadata hover" do
 			describe "for newly published post WITHOUT location" do
 				before do
 				  visit new_post_path
