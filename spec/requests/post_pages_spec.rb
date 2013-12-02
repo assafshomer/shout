@@ -286,12 +286,14 @@ describe "PostPages" do
 		end
 	end
 
-	describe "index" do	
+	describe "index" do 
 		let!(:page_title) { index_title }		
 	  shared_examples_for "index page" do 
 			it { should_not have_selector('textarea#inputbox') }		
 			it { should_not have_selector('input#preview_button') }		
 			it { should_not have_selector('input#publish_button') }			
+			it { should have_selector('td#stream') }
+			it { should have_selector('td#local_stream') }				
 	  end	
 		before do
 			if tile_count>Post.count
@@ -300,6 +302,9 @@ describe "PostPages" do
 				end
 			end	  	  
 	  end	
+	  describe "streams" do
+	  	
+	  end
 		describe "with pagination" do
 			let!(:preview2) { FactoryGirl.create(:post, content: "moonbuzz") }
 			let!(:published2) { FactoryGirl.create(:post,content: "akuna mathata", published: true)  }
@@ -386,8 +391,6 @@ describe "PostPages" do
 				it { should_not have_selector('div.pagination') }
 				it { should have_selector("div##{published1.id}", text: /#{pulverize(published1.content,'\W')}/) }					
 				it { should_not have_content("no posts at this time") }	
-				it { should have_selector('td#stream') }
-				it { should have_selector('td#local_stream') }							
 			end		
 		end	
 		describe "metadata" do

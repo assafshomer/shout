@@ -18,5 +18,11 @@ section
 						  = render partial: 'tile', collection: @local_posts	unless @local_posts.nil?				  
 
 		- else
-		  | no posts at this time
+			table
+				tr
+					td id="stream"
+		  			| no posts at this time					
+				tr
+					td id="local_stream"
+		  			| no posts at this time
 	/ div.hidden#tilesize tilesize="#{params[:search].nil? ? 1 : 2}"
