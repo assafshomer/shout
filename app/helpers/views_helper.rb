@@ -89,7 +89,7 @@ module ViewsHelper
 		if Rails.env == 'test'
 			10
 		else
-			189 #21 rows X 9 cols	
+			90 #21 rows X 9 cols	
 		end		
 	end
 
