@@ -1,6 +1,7 @@
 table cellpadding="5"
   tr
     td
-      = render 'shared/paginate', pad: pad
+      = render 'shared/paginate',collection: collection, pad: pad, id: id
+  tr
     td
       = render 'shared/search_counter'

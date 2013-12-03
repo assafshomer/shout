@@ -56,10 +56,13 @@ class PostsController < ApplicationController
     @count=tile_count
     @all_posts=Post.published.to_a
     @search_results=search_stream(params[:search], Post.published)
-    set_zoom unless params[:search].nil?  
-    @posts=@search_results.paginate(page: params[:page],
-     per_page: @count).order('created_at DESC')    
-    @local_posts=local_stream(@location, Post.published) 
+    @local_search=local_stream(@location, Post.published) 
+    # set_zoom unless params[:search].nil?  
+    @posts=@search_results.paginate(page: params[:search_page], 
+      per_page: @count).order('created_at DESC')
+    @local_posts=@local_search.paginate(page: params[:local_page], 
+      per_page: 10).order('created_at DESC') 
+    # binding.pry SELECT * from Posts where published='t' and location is null
     redirect_to posts_path if params[:commit]=='Clear'
   end
 
@@ -77,10 +80,13 @@ class PostsController < ApplicationController
       end
     end
 
-    def local_stream(space_separated_search_terms, stream)    
+    def local_stream(space_separated_search_terms, stream) 
+      result=[]   
       if !space_separated_search_terms.blank?      
-        stream.where(generate_LIKE_sql(space_separated_search_terms, 'location',Post))
+        result = stream.where(generate_LIKE_sql(space_separated_search_terms, 'location',Post))
       end
+      result=stream if result.blank?
+      return result
     end  
 
     def fork(post)

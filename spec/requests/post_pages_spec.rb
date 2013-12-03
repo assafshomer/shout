@@ -375,6 +375,7 @@ describe "PostPages" do
 				  click_button preview_button_title
 				  click_button publish_button_title
 				  visit posts_path			  
+				  # save_and_open_page
 				end
 				it { should have_selector("div##{Post.all.ids.max}",
 				 text: /#{pulverize(text,'\W')}/) }
@@ -434,6 +435,7 @@ describe "PostPages" do
 				  click_button preview_button_title
 				  click_button publish_button_title
 				  visit posts_path
+				  # save_and_open_page
 				end
 				it { should have_selector("div##{Post.first.id}", text: /#{pulverize('testing metadata','\W')}/) }					
 				it "should show the metadata mousehover on the title" do
