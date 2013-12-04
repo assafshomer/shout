@@ -61,7 +61,7 @@ class PostsController < ApplicationController
     @posts=@search_results.paginate(page: params[:search_page], 
       per_page: @count).order('created_at DESC')
     @local_posts=@local_search.paginate(page: params[:local_page], 
-      per_page: 10).order('created_at DESC') unless @local_posts.nil?
+      per_page: @count).order('created_at DESC') unless @local_search.nil?
     redirect_to posts_path if params[:commit]=='Clear'
   end
 
@@ -107,9 +107,9 @@ class PostsController < ApplicationController
 
     def set_tile_count
       if @local_posts.nil?
-        @count = tile_count * 2
+        @count = tile_count(1)
       else
-        @count = tile_count 
+        @count = tile_count(2)
       end
     end
 

@@ -85,11 +85,11 @@ module ViewsHelper
 		'Watch'
 	end
 
-	def tile_count
+	def tile_count(n=1)
 		if Rails.env == 'test'
 			10
-		else
-			90 #21 rows X 9 cols	
+		else #9 rows X 21 cols	
+			9 * ((22-n)/n).floor 
 		end		
 	end
 
