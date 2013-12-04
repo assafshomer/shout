@@ -53,16 +53,15 @@ class PostsController < ApplicationController
   def index 
     @title=index_title
     @zoom="superminioutput"
-    @count=tile_count
     @all_posts=Post.published.to_a
     @search_results=search_stream(params[:search], Post.published)
     @local_search=local_stream(@location, Post.published) 
+    set_tile_count
     # set_zoom unless params[:search].nil?  
     @posts=@search_results.paginate(page: params[:search_page], 
       per_page: @count).order('created_at DESC')
     @local_posts=@local_search.paginate(page: params[:local_page], 
-      per_page: 10).order('created_at DESC') 
-    # binding.pry SELECT * from Posts where published='t' and location is null
+      per_page: 10).order('created_at DESC') unless @local_posts.nil?
     redirect_to posts_path if params[:commit]=='Clear'
   end
 
@@ -81,12 +80,9 @@ class PostsController < ApplicationController
     end
 
     def local_stream(space_separated_search_terms, stream) 
-      result=[]   
       if !space_separated_search_terms.blank?      
-        result = stream.where(generate_LIKE_sql(space_separated_search_terms, 'location',Post))
+        stream.where(generate_LIKE_sql(space_separated_search_terms, 'location',Post))
       end
-      result=stream if result.blank?
-      return result
     end  
 
     def fork(post)
@@ -107,6 +103,14 @@ class PostsController < ApplicationController
     def set_zoom
       @zoom = "smalloutput" 
       @count = search_tile_count
+    end
+
+    def set_tile_count
+      if @local_posts.nil?
+        @count = tile_count * 2
+      else
+        @count = tile_count 
+      end
     end
 
 end

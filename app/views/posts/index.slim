@@ -1,21 +1,33 @@
 section
 	div.row
 		- if @all_posts.any?
-		  table
-		    tr
-		      td
-		        = render 'shared/paginate', pad: 2, collection: @posts, id: 'search' 
-		      td align="right" valign="bottom"
-		        = render 'shared/search_fields'
-		      td
-		      	= render 'shared/paginate', pad: 2, collection: @local_posts, id: 'local'
-		    tr
-		      td colspan="2" id="search_stream"
-						ul
-						  = render partial: 'tile', collection: @posts unless @posts.nil?
-		      td colspan="2" id="local_stream"
-						ul
-						  = render partial: 'tile', collection: @local_posts	unless @local_posts.nil?
+			-if @local_posts.to_a.any?
+			  table
+			    tr
+			      td
+			        = render 'shared/paginate', pad: 2, collection: @posts, id: 'search' 
+			      td align="right" valign="bottom"
+			        = render 'shared/search_fields'
+			      td
+			      	= render 'shared/paginate', pad: 2, collection: @local_posts, id: 'local'
+			    tr
+			      td colspan="2" id="search_stream"
+							ul
+							  = render partial: 'tile', collection: @posts unless @posts.nil?
+			      td colspan="2" id="local_stream"
+							ul
+							  = render partial: 'tile', collection: @local_posts	unless @local_posts.nil?
+			- else 
+			  table
+			    tr
+			      td
+			        = render 'shared/paginate', pad: 2, collection: @posts, id: 'search' 
+			      td align="right" valign="bottom"
+			        = render 'shared/search_fields'
+			    tr
+			      td colspan="2" id="search_stream"
+							ul
+							  = render partial: 'tile', collection: @posts unless @posts.nil?
 
 		- else
 			table
