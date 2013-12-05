@@ -11,7 +11,7 @@ shared_examples_for "a page with sidebar" do
   it { should have_selector('div.cheatsheet') }
   it { should have_content cheatsheet_text }
   it { should have_selector('li.tile') }
-  it { should have_selector("a#tile_#{Post.published.first.id}", 
+  it { should have_selector("a#search_link_#{Post.published.first.id}", 
     href="#{post_path(Post.published.first)}")}
   it { should have_link(shapes_text.strip, href: shapes_path) }
  end

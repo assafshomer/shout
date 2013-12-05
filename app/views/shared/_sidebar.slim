@@ -2,7 +2,7 @@ p.stream_title
 	| recent posts
 div#stream
 	ul
-		= render partial: 'posts/tile', collection: @posts
+		= render partial: 'posts/tile', collection: @posts, locals: {name: 'search'}
 p.cheatsheet_title
 	| cheatsheet		
 div#cheatsheet

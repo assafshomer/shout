@@ -1,0 +1,40 @@
+<section>
+	<div class="row">
+		<table>
+			<tr>
+				<td>
+					<%=  render 'shared/paginate', pad: 2, collection: @posts, id: 'search' %>
+				</td>
+				<td align="right" valign="bottom">
+					<%= render 'shared/search_fields' %>
+				</td>
+				<td>
+					<%= render 'shared/paginate', pad: 2, collection: @local_posts, id: 'local' unless @local_posts.nil? %>
+				</td>
+				<td>
+					<p>Local posts from <%= @location %></p>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" id="search_stream">
+					<ul>
+						<% if @posts.to_a.any? %>
+							<%= render partial: 'tile', collection: @posts, locals: {name: 'search'} %>
+						<% else %>
+							no posts at this time
+						<% end %>
+					</ul>						
+				</td>
+				<td colspan="2" id="local_stream">
+					<ul>
+						<% if @local_posts.to_a.any? %>
+							<%= render partial: 'tile', collection: @local_posts, locals: {name: 'local'} %>
+						<% else %>
+							no local posts at this time for <%= @location %>
+						<% end %>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+</section>
