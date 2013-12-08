@@ -11,9 +11,11 @@
 				<td>
 					<%= render 'shared/paginate', pad: 2, collection: @local_posts, id: 'local' unless @local_posts.nil? %>
 				</td>
+				<% unless @location.nil? %>
 				<td>
-					<p>Local posts from <%= @location %></p>
+					<p id='local_title'>Local posts from <%= @location %></p>
 				</td>
+				<% end %>
 			</tr>
 			<tr>
 				<td colspan="2" id="search_stream">
@@ -25,6 +27,7 @@
 						<% end %>
 					</ul>						
 				</td>
+				<% unless @location.nil? %>
 				<td colspan="2" id="local_stream">
 					<ul>
 						<% if @local_posts.to_a.any? %>
@@ -34,6 +37,7 @@
 						<% end %>
 					</ul>
 				</td>
+				<% end %>
 			</tr>
 		</table>
 	</div>

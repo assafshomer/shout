@@ -86,11 +86,10 @@ module ViewsHelper
 	end
 
 	def tile_count(n=1)
-		if Rails.env == 'test'
-			10
-		else #9 rows X 21 cols	
-			9 * ((22-n)/n).floor 
-		end		
+		if Rails.env == 'test' #make thet tests run faster
+			return (10/n).floor
+		end
+		9 * ((22-n)/n).floor #9 rows X 21 cols	
 	end
 
 	def cheatsheet_text

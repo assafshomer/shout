@@ -2,4 +2,5 @@
 footer.footer
   nav
     | This will be the footer
-    = @count unless @count.nil?
+    = 'pagination per page:' + @count.to_s unless @count.nil?
+    = 'local posts:' + @local_posts.count.to_s unless @local_posts.nil?

@@ -106,10 +106,10 @@ class PostsController < ApplicationController
     end
 
     def set_tile_count
-      if @local_posts.nil?
-        @count = tile_count(1)
-      else
+      if @local_search.to_a.any?
         @count = tile_count(2)
+      else
+        @count = tile_count(1)
       end
     end
 

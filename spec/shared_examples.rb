@@ -15,3 +15,14 @@ shared_examples_for "a page with sidebar" do
     href="#{post_path(Post.published.first)}")}
   it { should have_link(shapes_text.strip, href: shapes_path) }
  end
+
+shared_examples_for "an index page" do 
+  it { should_not have_selector('textarea#inputbox') }    
+  it { should_not have_selector('input#preview_button') }   
+  it { should_not have_selector('input#publish_button') }     
+  it { should have_selector('td#search_stream') }
+  # it { should have_selector('td#local_stream') }
+  it { should have_selector('input#search')}
+  it { should have_button 'Search'}
+  it { should have_button 'Clear'}
+end  
