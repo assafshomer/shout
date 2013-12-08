@@ -56,8 +56,7 @@ class PostsController < ApplicationController
     @all_posts=Post.published.to_a
     @search_results=search_stream(params[:search], Post.published)
     @local_search=local_stream(@location, Post.published) 
-    set_tile_count
-    # set_zoom unless params[:search].nil?  
+    @count=set_tile_count(@location)
     @posts=@search_results.paginate(page: params[:search_page], 
       per_page: @count).order('created_at DESC')
     @local_posts=@local_search.paginate(page: params[:local_page], 
@@ -105,11 +104,11 @@ class PostsController < ApplicationController
       @count = search_tile_count
     end
 
-    def set_tile_count
-      if @local_search.to_a.any?
-        @count = tile_count(2)
+    def set_tile_count(location)
+      if location.blank?
+        return tile_count(1)
       else
-        @count = tile_count(1)
+        return tile_count(2)
       end
     end
 

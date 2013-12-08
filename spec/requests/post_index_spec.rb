@@ -83,7 +83,6 @@ describe "index" do
 					FactoryGirl.create(:post, published: true, content: "humus", location: loc)
 				end 				
 				visit posts_path
-				# save_and_open_page
 			end
 			it_should_behave_like 'all pages'
 			it_should_behave_like 'an index page'		
@@ -104,8 +103,39 @@ describe "index" do
 				it { should have_selector("li##{'search_tile_'+Post.all[tile_count(2)-1].id.to_s}") }	
 				it { should_not have_selector("li##{'search_tile_'+Post.all[tile_count(2)].id.to_s}") }					
 			end
+			describe "after zeroing out location" do
+				before do
+					visit signin_path
+					fill_in 'location', with: ''
+					click_button signin_button_title
+					visit posts_path
+				end
+				it { should_not have_selector('td#local_stream') }	
+				it { should_not have_content("no local posts at this time") }						
+				describe "search stream tile count should be full" do
+					it { should have_selector("li##{'search_tile_'+Post.first.id.to_s}") }	
+					it { should have_selector("li##{'search_tile_'+Post.all[tile_count(1)-1].id.to_s}") }	
+					it { should_not have_selector("li##{'search_tile_'+Post.all[tile_count(1)].id.to_s}") }					
+				end								
+			end
+			describe "after changing location to a location without local posts" do
+				before do
+					visit signin_path
+					fill_in 'location', with: 'The moon'
+					click_button signin_button_title
+					visit posts_path
+				end
+				it { should have_selector('td#local_stream') }	
+				it { should have_content("no local posts at this time for The moon") }						
+				describe "search stream tile count should be full" do
+					it { should have_selector("li##{'search_tile_'+Post.first.id.to_s}") }	
+					it { should have_selector("li##{'search_tile_'+Post.all[tile_count(2)-1].id.to_s}") }	
+					it { should_not have_selector("li##{'search_tile_'+Post.all[tile_count(2)].id.to_s}") }					
+				end								
+			end			
 		end	  	
-  end	  
+  end	 
+
 	describe "linking to show" do
 		describe "simple linking" do
 			let!(:text) { "test simple link" }
