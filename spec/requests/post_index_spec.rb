@@ -71,6 +71,25 @@ describe "index" do
   		it { should have_selector('td#local_stream') }
   		it { should have_content('no local posts at this time') }			 		
   	end
+  	describe "local stream should search not match with LIKE" do
+  		let!(:p1) { FactoryGirl.create(:post, published: true, location: 'Tel-Baruch') }
+  		before do
+				visit signin_path
+				fill_in 'location', with: 'Tel'
+				click_button signin_button_title
+				visit posts_path  		  
+  		end
+  		it { should have_selector('p#local_title', text: 'Local posts from Tel') }
+  		it { should have_content('no local posts at this time for Tel') }		  		
+  		it { should_not have_selector("li##{'local_tile_'+p1.id.to_s}") }	
+  		describe "but should match exactly" do
+				let!(:p2) { FactoryGirl.create(:post, published: true, location: 'Tel-Sheva') }
+				before { visit posts_path }
+  			it { should_not have_content('no local posts at this time for Tel') }		  		
+  			it { should have_selector("li##{'local_tile_'+p2.id.to_s}") }					
+  			it { should_not have_selector("li##{'local_tile_'+p1.id.to_s}") }	
+  		end
+  	end
 		describe "with location and local posts" do
 			let!(:loc) { 'Tehran' }
 			let!(:pre3) { FactoryGirl.create(:post, content: "fuckbuttons", location: loc) }
