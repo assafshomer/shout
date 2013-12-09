@@ -71,7 +71,7 @@ describe "index" do
   		it { should have_selector('td#local_stream') }
   		it { should have_content('no local posts at this time') }			 		
   	end
-  	describe "local stream should search not match with LIKE" do
+  	describe "local stream search should not match with LIKE" do
   		let!(:p1) { FactoryGirl.create(:post, published: true, location: 'Tel-Baruch') }
   		before do
 				visit signin_path
@@ -83,7 +83,7 @@ describe "index" do
   		it { should have_content('no local posts at this time for Tel') }		  		
   		it { should_not have_selector("li##{'local_tile_'+p1.id.to_s}") }	
   		describe "but should match exactly" do
-				let!(:p2) { FactoryGirl.create(:post, published: true, location: 'Tel-Sheva') }
+				let!(:p2) { FactoryGirl.create(:post, published: true, location: 'Tel') }
 				before { visit posts_path }
   			it { should_not have_content('no local posts at this time for Tel') }		  		
   			it { should have_selector("li##{'local_tile_'+p2.id.to_s}") }					
