@@ -50,6 +50,11 @@ div.center{
   width:70%;
 }
 
+div.right{
+  float:right;
+  width:50%;
+}
+
 .table_header{
   color:yellow;
   font-weight:none;  
@@ -482,6 +487,8 @@ td#search_stream, td#local_stream {
 p#search_title, p#local_title {
   color: yellow;
 }
-table#search_panel{
-  margin-top:1em;
+table.search_panel, td.search_panel{
+  float:right;  
+  width:100%;
+  margin-right:3em;
 }
