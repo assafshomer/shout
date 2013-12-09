@@ -151,8 +151,28 @@ describe "index" do
 					it { should have_selector("li##{'search_tile_'+Post.all[tile_count(2)-1].id.to_s}") }	
 					it { should_not have_selector("li##{'search_tile_'+Post.all[tile_count(2)].id.to_s}") }					
 				end								
-			end			
-		end	  	
+			end		
+			describe "with location upto a case" do
+				before do
+					visit signin_path
+					fill_in 'location', with: 'teHraN'
+					click_button signin_button_title
+					visit posts_path
+				end
+				it_should_behave_like 'all pages'
+				it_should_behave_like 'an index page'		
+				it { should_not have_content("no local posts at this time") }			
+				it { should have_selector('p#local_title', text: 'Local posts from '+'teHraN') }
+				it { should have_selector('div.pagination#local') }
+				describe "local stream tile count should be right" do
+					let!(:localposts) { Post.where("location = 'Tehran'") }
+					it { should have_selector("li##{'local_tile_'+localposts.first.id.to_s}", text: /#{pulverize('humus','\W')}/) }					
+					it { should have_selector("li##{'local_tile_'+localposts[tile_count(2) -1].id.to_s}") }					
+					it { should_not have_selector("li##{'local_tile_'+localposts[tile_count(2)].id.to_s}") }			
+				end	
+			end				
+		end	
+
   end	 
 
 	describe "linking to show" do

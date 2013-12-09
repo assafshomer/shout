@@ -1,21 +1,20 @@
 module SearchHelper
 
 	def generate_sql(space_separated_terms, space_separated_field_names, class_name, type='LIKE')		
-		search_terms=extract_minimal_search_terms(space_separated_terms, type)
+		search_terms=extract_minimal_search_terms(space_separated_terms)
 		like_terms=wrap_with_percent(search_terms, type)
 		field_names=extract_legal_fields(space_separated_field_names, class_name)
-		sql_query=generate_query(search_terms,field_names, type)
+		sql_query=generate_query(search_terms,field_names)
 		[sql_query] + like_terms*field_names.size   
 	end
 
-	def generate_query(search_terms_array,field_names_array, type='LIKE')
+	def generate_query(search_terms_array,field_names_array)
 		sql_query=""
-		type='LIKE' unless (type =='LIKE' || type == '=')
 		field_names_array.each do |field|
-			if Rails.configuration.database_configuration[Rails.env]["adapter"] =~ /postgresql/ && type='LIKE'
+			if Rails.configuration.database_configuration[Rails.env]["adapter"] =~ /postgresql/
 				append_like=["#{field} ILIKE ? "]*search_terms_array.size	
 			else
-				append_like=["#{field} #{type} ? "]*search_terms_array.size
+				append_like=["#{field} LIKE ? "]*search_terms_array.size
 		end      
 			sql_query+=append_like.join(" OR ") + " OR "
 		end
@@ -60,13 +59,9 @@ module SearchHelper
 	# 	sql_query=sql_query[0,sql_query.length-' OR '.length]		
 	# end	
 
-	def extract_minimal_search_terms(space_separated_terms, type='LIKE')
+	def extract_minimal_search_terms(space_separated_terms)
 		search_array=space_separated_terms[0,40].split
-		if type=='LIKE'
-			search_array=search_array.compact.map(&:downcase).uniq	
-		else
-			search_array=search_array.compact.uniq	
-		end		
+		search_array=search_array.compact.map(&:downcase).uniq	
 		search_array.each do |x|
 			search_array.each do |y|
 				search_array=search_array-([]<<y) if y.include?(x) and y!=x

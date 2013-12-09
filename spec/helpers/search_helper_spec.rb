@@ -8,34 +8,36 @@ describe SearchHelper do
     end
     it "should work with 1 search field" do
       generate_sql("foo", 'bar', nil).should ==["bar LIKE ? ", "%foo%"]
-      generate_sql("foo", 'bar', nil,'=').should ==["bar = ? ", "foo"]
+      generate_sql("foo", 'bar', nil,'=').should ==["bar LIKE ? ", "foo"]
     end          
     it "should work with 3 search fields" do
       generate_sql("foo", 'bar baz quux',nil).should ==
       ["bar LIKE ?  OR baz LIKE ?  OR quux LIKE ? ", "%foo%", "%foo%", "%foo%"]
       generate_sql("foo", 'bar baz quux',nil,'=').should ==
-      ["bar = ?  OR baz = ?  OR quux = ? ", "foo", "foo", "foo"]      
+      ["bar LIKE ?  OR baz LIKE ?  OR quux LIKE ? ", "foo", "foo", "foo"]      
     end
     it "should work with 2 search fields and 2 search terms" do
       generate_sql("foo bar", 'buz quux',nil).should ==
       ["buz LIKE ?  OR buz LIKE ?  OR quux LIKE ?  OR quux LIKE ? ", "%foo%", "%bar%", "%foo%", "%bar%"]
       generate_sql("foo bar", 'buz quux',nil,'=').should ==
-      ["buz = ?  OR buz = ?  OR quux = ?  OR quux = ? ", "foo", "bar", "foo", "bar"]      
+      ["buz LIKE ?  OR buz LIKE ?  OR quux LIKE ?  OR quux LIKE ? ", "foo", "bar", "foo", "bar"]      
     end
     it "should collapse duplicates" do
       generate_sql("foo foo foo buz buz foo", 'bar',nil).should ==
       ["bar LIKE ?  OR bar LIKE ? ", "%foo%", "%buz%"]
       generate_sql("foo foo foo buz buz foo", 'bar',nil,'=').should ==
-      ["bar = ?  OR bar = ? ", "foo", "buz"]      
+      ["bar LIKE ?  OR bar LIKE ? ", "foo", "buz"]      
     end
     it "should collapse duplicates up to case for LIKE search" do
       generate_sql("foo FoO Foo buZ BUZ fOo", 'bar',nil).should ==
       ["bar LIKE ?  OR bar LIKE ? ", "%foo%", "%buz%"]
-    end
-    it "should NOT collapse duplicates up to case for EQUAL search" do
       generate_sql("foo FoO Foo buZ BUZ fOo", 'bar',nil,'=').should ==
-      ["bar = ?  OR bar = ?  OR bar = ?  OR bar = ?  OR bar = ?  OR bar = ? ", "foo", "FoO", "Foo", "buZ", "BUZ", "fOo"]      
-    end    
+      ["bar LIKE ?  OR bar LIKE ? ", "foo", "buz"]      
+    end
+    # it "should NOT collapse duplicates up to case for EQUAL search" do
+    #   generate_sql("foo FoO Foo buZ BUZ fOo", 'bar',nil,'=').should ==
+    #   ["bar = ?  OR bar = ?  OR bar = ?  OR bar = ?  OR bar = ?  OR bar = ? ", "foo", "FoO", "Foo", "buZ", "BUZ", "fOo"]      
+    # end    
     it "should truncate search terms after 41 characters" do
       generate_sql("f"*50, 'bar',nil).should == generate_sql("f"*40, 'bar',nil)      
       generate_sql("f"*50, 'bar',nil).should_not == generate_sql("f"*39, 'bar',nil)
@@ -49,13 +51,13 @@ describe SearchHelper do
     it "should truncate duplicates" do
       extract_minimal_search_terms('a a b b a c').should == ['a','b','c']
     end
-    it "ignore case for LIKE search" do
+    it "ignore case" do
       extract_minimal_search_terms('aa aa aA Aa AA').should ==['aa']
     end
-    it "NOT ignore case for EQUAL search" do
-      extract_minimal_search_terms('aa aA Aa AA','=').should ==['aa','aA','Aa','AA']
-      extract_minimal_search_terms('aa aa aA Aa AA AA AA','=').should ==['aa','aA','Aa','AA']
-    end    
+    # it "NOT ignore case for EQUAL search" do
+    #   extract_minimal_search_terms('aa aA Aa AA','=').should ==['aa','aA','Aa','AA']
+    #   extract_minimal_search_terms('aa aa aA Aa AA AA AA','=').should ==['aa','aA','Aa','AA']
+    # end    
     it "should not choke on empty string" do
       extract_minimal_search_terms('').should == []
     end
@@ -82,15 +84,15 @@ describe SearchHelper do
   describe "generate_query" do
     it "should work with one search term and one field" do
       generate_query(['foo'],['bar']).should == 'bar LIKE ? '
-      generate_query(['foo'],['bar'],'=').should == 'bar = ? '
+      generate_query(['foo'],['bar']).should == 'bar LIKE ? '
     end
     it "should not choke on empty" do
-      generate_query([],['bar'],'=').should be_blank
-      generate_query(['foo'],[],'=').should be_blank
-      generate_query([],[],'=').should be_blank
+      generate_query([],['bar']).should be_blank
+      generate_query(['foo'],[]).should be_blank
+      generate_query([],[]).should be_blank
     end   
     it "should work with 2 search terms" do
-      generate_query(['foo','bar'],['baz','quux'],'=').should == "baz = ?  OR baz = ?  OR quux = ?  OR quux = ? " 
+      generate_query(['foo','bar'],['baz','quux']).should == "baz LIKE ?  OR baz LIKE ?  OR quux LIKE ?  OR quux LIKE ? " 
       generate_query(['foo','bar'],['baz','quux']).should == "baz LIKE ?  OR baz LIKE ?  OR quux LIKE ?  OR quux LIKE ? " 
     end 
   end  
