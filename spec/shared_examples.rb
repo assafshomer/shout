@@ -21,7 +21,7 @@ shared_examples_for "an index page" do
   it { should_not have_selector('input#preview_button') }   
   it { should_not have_selector('input#publish_button') }     
   it { should have_selector('td#search_stream') }
-  # it { should have_selector('td#local_stream') }
+  it { should have_selector('p#search_title', text: search_title) }
   it { should have_selector('input#search')}
   it { should have_button 'Search'}
   it { should have_button 'Clear'}

@@ -8,6 +8,10 @@ module ViewsHelper
 		"Locate"
 	end
 
+	def search_title
+		"All posts"
+	end	
+
 	def signin_button_title
 		"set your location"
 	end

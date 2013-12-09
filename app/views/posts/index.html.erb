@@ -2,23 +2,17 @@
 	<div class="row">
 		<table>
 			<tr>
-				<td>
-					<%=  render 'shared/paginate', pad: 2, collection: @posts, id: 'search' %>
-				</td>
-				<td align="right" valign="bottom">
-					<%= render 'shared/search_fields' %>
-				</td>
-				<% unless @location.nil? %>
-				<td>
-					<%= render 'shared/paginate', pad: 2, collection: @local_posts, id: 'local' unless @local_posts.nil? %>
-				</td>				
-				<td>
-					<p id='local_title'>Local posts from <%= @location %></p>
-				</td>
+				<th>
+					<p id='search_title'><%= search_title %></p>
+				</th>
+				<% unless @location.blank? %>
+					<th>
+						<p id='local_title'>Local posts from <%= @location %></p>
+					</th>				
 				<% end %>
 			</tr>
 			<tr>
-				<td colspan="2" id="search_stream">
+				<td id="search_stream">
 					<ul>
 						<% if @posts.to_a.any? %>
 							<%= render partial: 'tile', collection: @posts, locals: {name: 'search'} %>
@@ -28,7 +22,7 @@
 					</ul>						
 				</td>
 				<% unless @location.blank? %>
-				<td colspan="2" id="local_stream">
+				<td id="local_stream">
 					<ul>
 						<% if @local_posts.to_a.any? %>
 							<%= render partial: 'tile', collection: @local_posts, locals: {name: 'local'} %>
@@ -39,6 +33,25 @@
 				</td>
 				<% end %>
 			</tr>
+			<tr>
+				<td>
+					<table class="search_panel">
+						<tr>
+							<td>
+								<%=  render 'shared/paginate', pad: 2, collection: @posts, id: 'search' %>			
+							</td>
+							<td align="right" valign="top">
+								<%= render 'shared/search_fields' %>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<% unless @location.nil? %>
+					<td>
+						<%= render 'shared/paginate', pad: 2, collection: @local_posts, id: 'local' unless @local_posts.nil? %>
+					</td>				
+				<% end %>
+			</tr>			
 		</table>
 	</div>
 </section>
