@@ -487,8 +487,26 @@ td#search_stream, td#local_stream {
 p#search_title, p#local_title {
   color: yellow;
 }
-table.search_panel, td.search_panel{
-  float:right;  
-  width:100%;
-  margin-right:3em;
+table.full{
+  width:95%;
+}
+td.half{
+  width:50%; 
+}
+td.up{
+  vertical-align:top;
+}
+div.pagination{
+  margin:5 0;
+}
+td.right#search_panel{
+  width:20%;
+  float:right;
+  text-align:right;
+  margin-right:25px;
+}
+td.left#paginate{
+  width:80%;
+  float:left;
+  text-align:left;
 }

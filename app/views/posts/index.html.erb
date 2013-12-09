@@ -35,19 +35,19 @@
 			</tr>
 			<tr>
 				<td>
-					<table class="search_panel">
+					<table class="full">
 						<tr>
-							<td class="search_panel">
+							<td class="center up" id="search_paginate">
 								<%=  render 'shared/paginate', pad: 2, collection: @posts, id: 'search' %>			
 							</td>
-							<td>
+							<td class="right" id="search_panel">
 								<%= render 'shared/search_fields' %>
 							</td>
 						</tr>
 					</table>
 				</td>
 				<% unless @location.nil? %>
-					<td>
+					<td class="center up" id="search_paginate">
 						<%= render 'shared/paginate', pad: 2, collection: @local_posts, id: 'local' unless @local_posts.nil? %>
 					</td>				
 				<% end %>
