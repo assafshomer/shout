@@ -6,7 +6,7 @@ class StaticController < ApplicationController
   	@title="Home"
     @post=Post.new 
     @posts=Post.publication_tail
-    @zoom="minioutput"
+    @zoom="small"
   end
 
   def help

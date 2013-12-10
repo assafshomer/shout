@@ -15,7 +15,7 @@
 				<td id="search_stream">
 					<ul>
 						<% if @posts.to_a.any? %>
-							<%= render partial: 'tile', collection: @posts, locals: {name: 'search'} %>
+							<%= render partial: 'tile', collection: @posts, locals: {name: 'search', zoom: @search_zoom} %>
 						<% else %>
 							no posts at this time
 						<% end %>
@@ -25,7 +25,7 @@
 				<td id="local_stream">
 					<ul>
 						<% if @local_posts.to_a.any? %>
-							<%= render partial: 'tile', collection: @local_posts, locals: {name: 'local'} %>
+							<%= render partial: 'tile', collection: @local_posts, locals: {name: 'local', zoom: @local_zoom} %>
 						<% else %>
 							no local posts at this time for <%= @location %>
 						<% end %>

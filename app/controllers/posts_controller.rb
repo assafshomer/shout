@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @title=new_title
     @post=Post.new 
     @posts=Post.publication_tail
-    @zoom="minioutput"
+    @zoom="small"
   end
 
   def create
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   	@post=Post.new(post_params)
     @post.location=@location
     @posts=Post.publication_tail
-    @zoom="minioutput"    
+    @zoom="small"    
     if @post.save
       fork(@post)
     else
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
     @post=Post.find(params[:id])
     @post.location=@location
     @posts=Post.publication_tail
-    @zoom="minioutput"
+    @zoom="small"
   end
 
   def update
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
     @post=Post.find(params[:id])
     @post.location=@location
     @posts=Post.publication_tail
-    @zoom="minioutput"    
+    @zoom="small"    
     if @post.update_attributes(post_params)
       fork(@post)
     else
@@ -52,15 +52,16 @@ class PostsController < ApplicationController
 
   def index 
     @title=index_title
-    @zoom="superminioutput"
+    @search_zoom="tiny"
+    @local_zoom="medium"
     @all_posts=Post.published.to_a
     @search_results=search_stream(params[:search], Post.published)
-    @local_search=local_stream(@location, Post.published) 
+    @local_results=local_stream(@location, Post.published) 
     @count=set_tile_count(@location)
     @posts=@search_results.paginate(page: params[:search_page], 
       per_page: @count).order('created_at DESC')
-    @local_posts=@local_search.paginate(page: params[:local_page], 
-      per_page: @count).order('created_at DESC') unless @local_search.nil?
+    @local_posts=@local_results.paginate(page: params[:local_page], 
+      per_page: @count).order('created_at DESC') unless @local_results.nil?
     redirect_to posts_path if params[:commit]=='Clear'
   end
 
@@ -100,7 +101,7 @@ class PostsController < ApplicationController
     end
 
     def set_zoom
-      @zoom = "smalloutput" 
+      @zoom = "medium" 
       @count = search_tile_count
     end
 

@@ -336,7 +336,7 @@ textarea#inputbox{
   @include box; 
 }
 
-.bigoutput{
+.big{
   @include output;
   font-size:16; 
   padding:16px;
@@ -345,7 +345,7 @@ textarea#inputbox{
   }  
 }
 
-.smalloutput{
+.medium{
   @include tile;
   padding:4px;
   font-size:8;
@@ -354,7 +354,7 @@ textarea#inputbox{
   }  
 }
 
-.minioutput{
+.small{
   @include tile;
   padding:2px;
   font-size:4;
@@ -363,7 +363,7 @@ textarea#inputbox{
   }  
 }
 
-.superminioutput{
+.tiny{
   @include tile;
   padding:1px;
   font-size:2;

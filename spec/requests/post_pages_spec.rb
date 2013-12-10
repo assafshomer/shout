@@ -17,7 +17,7 @@ describe "PostPages" do
 			visit new_post_path
 		end			
 		it { should have_selector('textarea#inputbox', text: "") }
-		it { should_not have_selector('div.bigoutput') }		
+		it { should_not have_selector('div.big') }		
 		it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
 		it { should have_button preview_button_title}
 		it { should have_selector('input#preview_button') }
@@ -33,7 +33,7 @@ describe "PostPages" do
 			shared_examples_for "an invalid post" do
 				it { should have_selector('div.alert.alert-error', text: 'too short') }
 				it { should have_button preview_button_title}
-				it { should_not have_selector('div.bigoutput') }		
+				it { should_not have_selector('div.big') }		
 				it { should_not have_button publish_button_title }
 				it { should_not have_selector('div.alert.alert-success') }
 			end
@@ -62,7 +62,7 @@ describe "PostPages" do
 				it { should_not have_selector('div.alert.alert-error', text: 'error') }
 				it { should_not have_selector('div.alert.alert-success') }
 				it { should have_selector('textarea#inputbox', text: "OK") }
-				it { should have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }
+				it { should have_selector('div.big', text: /#{pulverize('OK','\W')}/) }
 				specify {current_path.should == edit_post_path(Post.ids.max)}
 				it { should have_button preview_button_title}
 				it { should have_button publish_button_title}	
@@ -79,7 +79,7 @@ describe "PostPages" do
 				it { should_not have_selector('div.alert.alert-error', text: 'error') }
 				it { should have_selector('div.alert.alert-success') }
 				it { should_not have_selector('textarea#inputbox', text: "OK") }
-				it { should_not have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }	
+				it { should_not have_selector('div.big', text: /#{pulverize('OK','\W')}/) }	
 				it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }	
 				it { should have_button preview_button_title}
 				it { should_not have_button publish_button_title }							
@@ -116,7 +116,7 @@ describe "PostPages" do
 		it_should_behave_like 'a page with sidebar'
 		specify {current_path.should == edit_post_path(Post.ids.max)}					
 		it { should have_selector('textarea#inputbox', text: "blah blah") }
-		it { should have_selector('div.bigoutput', text: /#{pulverize('blah blah','\W')}/) }
+		it { should have_selector('div.big', text: /#{pulverize('blah blah','\W')}/) }
 		it { should have_selector('input#preview_button') }
 		it { should have_selector('input#publish_button') }
 
@@ -149,7 +149,7 @@ describe "PostPages" do
 				it { should_not have_selector('div.alert.alert-error', text: 'error') }
 				it { should_not have_selector('div.alert.alert-success') }
 				it { should have_selector('textarea#inputbox', text: "OK") }
-				it { should have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }
+				it { should have_selector('div.big', text: /#{pulverize('OK','\W')}/) }
 				specify {current_path.should == edit_post_path(Post.ids.max)}
 			end				
 		end
@@ -183,7 +183,7 @@ describe "PostPages" do
 				it { should_not have_selector('div.alert.alert-error', text: 'error') }
 				it { should have_selector('div.alert.alert-success') }
 				it { should_not have_selector('textarea#inputbox', text: "OK") }
-				it { should_not have_selector('div.bigoutput', text: /#{pulverize('OK','\W')}/) }	
+				it { should_not have_selector('div.big', text: /#{pulverize('OK','\W')}/) }	
 				it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }				
 				specify {current_path.should == new_post_path}
 				it { should have_title full_title(new_title) }
@@ -252,23 +252,23 @@ describe "PostPages" do
 			  visit post_path p1.id	
 			end
 			it_should_behave_like 'all pages'			
-			it { should have_selector('div.bigoutput', text: /#{pulverize(p1.content,'\W')}/) }				
+			it { should have_selector('div.big', text: /#{pulverize(p1.content,'\W')}/) }				
 			it { should have_selector('p.metadata', text: /#{metadata(p1)}/) }	
 		end
 		describe "post with newline" do
 			let!(:p1) { FactoryGirl.create(:post, content: two_lines) }
 			before { visit post_path p1.id }
-			it { should have_selector('div.bigoutput',
+			it { should have_selector('div.big',
 			 text: /#{pulverize('of.','\W')}.*#{pulverize('After','\W')}/)}
-			it { should_not have_selector('div.bigoutput',
+			it { should_not have_selector('div.big',
 			 text: /#{pulverize('of.','\W')}#{pulverize('After','\W')}/)}
 		end
 		describe "post with line breaks" do
 			let!(:p1) { FactoryGirl.create(:post, content: line_break) }
 			before { visit post_path p1.id }
-			it { should have_selector('div.bigoutput',
+			it { should have_selector('div.big',
 			 text: /#{pulverize('before','\W')}.*#{pulverize('after','\W')}/)}
-			it { should_not have_selector('div.bigoutput',
+			it { should_not have_selector('div.big',
 			 text: /#{pulverize('before','\W')}#{pulverize('after','\W')}/)}			
 		end		
 		describe "posts with active links" do
