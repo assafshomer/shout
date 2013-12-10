@@ -57,7 +57,7 @@ describe "index" do
   		before { visit posts_path } 
   		it_should_behave_like 'an index page'
   		it { should_not have_selector('td#local_stream') }
-  		it { should_not have_content('no local posts at this time') }
+  		it { should_not have_content(no_local_posts_message) }
   		it { should_not have_selector('div#local_title', text: 'Local posts from') }
   	end
   	describe "with location but no local posts" do
@@ -69,7 +69,7 @@ describe "index" do
 				visit posts_path
 			end
   		it { should have_selector('td#local_stream') }
-  		it { should have_content('no local posts at this time') }			 		
+  		it { should have_content(no_local_posts_message) }			 		
   	end
   	describe "local stream search should not match with LIKE" do
   		let!(:p1) { FactoryGirl.create(:post, published: true, location: 'Tel-Baruch') }
@@ -80,12 +80,12 @@ describe "index" do
 				visit posts_path  		  
   		end
   		it { should have_selector('div#local_title', text: 'Local posts from Tel') }
-  		it { should have_content('no local posts at this time for Tel') }		  		
+  		it { should have_content(no_local_posts_message+'Tel') }		  		
   		it { should_not have_selector("li##{'local_tile_'+p1.id.to_s}") }	
   		describe "but should match exactly" do
 				let!(:p2) { FactoryGirl.create(:post, published: true, location: 'Tel') }
 				before { visit posts_path }
-  			it { should_not have_content('no local posts at this time for Tel') }		  		
+  			it { should_not have_content(no_local_posts_message+'Tel') }		  		
   			it { should have_selector("li##{'local_tile_'+p2.id.to_s}") }					
   			it { should_not have_selector("li##{'local_tile_'+p1.id.to_s}") }	
   		end
@@ -105,7 +105,7 @@ describe "index" do
 			end
 			it_should_behave_like 'all pages'
 			it_should_behave_like 'an index page'		
-			it { should_not have_content("no local posts at this time") }			
+			it { should_not have_content(no_local_posts_message) }			
 			it { should have_selector('div#local_title', text: 'Local posts from '+loc) }
 			it { should have_selector('div.pagination#local') }
 			describe "preview" do
@@ -130,7 +130,7 @@ describe "index" do
 					visit posts_path
 				end
 				it { should_not have_selector('td#local_stream') }	
-				it { should_not have_content("no local posts at this time") }						
+				it { should_not have_content(no_local_posts_message) }						
 				describe "search stream tile count should be full" do
 					it { should have_selector("li##{'search_tile_'+Post.first.id.to_s}") }	
 					it { should have_selector("li##{'search_tile_'+Post.all[tile_count(1)-1].id.to_s}") }	
@@ -145,7 +145,7 @@ describe "index" do
 					visit posts_path
 				end
 				it { should have_selector('td#local_stream') }	
-				it { should have_content("no local posts at this time for The moon") }						
+				it { should have_content(no_local_posts_message+"The moon") }						
 				describe "search stream tile count should be full" do
 					it { should have_selector("li##{'search_tile_'+Post.first.id.to_s}") }	
 					it { should have_selector("li##{'search_tile_'+Post.all[tile_count(2)-1].id.to_s}") }	
@@ -161,7 +161,7 @@ describe "index" do
 				end
 				it_should_behave_like 'all pages'
 				it_should_behave_like 'an index page'		
-				it { should_not have_content("no local posts at this time") }			
+				it { should_not have_content(no_local_posts_message) }			
 				it { should have_selector('div#local_title', text: 'Local posts from '+'teHraN') }
 				it { should have_selector('div.pagination#local') }
 				describe "local stream tile count should be right" do

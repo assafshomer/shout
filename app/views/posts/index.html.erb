@@ -27,7 +27,7 @@
 						<% if @local_posts.to_a.any? %>
 							<%= render partial: 'tile', collection: @local_posts, locals: {name: 'local', zoom: @local_zoom} %>
 						<% else %>
-							no local posts at this time for <%= @location %>
+							no local posts from <%= @location %>
 						<% end %>
 					</ul>
 				</td>

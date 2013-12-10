@@ -20,6 +20,10 @@ module ViewsHelper
 		"What is your location"
 	end
 
+	def no_local_posts_message
+		'no local posts from '
+	end
+
 	def publish_button_title
 		# app_title
 		"Post"
