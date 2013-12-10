@@ -382,6 +382,7 @@ textarea#inputbox{
   font-weight:normal;
   font-size:12px;
   display:inline;
+  margin-bottom:1em;
 }
 .lower{
   padding-top:1em;
@@ -516,4 +517,5 @@ td.left#paginate{
 tr#index_titles th{
   padding-bottom:1em;
   padding-top:1em;
+  vertical-align:middle;
 }

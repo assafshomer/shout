@@ -59,7 +59,7 @@ class PostsController < ApplicationController
     @local_results=local_stream(@location, Post.published) 
     @search_count=set_tile_count(@location)
     @local_count=@search_count
-    set_search_zoom unless params[:search].nil?
+    # set_search_zoom unless params[:search].nil?
     @posts=@search_results.paginate(page: params[:search_page], 
       per_page: @search_count).order('created_at DESC')
     @local_posts=@local_results.paginate(page: params[:local_page], 

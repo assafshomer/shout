@@ -58,7 +58,7 @@ describe "index" do
   		it_should_behave_like 'an index page'
   		it { should_not have_selector('td#local_stream') }
   		it { should_not have_content('no local posts at this time') }
-  		it { should_not have_selector('p#local_title', text: 'Local posts from') }
+  		it { should_not have_selector('div#local_title', text: 'Local posts from') }
   	end
   	describe "with location but no local posts" do
   		let!(:loc) { 'Dimona' }
@@ -79,7 +79,7 @@ describe "index" do
 				click_button signin_button_title
 				visit posts_path  		  
   		end
-  		it { should have_selector('p#local_title', text: 'Local posts from Tel') }
+  		it { should have_selector('div#local_title', text: 'Local posts from Tel') }
   		it { should have_content('no local posts at this time for Tel') }		  		
   		it { should_not have_selector("li##{'local_tile_'+p1.id.to_s}") }	
   		describe "but should match exactly" do
@@ -106,7 +106,7 @@ describe "index" do
 			it_should_behave_like 'all pages'
 			it_should_behave_like 'an index page'		
 			it { should_not have_content("no local posts at this time") }			
-			it { should have_selector('p#local_title', text: 'Local posts from '+loc) }
+			it { should have_selector('div#local_title', text: 'Local posts from '+loc) }
 			it { should have_selector('div.pagination#local') }
 			describe "preview" do
 				it { should_not have_selector("li##{'local_tile_'+pre3.id.to_s}") }	
@@ -162,7 +162,7 @@ describe "index" do
 				it_should_behave_like 'all pages'
 				it_should_behave_like 'an index page'		
 				it { should_not have_content("no local posts at this time") }			
-				it { should have_selector('p#local_title', text: 'Local posts from '+'teHraN') }
+				it { should have_selector('div#local_title', text: 'Local posts from '+'teHraN') }
 				it { should have_selector('div.pagination#local') }
 				describe "local stream tile count should be right" do
 					let!(:localposts) { Post.where("location = 'Tehran'") }
