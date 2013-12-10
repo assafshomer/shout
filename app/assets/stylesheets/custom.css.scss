@@ -472,15 +472,12 @@ div.cheatsheet {
   font-size:3em;
   color:black;
 }
-div#bgd{
+.home{
   background: url(image_path('bulletin5.jpg')) no-repeat;
   background-size:100%;
   width:100%;
   height:100%;
   @include opacity25;    
-}
-#locform{
-  background:none;  
 }
 p.metadata{
   color:gray;
