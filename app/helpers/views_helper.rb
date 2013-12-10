@@ -58,7 +58,7 @@ module ViewsHelper
 	end
 
 	def new_title
-		'Compose'
+		'Write'
 	end
 
 	def edit_title
@@ -70,7 +70,7 @@ module ViewsHelper
 	end
 
 	def index_title
-		"Watch"
+		"Walk-by"
 	end
 
 	def feed_title
@@ -87,10 +87,6 @@ module ViewsHelper
 			content += ' '
 		end
 		content[0..content.length-2]
-	end
-
-	def tile_title
-		'Watch'
 	end
 
 	def tile_count(n=1)
