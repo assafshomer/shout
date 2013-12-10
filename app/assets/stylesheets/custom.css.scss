@@ -472,12 +472,15 @@ div.cheatsheet {
   font-size:3em;
   color:black;
 }
-.home{
+div#bgd{
   background: url(image_path('bulletin5.jpg')) no-repeat;
   background-size:100%;
   width:100%;
   height:100%;
-  @include opacity25;  
+  @include opacity25;    
+}
+#locform{
+  background:none;  
 }
 p.metadata{
   color:gray;
@@ -518,4 +521,11 @@ tr#index_titles th{
   padding-bottom:1em;
   padding-top:1em;
   vertical-align:middle;
+}
+#outPopUp{
+  position:absolute;
+  z-index:15;
+  top:50%;
+  left:50%;
+  margin:-100px 0 0 -150px;
 }
