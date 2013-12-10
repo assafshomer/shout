@@ -1,13 +1,13 @@
 <section>
 	<div class="row">
 		<table>
-			<tr>
+			<tr id="index_titles">
 				<th>
-					<p id='search_title'><%= search_title %></p>
+					<div id='search_title'><%= search_title %><%= render 'shared/search_counter' %><div>
 				</th>
 				<% unless @location.blank? %>
 					<th>
-						<p id='local_title'>Local posts from <%= @location %></p>
+						<div id='local_title'>Local posts from <%= @location %></div>
 					</th>				
 				<% end %>
 			</tr>

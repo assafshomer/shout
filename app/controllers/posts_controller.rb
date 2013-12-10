@@ -53,15 +53,17 @@ class PostsController < ApplicationController
   def index 
     @title=index_title
     @search_zoom="tiny"
-    @local_zoom="medium"
+    @local_zoom="tiny"
     @all_posts=Post.published.to_a
     @search_results=search_stream(params[:search], Post.published)
     @local_results=local_stream(@location, Post.published) 
-    @count=set_tile_count(@location)
+    @search_count=set_tile_count(@location)
+    @local_count=@search_count
+    set_search_zoom unless params[:search].nil?
     @posts=@search_results.paginate(page: params[:search_page], 
-      per_page: @count).order('created_at DESC')
+      per_page: @search_count).order('created_at DESC')
     @local_posts=@local_results.paginate(page: params[:local_page], 
-      per_page: @count).order('created_at DESC') unless @local_results.nil?
+      per_page: @local_count).order('created_at DESC') unless @local_results.nil?
     redirect_to posts_path if params[:commit]=='Clear'
   end
 
@@ -100,9 +102,9 @@ class PostsController < ApplicationController
       redirect_to new_post_path if post.nil? || post.published? 
     end
 
-    def set_zoom
-      @zoom = "medium" 
-      @count = search_tile_count
+    def set_search_zoom
+      @search_zoom = "medium" 
+      @search_count = 4
     end
 
     def set_tile_count(location)
