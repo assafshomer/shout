@@ -24,6 +24,16 @@ describe "signup" do
 	end			
 
 	describe "filling in a location" do
+
+		describe "redirect to index after setting a location" do
+			before do
+			  fill_in 'location', with: 'Jumangi'
+			  click_button signin_button_title			  
+			end
+			it_should_behave_like 'the index page'
+			it { should have_link(wrap_location('Jumangi'), href: signin_path) }	
+		end
+
 		describe "well formed location" do
 			before do
 			  fill_in "location",             with: "foobar"  

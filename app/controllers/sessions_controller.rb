@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 		@title=full_title(signin_title)
 		@location=params[:location] || 'unknown'
 		cookies[:location]=@location 
-		redirect_to root_path
+		redirect_to posts_path
 	end
 
 end

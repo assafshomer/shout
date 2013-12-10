@@ -26,7 +26,7 @@ describe "index" do
 				visit posts_path
 			end
 			it_should_behave_like 'all pages'
-			it_should_behave_like 'an index page'	
+			it_should_behave_like 'the index page'	
 			it { should_not have_selector('td#local_stream') }	
 			it { should_not have_content("no posts at this time") }			
 			it { should have_selector('div.pagination#search') }
@@ -55,7 +55,7 @@ describe "index" do
   describe "local stream" do
   	describe "without location" do
   		before { visit posts_path } 
-  		it_should_behave_like 'an index page'
+  		it_should_behave_like 'the index page'
   		it { should_not have_selector('td#local_stream') }
   		it { should_not have_content(no_local_posts_message) }
   		it { should_not have_selector('div#local_title', text: 'Local posts from') }
@@ -104,7 +104,7 @@ describe "index" do
 				visit posts_path
 			end
 			it_should_behave_like 'all pages'
-			it_should_behave_like 'an index page'		
+			it_should_behave_like 'the index page'		
 			it { should_not have_content(no_local_posts_message) }			
 			it { should have_selector('div#local_title', text: 'Local posts from '+loc) }
 			it { should have_selector('div.pagination#local') }
@@ -160,7 +160,7 @@ describe "index" do
 					visit posts_path
 				end
 				it_should_behave_like 'all pages'
-				it_should_behave_like 'an index page'		
+				it_should_behave_like 'the index page'		
 				it { should_not have_content(no_local_posts_message) }			
 				it { should have_selector('div#local_title', text: 'Local posts from '+'teHraN') }
 				it { should have_selector('div.pagination#local') }
@@ -221,7 +221,7 @@ describe "index" do
 			let!(:preview1) { FactoryGirl.create(:post, content: "foobaz") }
 			before {visit posts_path}
 			it_should_behave_like 'all pages'
-			it_should_behave_like 'an index page'				
+			it_should_behave_like 'the index page'				
 			it { should_not have_selector('div.pagination') }
 			it { should_not have_selector("li##{'local_tile_'+preview1.id.to_s}", text: /#{pulverize(preview1.content,'\W')}/) }	
 			it { should have_content("no posts at this time") }				
@@ -230,7 +230,7 @@ describe "index" do
 			let!(:published1) { FactoryGirl.create(:post, content: "buzz quuaax", published: true)  }
 			before {visit posts_path}
 			it_should_behave_like 'all pages'
-			it_should_behave_like 'an index page'					
+			it_should_behave_like 'the index page'					
 			it { should_not have_selector('div.pagination') }
 			it { should have_selector("li##{'search_tile_'+published1.id.to_s}", text: /#{pulverize(published1.content,'\W')}/) }					
 			it { should_not have_content("no posts at this time") }	

@@ -16,7 +16,8 @@ shared_examples_for "a page with sidebar" do
   it { should have_link(shapes_text.strip, href: shapes_path) }
  end
 
-shared_examples_for "an index page" do 
+shared_examples_for "the index page" do 
+  it {should have_title index_title}
   it { should_not have_selector('textarea#inputbox') }    
   it { should_not have_selector('input#preview_button') }   
   it { should_not have_selector('input#publish_button') }     
