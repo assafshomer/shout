@@ -515,8 +515,8 @@ tr#index_titles th{
 #outPopUp{
   position:absolute;
   z-index:15;
-  top:50%;
-  left:50%;
+  top:70%;
+  left:45%;
   margin:-100px 0 0 -150px;
 }
 .home{
@@ -539,8 +539,17 @@ tr#index_titles th{
     opacity: 1;
     // position: relative;
 }
-strong{
+#catchy{
+  position:absolute;
   font-size:10em;
-  font-weight:normal;
-  font-style:italic;
+  top:30%;
+  left:10%;
+  color:black;
+}
+#elevator{
+  position:absolute;
+  font-size:5em;
+  top:40%;
+  left:10%;
+  color:black;
 }

@@ -4,6 +4,14 @@ module ViewsHelper
 		"click to preview"
 	end
 
+	def catch_phrase
+		foo
+	end
+	
+	def elevator_pitch
+		bar
+	end
+	
 	def signin_title
 		"Locate"
 	end
