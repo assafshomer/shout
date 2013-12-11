@@ -18,7 +18,7 @@ describe "PostPages" do
 		end			
 		it { should have_selector('textarea#inputbox', text: "") }
 		it { should_not have_selector('div.big') }		
-		it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
+		# it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }
 		it { should have_button preview_button_title}
 		it { should have_selector('input#preview_button') }
 		it { should have_xpath("//input[@value=\'#{preview_button_title}\']") }	
@@ -80,7 +80,7 @@ describe "PostPages" do
 				it { should have_selector('div.alert.alert-success') }
 				it { should_not have_selector('textarea#inputbox', text: "OK") }
 				it { should_not have_selector('div.big', text: /#{pulverize('OK','\W')}/) }	
-				it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }	
+				# it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }	
 				it { should have_button preview_button_title}
 				it { should_not have_button publish_button_title }							
 				specify {current_path.should == new_post_path}
@@ -184,7 +184,7 @@ describe "PostPages" do
 				it { should have_selector('div.alert.alert-success') }
 				it { should_not have_selector('textarea#inputbox', text: "OK") }
 				it { should_not have_selector('div.big', text: /#{pulverize('OK','\W')}/) }	
-				it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }				
+				# it { should have_xpath("//textarea[@placeholder=\'#{post_place_holder}\']") }				
 				specify {current_path.should == new_post_path}
 				it { should have_title full_title(new_title) }
 			end				

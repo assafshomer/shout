@@ -413,14 +413,14 @@ div#stream{
 }
 
 p.stream_title{
-  color:orange;
+  color:yellow;
   text-align:center;
   font-size:15;
   margin-top:10;
 }
 
 th.box_title{
-  color:orange;
+  color:yellow;
   text-align:center;
   font-size:15;
   font-weight:normal;
@@ -428,7 +428,7 @@ th.box_title{
 }
 
 p.cheatsheet_title{
-  color:orange;
+  color:yellow;
   text-align:center;
   font-size:15;
   margin-top:350;
@@ -538,4 +538,9 @@ tr#index_titles th{
 .shiny{
     opacity: 1;
     // position: relative;
+}
+strong{
+  font-size:10em;
+  font-weight:normal;
+  font-style:italic;
 }

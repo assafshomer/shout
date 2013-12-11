@@ -3,7 +3,7 @@
 	= form_tag :sessions do
 		table cellpadding="5" id="outPopUp"
 			tr
-				td.shiny
+				td
 					= text_field_tag :location,nil, placeholder: location_placeholder, class: "input-large"
-				td.shiny
-					= submit_tag signin_button_title, title: "Submit your location",  id: "location_button", class: "btn btn-primary btn-align"	
+				td
+					= submit_tag signin_button_title,  id: "location_button", class: "btn btn-primary btn-align"	

@@ -17,7 +17,7 @@ module ViewsHelper
 	end
 
 	def location_placeholder
-		"What is your location"
+		"Your location? (optional) "
 	end
 
 	def no_local_posts_message
@@ -58,7 +58,7 @@ module ViewsHelper
 	end
 
 	def new_title
-		'Write'
+		'Post'
 	end
 
 	def edit_title
