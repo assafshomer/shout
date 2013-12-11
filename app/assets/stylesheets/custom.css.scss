@@ -472,13 +472,6 @@ div.cheatsheet {
   font-size:3em;
   color:black;
 }
-.home{
-  background: url(image_path('bulletin5.jpg')) no-repeat;
-  background-size:100%;
-  width:100%;
-  height:100%;
-  @include opacity25;    
-}
 p.metadata{
   color:gray;
   font-size:16px;
@@ -525,4 +518,24 @@ tr#index_titles th{
   top:50%;
   left:50%;
   margin:-100px 0 0 -150px;
+}
+.home{
+  background: url(image_path('bulletin5.jpg')) no-repeat;
+  background-size:100%;
+  width:100%;
+  height:100%;
+  @include opacity25;    
+}
+.opaque{
+    background: url(image_path('bulletin5.jpg')) no-repeat;
+    background-size:100%;
+    opacity: 0.3;
+    height: 100%;
+    width: 100%;
+    // background-color: orange;
+    
+}
+.shiny{
+    opacity: 1;
+    // position: relative;
 }
