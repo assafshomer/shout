@@ -1,13 +1,7 @@
 .opaque
 .shiny
-	= form_tag :sessions do
-		table cellpadding="5" id="outPopUp"
-			tr
-				td
-					= text_field_tag :location,nil, placeholder: location_placeholder, class: "input-large"
-				td
-					= submit_tag signin_button_title,  id: "location_button", class: "btn btn-primary btn-align"	
+	= render 'signin_form'	
 .center#catchy
-	| foo
+	= catch_phrase
 .center#elevator
-	| because you know you want to
+	= elevator_pitch

@@ -5,11 +5,11 @@ module ViewsHelper
 	end
 
 	def catch_phrase
-		foo
+		'Put it out there'
 	end
 	
 	def elevator_pitch
-		bar
+		"the world want's to know"
 	end
 	
 	def signin_title
