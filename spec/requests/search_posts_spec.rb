@@ -91,7 +91,7 @@ describe "Search Posts" do
 			before do
 				visit signin_path
 				fill_in 'location', 	with: 'Vietnam'
-				click_button signin_button_title
+				click_button 'location_button'
 				visit new_post_path
 				fill_in 'inputbox', 	with: 'Norm from Saigon'
 				click_button preview_button_title

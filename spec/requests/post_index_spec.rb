@@ -65,7 +65,7 @@ describe "index" do
 			before do
 				visit signin_path
 				fill_in 'location', with: loc
-				click_button signin_button_title
+				click_button 'location_button'
 				visit posts_path
 			end
   		it { should have_selector('td#local_stream') }
@@ -76,7 +76,7 @@ describe "index" do
   		before do
 				visit signin_path
 				fill_in 'location', with: 'Tel'
-				click_button signin_button_title
+				click_button 'location_button'
 				visit posts_path  		  
   		end
   		it { should have_selector('div#local_title', text: 'Local posts from Tel') }
@@ -97,7 +97,7 @@ describe "index" do
 			before do
 				visit signin_path
 				fill_in 'location', with: loc
-				click_button signin_button_title
+				click_button 'location_button'
 				(tile_count*2).times do
 					FactoryGirl.create(:post, published: true, content: "humus", location: loc)
 				end 				
@@ -126,7 +126,7 @@ describe "index" do
 				before do
 					visit signin_path
 					fill_in 'location', with: ''
-					click_button signin_button_title
+					click_button 'location_button'
 					visit posts_path
 				end
 				it { should_not have_selector('td#local_stream') }	
@@ -141,7 +141,7 @@ describe "index" do
 				before do
 					visit signin_path
 					fill_in 'location', with: 'The moon'
-					click_button signin_button_title
+					click_button 'location_button'
 					visit posts_path
 				end
 				it { should have_selector('td#local_stream') }	
@@ -156,7 +156,7 @@ describe "index" do
 				before do
 					visit signin_path
 					fill_in 'location', with: 'teHraN'
-					click_button signin_button_title
+					click_button 'location_button'
 					visit posts_path
 				end
 				it_should_behave_like 'all pages'
@@ -255,7 +255,7 @@ describe "index" do
 			before do
 				visit signin_path
 				fill_in 'location', 		with: 'New York'
-			  click_button signin_button_title
+			  click_button 'location_button'
 			  visit new_post_path
 			  fill_in 'inputbox', with: 'testing metadata 2'
 			  click_button preview_button_title

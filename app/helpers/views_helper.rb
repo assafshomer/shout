@@ -21,12 +21,36 @@ module ViewsHelper
 	end	
 
 	def signin_button_title
-		"set your location"
+		if @location.blank?
+			return set_location_button
+		else
+			return change_location_button
+		end
 	end
 
 	def location_placeholder
-		"Your location? (optional) "
+		if @location.blank?
+			return set_location_placeholder
+		else
+			return change_location_placeholder
+		end
 	end
+
+	def set_location_button
+		"set location"
+	end	
+
+	def change_location_button
+		"change location"
+	end	
+
+	def set_location_placeholder
+		"Your location (optional)"
+	end
+
+	def change_location_placeholder
+		"New location"
+	end	
 
 	def no_local_posts_message
 		'no local posts from '

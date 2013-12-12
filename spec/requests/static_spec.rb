@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'shared_examples'
 include TestHelper
+include ViewsHelper
 
 describe "Static" do
 	subject { page }
@@ -9,7 +10,10 @@ describe "Static" do
     before { visit root_path }
     it_should_behave_like 'all pages'   
     it { should have_title full_title(home_title) }
-    it { should have_selector('div.home')}
+    it { should have_selector('div.opaque')}
+    it { should have_selector('div.shiny')}
+    it { should have_content catch_phrase }
+    it { should have_content elevator_pitch }
   end
 
   describe "Compose page" do
