@@ -22,6 +22,8 @@ describe "signup" do
 		it { should have_link(wrap_location(signin_button_title), href: signin_path) }	
 		before { visit contact_path }
 		it { should have_link(wrap_location(signin_button_title), href: signin_path) }	
+		before { visit signin_path }
+		it { should have_link(wrap_location(signin_button_title), href: signin_path) }			
 	end			
 
 	describe "filling in a location" do

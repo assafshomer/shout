@@ -14,7 +14,10 @@ describe "Static" do
     it { should have_selector('div.shiny')}
     it { should have_content catch_phrase }
     it { should have_content elevator_pitch }
-  end
+    it { should have_link('signinbutton', {href: signin_path}) }
+    it { should have_link('newbutton', {href: new_post_path}) }
+    it { should have_link('indexbutton', {href: posts_path}) }
+  end 
 
   describe "Compose page" do
   	before { visit new_post_path }

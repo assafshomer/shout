@@ -224,7 +224,7 @@ describe "index" do
 			it_should_behave_like 'the index page'				
 			it { should_not have_selector('div.pagination') }
 			it { should_not have_selector("li##{'local_tile_'+preview1.id.to_s}", text: /#{pulverize(preview1.content,'\W')}/) }	
-			it { should have_content("no posts at this time") }				
+			it { should have_content(no_posts_message) }				
 		end
 		describe "publish" do
 			let!(:published1) { FactoryGirl.create(:post, content: "buzz quuaax", published: true)  }

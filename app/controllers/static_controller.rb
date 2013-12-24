@@ -4,9 +4,9 @@ class StaticController < ApplicationController
 
   def home
   	@title="Home"
-    @post=Post.new 
-    @posts=Post.publication_tail
-    @zoom="small"
+    # @post=Post.new 
+    # @posts=Post.publication_tail
+    # @zoom="small"
   end
 
   def help

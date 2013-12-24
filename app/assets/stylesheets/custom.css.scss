@@ -280,6 +280,10 @@ input {
   padding-left:140px;
   padding-right:140px;  
 }
+.btn-tall {
+  padding-top:10px;
+  padding-bottom:10px;  
+}
 .btn-pad {
   padding-left:10px;
   padding-right:10px;  
@@ -552,4 +556,10 @@ tr#index_titles th{
   top:40%;
   left:10%;
   color:black;
+}
+.homebuttons{
+  position:absolute;
+  font-size:5em;
+  top:50%; 
+ 
 }

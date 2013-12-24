@@ -5,11 +5,11 @@ module ViewsHelper
 	end
 
 	def catch_phrase
-		'Put it out there'
+		'Do Tell'
 	end
 	
 	def elevator_pitch
-		"the world want's to know"
+		"The Online Bulletin Board"
 	end
 	
 	def signin_title
@@ -51,6 +51,10 @@ module ViewsHelper
 	def change_location_placeholder
 		"New location"
 	end	
+
+	def no_posts_message
+		'no matching posts'
+	end
 
 	def no_local_posts_message
 		'no local posts from '
