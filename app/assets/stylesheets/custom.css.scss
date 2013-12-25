@@ -104,7 +104,7 @@ p {
       a {
       color:$almostWhite;  
         &:hover {
-        color:$white;
+        color:black;
         text-decoration:none;
       }
     }
@@ -126,9 +126,11 @@ p {
       line-height: 1;
       font-weight:normal;
     }     
-    .nav {
-      a {
-        color:$almostWhite;
+    .nav a{
+      color:$almostWhite;  
+        &:hover {
+        color:black;
+        text-decoration:none;
       }
     }    
   }  
@@ -158,8 +160,12 @@ footer {
   color: $grayLight;
   position:absolute;
   bottom:0;
-  width:100%;
+  left:5%;
+  width:90%;
   height:40px;   /* Height of the footer */
+  li a{
+    color:white;
+  }
 }
 
 footer a {
@@ -170,9 +176,6 @@ footer a {
   color: $grayLight; 
   padding: 5px;
 }
-
-
-
 .btn-align {
   margin-bottom: 10px;  
 }

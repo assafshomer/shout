@@ -22,9 +22,9 @@ module ViewsHelper
 
 	def signin_button_title
 		if @location.blank?
-			return 'set location'
+			return 'Set location'
 		else
-			return 'change location'
+			return 'Change location'
 		end
 	end
 

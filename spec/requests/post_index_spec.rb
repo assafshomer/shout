@@ -91,7 +91,7 @@ describe "index" do
   		end
   	end
 		describe "with location and local posts" do
-			let!(:loc) { 'Tehran' }
+			let!(:loc) { 'San Jose' }
 			let!(:pre3) { FactoryGirl.create(:post, content: "fuckbuttons", location: loc) }
 			let!(:pub3) { FactoryGirl.create(:post,content: "grandaddy hohoho",	published: true, location: loc)  }
 			before do
@@ -112,7 +112,7 @@ describe "index" do
 				it { should_not have_selector("li##{'local_tile_'+pre3.id.to_s}") }	
 			end
 			describe "local stream tile count should be right" do
-				let!(:localposts) { Post.where("location = 'Tehran'") }
+				let!(:localposts) { Post.where("location = 'San Jose'") }
 				it { should have_selector("li##{'local_tile_'+localposts.first.id.to_s}", text: /#{pulverize('humus','\W')}/) }					
 				it { should have_selector("li##{'local_tile_'+localposts[tile_count(2) -1].id.to_s}") }					
 				it { should_not have_selector("li##{'local_tile_'+localposts[tile_count(2)].id.to_s}") }			
@@ -165,7 +165,7 @@ describe "index" do
 				it { should have_selector('div#local_title', text: 'Local posts from '+'teHraN') }
 				it { should have_selector('div.pagination#local') }
 				describe "local stream tile count should be right" do
-					let!(:localposts) { Post.where("location = 'Tehran'") }
+					let!(:localposts) { Post.where("location = 'San Jose'") }
 					it { should have_selector("li##{'local_tile_'+localposts.first.id.to_s}", text: /#{pulverize('humus','\W')}/) }					
 					it { should have_selector("li##{'local_tile_'+localposts[tile_count(2) -1].id.to_s}") }					
 					it { should_not have_selector("li##{'local_tile_'+localposts[tile_count(2)].id.to_s}") }			
