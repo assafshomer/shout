@@ -1,7 +1,7 @@
 = form_tag :sessions do
-	table cellpadding="5" id="outPopUp"
+	table cellpadding="5" id="signin"
 		tr
 			td
 				= text_field_tag :location,nil, placeholder: location_placeholder, class: "input-large"
 			td
-				= submit_tag signin_button_title,  id: "location_button", class: "btn btn-primary btn-align"
+				= submit_tag set_location_button_title,  id: "location_button", class: "btn btn-primary btn-align"

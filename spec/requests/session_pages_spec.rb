@@ -28,12 +28,13 @@ describe "signup" do
 
 	describe "filling in a location" do
 
-		describe "redirect to index after setting a location" do
+		describe "redirect back home after setting a location" do
 			before do
 			  fill_in 'location', with: 'Jumangi'
 			  click_button 'location_button'			  
 			end
-			it_should_behave_like 'the index page'
+			it { should have_title home_title }
+			specify {current_path.should == root_path }		
 			it { should have_link(wrap_location('Jumangi'), href: signin_path) }	
 		end
 
@@ -43,7 +44,7 @@ describe "signup" do
 			  click_button 'location_button'
 			  visit signin_path			  
 			end
-			it { should have_button change_location_button }
+			it { should have_button 'location_button' }
 			it { should have_xpath("//input[@placeholder=\'#{change_location_placeholder}\']") }
 		end
 

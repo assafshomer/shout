@@ -1,11 +1,1 @@
-.opaque
-.shiny
-.center#catchy
-	= catch_phrase
-.center#elevator
-	= elevator_pitch
-.homebuttons
-	ul.center 
-		li = link_to signin_button_title, signin_path, id: 'signinbutton', class: "btn btn-primary" 
-		li = link_to new_title, new_post_path, id: 'newbutton', class: "btn btn-warning" 
-		li = link_to index_title, posts_path, id: 'indexbutton', class: "btn btn-success" 
+= render 'shared/welcome'

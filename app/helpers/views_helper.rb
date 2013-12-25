@@ -22,9 +22,17 @@ module ViewsHelper
 
 	def signin_button_title
 		if @location.blank?
-			return set_location_button
+			return 'set location'
 		else
-			return change_location_button
+			return 'change location'
+		end
+	end
+
+	def set_location_button_title
+		if @location.blank?
+			return 'set'
+		else
+			return 'change'
 		end
 	end
 
@@ -35,14 +43,6 @@ module ViewsHelper
 			return change_location_placeholder
 		end
 	end
-
-	def set_location_button
-		"set location"
-	end	
-
-	def change_location_button
-		"change location"
-	end	
 
 	def set_location_placeholder
 		"Your location (optional)"
