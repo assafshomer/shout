@@ -4,7 +4,8 @@
 	= catch_phrase
 .center#elevator
 	= elevator_pitch
-center.homebuttons
-	= link_to signin_button_title, signin_path, id: 'signinbutton', class: "btn btn-primary btn-long btn-tall" 
-	= link_to new_title, new_post_path, id: 'newbutton', class: "btn btn-primary btn-long btn-tall" 
-	= link_to index_title, posts_path, id: 'indexbutton', class: "btn btn-primary btn-long btn-tall" 
+.homebuttons
+	ul 
+		li = link_to signin_button_title, signin_path, id: 'signinbutton', class: "btn btn-primary" 
+		li = link_to new_title, new_post_path, id: 'newbutton', class: "btn btn-warning" 
+		li = link_to index_title, posts_path, id: 'indexbutton', class: "btn btn-success" 

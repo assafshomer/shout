@@ -5,7 +5,7 @@ module ViewsHelper
 	end
 
 	def catch_phrase
-		'Do Tell'
+		app_mantra
 	end
 	
 	def elevator_pitch
@@ -82,7 +82,7 @@ module ViewsHelper
 	end
 
 	def app_mantra
-		'...think inside the box...'
+		'Think inside the Box'
 	end
 
 	def post_place_holder

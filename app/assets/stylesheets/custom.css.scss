@@ -288,6 +288,7 @@ input {
   padding-left:10px;
   padding-right:10px;  
 }  
+
 .submit-pad {
   padding-left: 220px;   
 }
@@ -536,16 +537,13 @@ tr#index_titles th{
     opacity: 0.3;
     height: 100%;
     width: 100%;
-    // background-color: orange;
-    
 }
 .shiny{
     opacity: 1;
-    // position: relative;
 }
 #catchy{
   position:absolute;
-  font-size:10em;
+  font-size:8em;
   top:30%;
   left:10%;
   color:black;
@@ -559,7 +557,16 @@ tr#index_titles th{
 }
 .homebuttons{
   position:absolute;
-  font-size:5em;
-  top:50%; 
- 
+  padding:10;
+  top:50%;
+  left:25%;
+  li{
+    float:left;
+    padding-left:20;
+    padding-right:20;
+  }
+  .btn{
+    font-size:3em;  
+    padding:30px;
+  }  
 }
