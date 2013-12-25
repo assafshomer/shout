@@ -94,7 +94,7 @@ module ViewsHelper
 	end
 
 	def new_title
-		'Post'
+		'Write-on'
 	end
 
 	def edit_title
