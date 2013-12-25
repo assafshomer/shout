@@ -545,25 +545,29 @@ tr#index_titles th{
   position:absolute;
   font-size:8em;
   top:30%;
-  left:10%;
-  color:black;
+  left:15%;
+  color:#fff;
 }
 #elevator{
   position:absolute;
   font-size:5em;
   top:40%;
-  left:10%;
+  left:15%;
   color:black;
+  font-style:italic;
 }
 .homebuttons{
   position:absolute;
   padding:10;
   top:50%;
-  left:25%;
+  // left:15%;
   li{
+    position:relative;
+    left:50%;
     float:left;
     padding-left:20;
     padding-right:20;
+    // text-align:left;
   }
   .btn{
     font-size:3em;  
