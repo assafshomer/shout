@@ -5,6 +5,8 @@
 	.static_content
 		ul
 			li Bilbox is modleing a street bulletin board, on the internet
-			li Like the street, there are no users. Any one can "#{link_to 'post', new_post_path}" anything
-			li You can "#{link_to 'Walk-by', posts_path}" to see (and search) what others have posted.
-			li You can "#{link_to 'share your location', signin_path}" and automatically see local posts
+			li Like the actual bulletin board on a street corner, there are no "users". Any one can #{link_to 'post', new_post_path} anything. 
+			li Posting is currently text based. Have fun with #{link_to 'really big text', post_path(Post.find_by_content(example_big))}, and #{link_to 'weird characters', post_path(Post.find_by_content(example_char))} (#{link_to 'more..', shapes_path}).
+			li You can #{link_to 'Walk-by', posts_path} to see (and search) what others have posted.
+			li You can #{link_to 'share your location', signin_path} and automatically see local posts.
+			li Bilbox is currently in beta. #{link_to 'Suggestions', contact_path} are welcome!
