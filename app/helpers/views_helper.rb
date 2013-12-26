@@ -239,5 +239,11 @@ private
 		array.reject! {|x| (12992..13000).include? x}			
 	end
 	
+	def example_big
+		"      `50 Y`"
+	end
+	def example_char
+		"Check out this `2 cool` shape:\r\n\r\n\r\n\r\n`22 ௵`"
+	end
 
 end

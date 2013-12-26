@@ -4,6 +4,17 @@ namespace :db do
 		make_posts		
 	end
 
+	desc "create example posts"
+	task examples: :environment do 		
+		create_examples
+	end
+
+	def create_examples		
+		Post.create!(content: "Check out this `2 cool` shape:\r\n\r\n\r\n\r\n`22 ௵`",
+		 published: true, location: 'The Internets')
+		Post.create!(content: "      `50 Y`",published: true, location: 'The Internets')			
+	end
+
 	def make_posts		
 		number_of_posts=500			
 		number_of_posts=(ViewsHelper::tile_count * 3) if Rails.env="test"

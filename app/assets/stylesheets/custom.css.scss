@@ -583,3 +583,25 @@ tr#index_titles th{
   text-align:center;
   width:10%;
 }
+.static_title{
+  position:absolute;
+  font-size:3em;
+  top:10%;
+  left:15%;
+  color:#fff;
+  font-family: sans-sariff;
+}
+.static_content{
+  position:absolute;
+  font-size:2em;
+  top:15%;
+  left:15%;
+  color:#ddd;
+  font-family: sans-sariff;
+  ul li{
+    line-height:1em;
+    a{
+      color:yellow;
+    }
+  }
+}
