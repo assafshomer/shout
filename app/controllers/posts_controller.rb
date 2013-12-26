@@ -57,6 +57,7 @@ class PostsController < ApplicationController
     @all_posts=Post.published.to_a
     @search_results=search_stream(params[:search], Post.published)
     @local_results=local_stream(@location, Post.published) 
+    # binding.pry
     @search_count=set_tile_count(@location)
     @local_count=@search_count
     # set_search_zoom unless params[:search].nil?
@@ -81,9 +82,9 @@ class PostsController < ApplicationController
       end
     end
 
-    def local_stream(space_separated_search_terms, stream) 
-      if !space_separated_search_terms.blank?      
-        stream.where(generate_sql(space_separated_search_terms, 'location',Post,'='))
+    def local_stream(location, stream) 
+      if !location.blank?      
+        stream.where(generate_exact_sql(location, 'location',Post))
       end
     end  
 

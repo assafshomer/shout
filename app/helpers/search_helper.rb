@@ -1,8 +1,16 @@
 module SearchHelper
 
 	def generate_sql(space_separated_terms, space_separated_field_names, class_name, type='LIKE')		
-		search_terms=extract_minimal_search_terms(space_separated_terms)
+		search_terms=extract_minimal_search_terms(space_separated_terms, 'LIKE')
 		like_terms=wrap_with_percent(search_terms, type)
+		field_names=extract_legal_fields(space_separated_field_names, class_name)
+		sql_query=generate_query(search_terms,field_names)
+		[sql_query] + like_terms*field_names.size   
+	end
+
+	def generate_exact_sql(search_term, space_separated_field_names, class_name)		
+		search_terms=extract_minimal_search_terms(search_term, '=') # keeping search term as is
+		like_terms=wrap_with_percent(search_terms, '=') # not wrapping with percent
 		field_names=extract_legal_fields(space_separated_field_names, class_name)
 		sql_query=generate_query(search_terms,field_names)
 		[sql_query] + like_terms*field_names.size   
@@ -59,8 +67,10 @@ module SearchHelper
 	# 	sql_query=sql_query[0,sql_query.length-' OR '.length]		
 	# end	
 
-	def extract_minimal_search_terms(space_separated_terms)
-		search_array=space_separated_terms[0,40].split
+	def extract_minimal_search_terms(space_separated_terms,type='LIKE')
+		short=space_separated_terms[0,40]
+		return [short] unless type == 'LIKE'
+		search_array=short.split
 		search_array=search_array.compact.map(&:downcase).uniq	
 		search_array.each do |x|
 			search_array.each do |y|

@@ -153,16 +153,17 @@ describe "index" do
 				end								
 			end		
 			describe "with location upto a case" do
+				let!(:fakeloc) { 'sAn jOSE' }
 				before do
 					visit signin_path
-					fill_in 'location', with: 'teHraN'
+					fill_in 'location', with: fakeloc
 					click_button 'location_button'
 					visit posts_path
 				end
 				it_should_behave_like 'all pages'
 				it_should_behave_like 'the index page'		
 				it { should_not have_content(no_local_posts_message) }			
-				it { should have_selector('div#local_title', text: 'Local posts from '+'teHraN') }
+				it { should have_selector('div#local_title', text: 'Local posts from '+ fakeloc) }
 				it { should have_selector('div.pagination#local') }
 				describe "local stream tile count should be right" do
 					let!(:localposts) { Post.where("location = 'San Jose'") }
