@@ -548,6 +548,21 @@ tr#index_titles th{
     height: 100%;
     width: 100%;
 }
+.opaque3{
+    background: url(image_path('inner-sunset-board.jpg')) no-repeat;
+    background-size:100%;
+    opacity: 0.3;
+    height: 100%;
+    width: 100%;
+}
+.opaque4{
+    background: url(image_path('bulletin.jpg')) no-repeat;
+    background-size:100%;
+    opacity: 0.3;
+    height: 100%;
+    width: 100%;
+}
+
 .shiny{
     opacity: 1;
 }
@@ -592,7 +607,7 @@ tr#index_titles th{
 }
 .static_title{
   position:absolute;
-  font-size:3em;
+  font-size:5em;
   top:10%;
   left:15%;
   color:#fff;
@@ -611,4 +626,20 @@ tr#index_titles th{
       color:yellow;
     }
   }
+}
+
+.one{
+  font-size:1em;
+}
+.two{
+  font-size:2em;
+}
+.three{
+  font-size:3em;
+}
+.five{
+  font-size:5em;
+}
+#left{
+  float:left;
 }

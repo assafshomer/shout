@@ -21,6 +21,7 @@ namespace :db do
 			published: true, location: 'Duluth')
 		Post.create!(content: "If you wrap a piece of text with backticks immediately followed by a number the text you write will appear that much bigger.\r\n\r\nFor example:\r\n\r\n`3 3 times bigger`\r\n\r\n`10 tenfold`\r\n\r\nSince this is the internet, you can link using a pipe, for example: \r\n\r\n`1 Search the web| http://www.google.com` for normal size fonts, or if you want to go bigger then:\r\n\r\n`5 Netflix|http://www.netflix.com`\r\n\r\nYou can use `1 symbols|http://www.alt-codes.net` too, like this one:`3 ♫` or `2 ╬`\r\n\r\nYou are limited to the size of the box, so if you overflow, what you write cannot be seen:\r\n\r\n<><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\r\n`2 <><><><><><><><><><><><><><><><><><><><><><><><><><><><><>`\r\n`3 <><><><><><><><><><><><><><><><><><><><><><><><><><><><><>`\r\nand you should not be able to see this line here \r\n\r\n\r\n",
 			published:true, location: 'New York')
+		Post.create!(content: 'normal text', published: true, location: 'Oz')
 	end
 
 	def make_posts		

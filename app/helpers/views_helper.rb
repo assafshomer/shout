@@ -177,6 +177,10 @@ module ViewsHelper
 		"Here is a link to a web service that inspired bilbox:\r\n\r\n`5 I ♥ Twitter | http://www.twitter.com`"
 	end
 
+	def exaplain_backticks
+		"To have your content displayed bigger, wrap it in backtics followed by a number, it will show that many times bigger"
+	end
+
 # def findrange(string)
 # 	result= string.scan(/\d{4}=>/).each do |s|
 # 		s.sub!(/=>/,"")    

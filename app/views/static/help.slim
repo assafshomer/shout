@@ -1,0 +1,14 @@
+.opaque4
+.shiny
+	.static_title 
+		| Rules
+	.static_content
+		ul
+			li Any text you write will appear #{link_to 'as is', post_path(Post.find_by_content('normal text'))}
+			li Wrap anything in backtics followed by a number, it will appear that many times bigger 
+		| `2 hello` will be displayed as 
+		p.two hello 
+		| `5 I ♥ U` will be displayed as
+		p.five I ♥ U
+		| `2 facebook? | http://www.twitter.com` will display a hyperlink to the twitter website reading
+		p.two #{link_to 'facebook?', 'http://www.twitter.com'}
