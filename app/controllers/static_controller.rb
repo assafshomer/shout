@@ -23,6 +23,7 @@ class StaticController < ApplicationController
 
   def about
   	@title="About"
+    @small_text_example=Post.where('content LIKE "%Bob%Dylan%Hurricane%"')[0].id
   end
 
   def contact

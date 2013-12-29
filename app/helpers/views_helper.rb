@@ -70,7 +70,7 @@ module ViewsHelper
 	end
 
 	def app_title
-		'bilbox'
+		'bilBox'
 	end
 
 	def full_title(string)
@@ -171,6 +171,10 @@ module ViewsHelper
 	
 	def example_char
 		"Check out this `2 cool` shape:\r\n\r\n\r\n\r\n`22 ௵`"
+	end
+
+	def example_link
+		"Here is a link to a web service that inspired bilbox:\r\n\r\n`5 I ♥ Twitter | http://www.twitter.com`"
 	end
 
 # def findrange(string)

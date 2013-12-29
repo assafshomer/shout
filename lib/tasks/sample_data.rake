@@ -12,7 +12,13 @@ namespace :db do
 	def create_examples		
 		Post.create!(content: "Check out this `2 cool` shape:\r\n\r\n\r\n\r\n`22 ௵`",
 		 published: true, location: 'The Internets')
-		Post.create!(content: "      `50 Y`",published: true, location: 'The Internets')			
+		Post.create!(content: "      `50 Y`",published: true, location: 'The Internets')
+		Post.create!(content: "`10   Dylan` \r\n\r\n`5\r\n\r\n           is`\r\n`15  God`",
+			published: true, location: 'Duluth')		
+		Post.create!(content: "A web service that inspired bilbox:\r\n\r\n`5 I ♥ Twitter | http://www.twitter.com`", 
+			published: true, location: 'Tel-Aviv')	
+		Post.create!(content: "`3 Bob Dylan – Hurricane`\r\n\r\nPistols shots ring out in the barroom night\r\nEnter Patty Valentine from the upper hall\r\nShe sees the bartender in a pool of blood\r\nCries out \"My God they killed them all\"\r\nHere comes the story of the Hurricane\r\nThe man the authorities came to blame\r\nFor something that he never done\r\nPut him in a prison cell but one time he could-a been\r\nThe champion of the world.\r\n\r\nThree bodies lying there does Patty see\r\nAnd another man named Bello moving around mysteriously\r\n\"I didn't do it\" he says and he throws up his hands\r\n\"I was only robbing the register I hope you understand\r\nI saw them leaving\" he says and he stops\r\n\"One of us had better call up the cops\"\r\nAnd so Patty calls the cops\r\nAnd they arrive on the scene with their red lights flashing\r\nIn the hot New Jersey night.\r\n\r\nMeanwhile far away in another part of town\r\nRubin Carter and a couple of friends are driving around\r\nNumber one contender for the middleweight crown\r\nHad no idea what kinda shit was about to go down\r\nWhen a cop pulled him over to the side of the road\r\nJust like the time before and the time before that\r\nIn Patterson that's just the way things go\r\nIf you're black you might as well not shown up on the street\r\n'Less you wanna draw the heat.\r\n\r\nAlfred Bello had a partner and he had a rap for the corps\r\nHim and Arthur Dexter Bradley were just out prowling around\r\nHe said \"I saw two men running out they looked like middleweights\r\nThey jumped into a white car with out-of-state plates\"\r\nAnd Miss Patty Valentine just nodded her head\r\nCop sai",
+			published: true, location: 'Duluth')
 	end
 
 	def make_posts		

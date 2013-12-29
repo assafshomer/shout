@@ -541,6 +541,13 @@ tr#index_titles th{
     height: 100%;
     width: 100%;
 }
+.opaque2{
+    background: url(image_path('communityboard.jpg')) no-repeat;
+    background-size:100%;
+    opacity: 0.3;
+    height: 100%;
+    width: 100%;
+}
 .shiny{
     opacity: 1;
 }
