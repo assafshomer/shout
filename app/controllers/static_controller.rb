@@ -24,6 +24,7 @@ class StaticController < ApplicationController
   def about
   	@title="About"
     @small_text_example=Post.where('content LIKE "%Bob%Dylan%Hurricane%"')[0].id
+    @inbetween_example=Post.where('content LIKE "%backticks immediately followed by a number%"')[0].id
   end
 
   def contact
