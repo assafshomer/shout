@@ -4,6 +4,7 @@
 		| Rules
 	.static_content
 		ul
+			li You are limited to the space inside the #{link_to 'box', new_post_path}
 			li Any text you write will appear #{link_to 'as is', post_path(Post.find_by_content('normal text'))}
 			li Wrap anything in backtics followed by a number, it will appear that many times bigger 
 		| `2 hello` will be displayed as 

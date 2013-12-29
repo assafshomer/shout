@@ -1,4 +1,8 @@
 .opaque3
 .shiny
 	.static_title
-		= mail_to 'bilboxxxxx@gmail.com','send us an email'
+	| Contact Us
+	.static_content
+		ul
+			li = mail_to 'bilboxxxxx@gmail.com','send us an email'
+			li = link_to 'Fill our Feedback form', 'https://docs.google.com/forms/d/1PnUPUjU7fjBAgTPlhd7z1cZKUYsfWJGQ0gJ8NNwSHaY/viewform', title: "thank you"
